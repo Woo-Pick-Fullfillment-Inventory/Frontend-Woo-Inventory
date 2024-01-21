@@ -1,24 +1,49 @@
+// HomeScreen.js
 import React from 'react';
 import { Button } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { View, StyleSheet } from 'react-native';
 import { RootStackParamList } from '../App';
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
-  'ProfileScreen'
+  'LoginScreen' | 'SignupScreen'
 >;
 
 const HomeScreen = () => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
 
   return (
-    <Button
-      onPress={() => navigation.navigate('ProfileScreen', { name: 'Jane' })}
-    >
-      Go to Jane's profile
-    </Button>
+    <View style={styles.container}>
+      <Button
+        mode="contained"
+        onPress={() => navigation.navigate('LoginScreen')}
+        style={styles.button}
+      >
+        Login
+      </Button>
+      <Button
+        mode="contained"
+        onPress={() => navigation.navigate('SignupScreen')}
+        style={styles.button}
+      >
+        Sign Up
+      </Button>
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  button: {
+    margin: 10,
+  },
+});
 
 export default HomeScreen;
