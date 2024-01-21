@@ -1,0 +1,1 @@
+// All colors must be defined here
