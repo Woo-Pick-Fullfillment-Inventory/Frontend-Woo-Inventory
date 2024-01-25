@@ -6,8 +6,8 @@ import ProfileScreen from './screens/ProfileScreen';
 import MainMenuScreen from './screens/MainMenuScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
 import AgbScreen from './screens/AgbScreen';
-import LoginScreen from './screens/LoginScreen';
-import SignupScreen from './screens/SignupScreen';
+import LoginScreen from './screens/login/LoginScreen';
+import SignupScreen from './screens/signup/SignupScreen';
 
 export type RootStackParamList = {
   HomeScreen: undefined; // No parameters expected
