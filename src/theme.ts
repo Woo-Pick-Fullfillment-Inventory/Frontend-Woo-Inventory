@@ -4,9 +4,9 @@
 
 import { StyleSheet } from 'react-native';
 
-export const PRIMARY_COLOR = '#6600FF';
-export const BLACK = '#000';
-export const WHITE = '#FFF';
+export const PRIMARYCOLOR = '#6600FF';
+export const BLACKCOLOR = '#000000';
+export const WHITECOLOR = '#FFFFFF';
 
 export const globalStyle = StyleSheet.create({
   container: {
@@ -18,7 +18,7 @@ export const globalStyle = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 10,
     paddingHorizontal: 40,
-    color: BLACK,
+    color: BLACKCOLOR,
   },
 
   logo: {
