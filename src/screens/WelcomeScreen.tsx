@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import { Text } from 'react-native-paper';
 import { SvgXml } from 'react-native-svg';
-import { logoSvg } from '../assets/index';
+import { logoSvg } from '../assets/logo.tsx';
 import { PRIMARYCOLOR } from '../theme'
 import { RootStackParamList } from '../App';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
