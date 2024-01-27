@@ -42,5 +42,6 @@ export const globalStyle = StyleSheet.create({
 
   section: {
     marginTop: 10,
+    alignItems: 'center',
   },
 });

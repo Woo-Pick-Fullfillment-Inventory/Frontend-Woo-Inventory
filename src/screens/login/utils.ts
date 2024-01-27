@@ -18,7 +18,7 @@ export const login = async (email: string, password: string) => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-              email: email,
+              emailOrUsername: email,
               password: password,
           }),
         }).then((res) => res.json());
@@ -34,6 +34,7 @@ export const login = async (email: string, password: string) => {
             'Success!'
           );
         }
+
     } catch (error) {
       console.error(error)
     }

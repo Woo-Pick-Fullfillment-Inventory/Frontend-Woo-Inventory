@@ -63,14 +63,14 @@ export const LoginScreen = () => {
         <InputField
           title={'Confirm Password'}
           placeholder={'Confirm Password'}
-          value={password}
+          value={confirmPassword}
           action={(text) => setConfirmPassword(text)}
           isPassword
         />
         <InputField
           title={'Token'}
-          placeholder={'Confirm Password'}
-          value={password}
+          placeholder={''}
+          value={token}
           action={(text) => setToken(text)}
         />
        
@@ -80,21 +80,22 @@ export const LoginScreen = () => {
             title={'By joining you agree to our Term & Condition'}
             action={() => setChecked(!checked)}
           />
-          </Text>
-          <View style={styles.buttonSection}>
-            <Button 
-              onPress={() => signup(email, username, password, confirmPassword, token)} 
-              title={'Register'}
-            />
-            <Text style={styles.text}>
-              or 
-              <Pressable
-                onPress={() => navigation.navigate('LoginScreen')}
-              >
-                <Text style={styles.link}> Login</Text>
-              </Pressable>
-            </Text>
-        </View>
+        </Text>
+      </View>
+
+      <View style={styles.buttonSection}>
+        <Button 
+          onPress={() => signup(email, username, password, confirmPassword, token)} 
+          title={'Register'}
+        />
+        <Text style={styles.text}>
+          or 
+          <Pressable
+            onPress={() => navigation.navigate('LoginScreen')}
+          >
+            <Text style={styles.link}> Login</Text>
+          </Pressable>
+        </Text>
       </View>
     </View>
   );
