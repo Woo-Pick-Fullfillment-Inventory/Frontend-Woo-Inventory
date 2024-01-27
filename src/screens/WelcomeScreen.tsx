@@ -3,7 +3,7 @@ import { View, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import { Text } from 'react-native-paper';
 import { SvgXml } from 'react-native-svg';
 import { logoSvg } from '../assets/logo.tsx';
-import { PRIMARYCOLOR } from '../theme'
+import { BLACKCOLOR, PRIMARYCOLOR, WHITECOLOR } from '../theme'
 import { RootStackParamList } from '../App';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     flex: 0.8,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: WHITECOLOR,
     width: '100%',
   },
   textContainer: {
@@ -112,19 +112,19 @@ const styles = StyleSheet.create({
     fontWeight: '400',
   },
   button: {
-    backgroundColor: 'white',
+    backgroundColor: WHITECOLOR,
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
   },
   buttonText: {
-    color: 'black',
+    color: BLACKCOLOR,
     fontSize: 16,
     fontWeight: 'bold',
   },
   separator: {
     marginHorizontal: 5,
-    color: 'black',
+    color: BLACKCOLOR,
   },
 });
 
