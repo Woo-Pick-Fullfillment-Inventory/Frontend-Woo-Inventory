@@ -9,6 +9,7 @@ import { Button } from '../../components/Button';
 import { CheckBox } from '../../components/CheckBox';
 import {globalStyle} from '../../theme'
 import Logo from '../../static/logo/wi.svg'
+import cameraIcon from '../../static/icons/camera.svg';
 
 import { signup } from './utils';
 
@@ -69,9 +70,9 @@ export const LoginScreen = () => {
         />
         <InputField
           title={'Token'}
-          placeholder={''}
           value={token}
           action={(text) => setToken(text)}
+          icon={cameraIcon}
         />
        
         <Text>
