@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+export const checkboxPassiveSvg = `<?xml version="1.0" encoding="UTF-8"?>
 <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
 <svg width="8" height="8" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>checkbox-component-unchecked</title>
@@ -9,4 +9,4 @@
 </path>
         </g>
     </g>
-</svg>
+</svg>`

@@ -1,4 +1,3 @@
-// Tạm thời dùng default alert vì chưa có design cho warning messages
 import {Alert} from 'react-native';
 
 const SIGNIN_ENDPOINT = 'https://woopick-backend-2plmu3pwka-ey.a.run.app/api/v1/auth/signin';

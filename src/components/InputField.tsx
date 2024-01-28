@@ -1,12 +1,17 @@
 import {useState} from 'react';
 import {Text, TextInput} from 'react-native-paper';
 import {StyleSheet, View} from 'react-native';
-import { IconSource } from 'react-native-paper/lib/typescript/components/Icon';
+import {SvgXml} from 'react-native-svg';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
-import show from '../static/icons/show.svg'
-import hide from '../static/icons/hide.svg'
+import camera from '../assets/icons/camera.png';
+import show from '../assets/icons/show.png';
+import hide from '../assets/icons/hide.png';
+import {PRIMARYCOLOR} from '../theme'
+import {RootStackParamList} from '../App';
+import {useNavigation} from '@react-navigation/native';
 
-import {PRIMARY_COLOR} from '../theme'
+type InputFieldNavigationProp = NativeStackNavigationProp<RootStackParamList,'ScannerScreen'>;
 
 export type Props = {
   title: string,
@@ -14,17 +19,18 @@ export type Props = {
   value: string
   action: (text: string) => void,
   isPassword?: boolean
-  icon?: IconSource
-};
+  isCamera?: boolean
+}
 
 export const InputField = (props: Props) => {
+  const navigation = useNavigation<InputFieldNavigationProp>();
   const {
     title,
     placeholder,
     value,
     action,
     isPassword,
-    icon
+    isCamera
   } = props;
 
   const [passwordVisible, setPasswordVisible] = useState(isPassword);
@@ -33,31 +39,12 @@ export const InputField = (props: Props) => {
     setPasswordVisible(!passwordVisible);
   };
 
-  const fieldIcon = () => {
-    if (isPassword) {
-      return (
-        <TextInput.Icon
-          icon={passwordVisible ? show : hide}
-          onPress={togglePasswordVisibility}
-        />
-      )
-    }
-
-    if(icon) {
-      return (
-        <TextInput.Icon
-          icon={icon}
-        />
-      )
-      }
-    return null;
-  }
-
   return (
     <View style={styles.container}>
       <Text style={styles.title}>
         {title}
       </Text>
+
       <TextInput
         style={styles.inputText}
         value={value}
@@ -65,19 +52,20 @@ export const InputField = (props: Props) => {
         placeholderTextColor={'#C8CAD0'}
         onChangeText={action}
         secureTextEntry={passwordVisible}
-        right={
-          isPassword && // if the field is password -> return eye icon
-            <TextInput.Icon
-              icon={passwordVisible ? show : hide}
-              onPress={togglePasswordVisibility}
-            />
+        right={isPassword && // if the field is password -> return eye icon
+          <TextInput.Icon
+            icon={passwordVisible ? show : hide}
+            onPress={togglePasswordVisibility}
+            color={PRIMARYCOLOR}
+          />
           ||
-          icon &&  // if icon source is defined -> return icon source
+          isCamera &&  // if icon source is defined -> return icon source
             <TextInput.Icon
-              icon={icon}
+              icon={camera}
+              onPress={() => navigation.navigate('ScannerScreen')}
+              color={PRIMARYCOLOR}
             />
-        }
-        
+          }
       />
     </View>
   )
@@ -92,18 +80,18 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: '400',
     lineHeight: 13,
-    color: PRIMARY_COLOR
+    color: PRIMARYCOLOR
   },
 
   inputText: {
-    width: 252,
+    width: 270,
     height: 30,
     backgroundColor: '#fff',
-    fontSize: 10,
     marginBottom: 10,
-    borderColor: PRIMARY_COLOR,
+    fontSize: 10,
     borderWidth: 1,
     borderRadius: 5,
+    borderColor: PRIMARYCOLOR,
   },
 });
 

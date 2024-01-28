@@ -1,17 +1,17 @@
-import { useState } from 'react';
-import { StyleSheet, View, Text, Pressable } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import {useState} from 'react';
+import {StyleSheet, View, Text, Pressable} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp } from '@react-navigation/native-stack';
+import {SvgXml} from 'react-native-svg';
 
-import { RootStackParamList } from '../../App';
-import { InputField } from '../../components/InputField';
-import { Button } from '../../components/Button';
-import { CheckBox } from '../../components/CheckBox';
+import {RootStackParamList} from '../../App';
+import {InputField} from '../../components/InputField';
+import {Button} from '../../components/Button';
+import {CheckBox} from '../../components/CheckBox';
 import {globalStyle} from '../../theme'
-import Logo from '../../static/logo/wi.svg'
-import cameraIcon from '../../static/icons/camera.svg';
+import {logoSvg} from '../../assets/logo'
 
-import { signup } from './utils';
+import {signup} from './utils';
 
 type SignupScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -30,7 +30,7 @@ export const LoginScreen = () => {
 
   return (
     <View style={globalStyle.screenContainer}>
-      <Logo width={100} />
+      <SvgXml xml={logoSvg} width={100} />
 
       <View style={globalStyle.section}>
         <Text style={globalStyle.heading1} >Join Free</Text>
@@ -72,7 +72,7 @@ export const LoginScreen = () => {
           title={'Token'}
           value={token}
           action={(text) => setToken(text)}
-          icon={cameraIcon}
+          isCamera
         />
        
         <Text>

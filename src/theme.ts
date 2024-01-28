@@ -16,7 +16,7 @@ export const globalStyle = StyleSheet.create({
   screenContainer: {
     flex: 1,
     alignItems: 'center',
-    paddingVertical: 10,
+    paddingTop: '20%',
     paddingHorizontal: 40,
     color: BLACKCOLOR,
   },
@@ -42,6 +42,5 @@ export const globalStyle = StyleSheet.create({
 
   section: {
     marginTop: 10,
-    alignItems: 'center',
   },
 });

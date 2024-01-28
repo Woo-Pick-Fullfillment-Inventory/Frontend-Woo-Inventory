@@ -1,16 +1,14 @@
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { signin, logout, SigninPayload } from '../../redux/authSlice';
-import { StyleSheet, View, Text, GestureResponderEvent } from 'react-native';
+import {useState} from 'react';
+import {StyleSheet, View, Text} from 'react-native';
+import {SvgXml} from 'react-native-svg';
 
-import { InputField } from '../../components/InputField';
-import { Button } from '../../components/Button';
-import { CheckBox } from '../../components/CheckBox';
-import { RootState } from '../../redux/store';
+import {InputField} from '../../components/InputField';
+import {Button} from '../../components/Button';
+import {CheckBox} from '../../components/CheckBox';
 import {globalStyle} from '../../theme'
-import Logo from '../../static/logo/wi.svg'
+import {logoSvg} from '../../assets/logo'
 
-import { login } from './utils';
+import {login} from './utils';
 
 export const LoginScreen = () => {
   const [checked, setChecked] = useState(false);
@@ -19,7 +17,7 @@ export const LoginScreen = () => {
 
   return (
     <View style={globalStyle.screenContainer}>
-      <Logo width={100} />
+      <SvgXml xml={logoSvg} width={100} />
 
       <View style={globalStyle.section}>
         <Text style={globalStyle.heading1} >Login</Text>
@@ -45,7 +43,7 @@ export const LoginScreen = () => {
           isPassword
         />
        
-        <Text>
+        <Text style={styles.checkboxWrapper}>
           <CheckBox
             isChecked={checked}
             title={'Remember me'}
@@ -76,6 +74,10 @@ const styles = StyleSheet.create({
 
   buttonSection: {
     marginTop: 15,
+  },
+
+  checkboxWrapper: {
+    width: '100%',
   },
 
   checkbox: {
