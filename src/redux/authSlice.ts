@@ -2,14 +2,13 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 export interface InitialState {
-  userData: any; // Replace 'any' with a more specific type if possible
-  loading: boolean;
-  error: any;
+  status: string;
+  jwtToken: any;
   isLoggedIn: boolean;
 }
 
 export interface SigninPayload {
-  email: string;
+  emailOrUsername: string;
   password: string;
 }
 
@@ -21,9 +20,8 @@ export interface SignupPayload {
 }
 
 const initialState: InitialState = {
-  userData: null,
-  loading: false,
-  error: null,
+  status: 'idle', // 'idle' | 'loading' | 'succeeded' | 'failed'
+  jwtToken: null,
   isLoggedIn: false,
 };
 
@@ -33,40 +31,39 @@ const authSlice = createSlice({
   reducers: {
     logout: state => {
       state.isLoggedIn = false;
-      state.userData = null;
     },
   },
   extraReducers: builder => {
     builder
       .addCase(signin.pending, state => {
-        state.loading = true;
+        state.status = 'loading';
       })
       .addCase(signin.fulfilled, (state, action) => {
-        state.loading = false;
+        state.status = 'succeeded';
         state.isLoggedIn = true;
-        state.userData = action.payload;
+        console.log("success action payload ", action.payload);
+        
+        state.jwtToken = action.payload.jwtToken;
       })
-      .addCase(signin.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
+      .addCase(signin.rejected, (state) => {
+        state.status = 'failed';
       })
       .addCase(signup.pending, state => {
-        state.loading = true;
+        state.status = 'loading';
       })
-      .addCase(signup.fulfilled, (state, action) => {
-        state.loading = false;
-        state.userData = action.payload;
+      .addCase(signup.fulfilled, (state) => {
+        state.status = 'succeeded';
+        state.isLoggedIn = true;
       })
-      .addCase(signup.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
+      .addCase(signup.rejected, (state) => {
+        state.status = 'failed';
       });
   },
 });
 
 export const signin = createAsyncThunk(
   'auth/signin',
-  async ({ email, password }: SigninPayload, { rejectWithValue }) => {
+  async ({ emailOrUsername, password }: SigninPayload, { rejectWithValue }) => {
     try {
       const response = await fetch(
         'https://woopick-backend-2plmu3pwka-ey.a.run.app/api/v1/auth/signin',
@@ -74,18 +71,32 @@ export const signin = createAsyncThunk(
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            email,
+            emailOrUsername,
             password,
           }),
         },
       );
 
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
+      if (response.ok) {
+        // If the response is OK, assume it's JSON
+        return await response.json();
+      } else {
+        // If the response is not OK, handle both JSON and non-JSON responses
+        // can be logic problem or server problem
+        const contentType = response.headers.get('content-type');
+        let errorDetail;
+        if (contentType && contentType.includes('application/json')) {
+          errorDetail = await response.json();
+        } else {
+          errorDetail = await response.text();
+        }
+        console.log('errorDetail is ', errorDetail);
+        
+        return rejectWithValue(errorDetail);
       }
-
-      return await response.json();
     } catch (error: any) {
+      // handle other type of error such as network error
+      console.log('error in signin call ', error);
       return rejectWithValue(error.message);
     }
   },

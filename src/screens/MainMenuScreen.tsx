@@ -4,19 +4,19 @@ import { View, StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../App';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, NavigationProp  } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../redux/store';
+import { logout } from '../redux/authSlice';
 
-type MainMenuScreenNavigationProp = NativeStackNavigationProp<
-  RootStackParamList,
-  'MainMenuScreen'
->;
 
 const MainMenuScreen = () => {
-  const navigation = useNavigation<MainMenuScreenNavigationProp>();
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleLogout = () => {
-    navigation.navigate("HomeScreen")
-    console.log('User logged out');
+    dispatch(logout());
+    navigation.navigate("WelcomeScreen")
   };
 
   return (
