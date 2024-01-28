@@ -13,7 +13,7 @@ import {useNavigation} from '@react-navigation/native';
 
 type InputFieldNavigationProp = NativeStackNavigationProp<RootStackParamList,'ScannerScreen'>;
 
-export type Props = {
+type Props = {
   title: string,
   placeholder?: string,
   value: string

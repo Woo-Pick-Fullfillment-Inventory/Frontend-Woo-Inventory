@@ -25,19 +25,19 @@ export const signup = async (email: string, username: string, password: string, 
           passwordConfirmation: confirmPassword,
           token: token,
         }),
-      }).then((res) => res.json());
+      })
+
+      const responseData = await response.json(); // Wait for the JSON response
+
+      console.log(responseData)
 
       if (response.type) {
-        Alert.alert(
-          response.title
-        );
+        Alert.alert(responseData.title);
       }
 
-      if (response.jwtToken) {
-        Alert.alert(
-          'Success!'
-        );
-        }
+      if (responseData.jwtToken) {
+        Alert.alert('Success!');
+      }
 
     } catch (error) {
       console.error(error)

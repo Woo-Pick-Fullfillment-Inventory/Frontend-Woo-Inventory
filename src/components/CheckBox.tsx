@@ -4,7 +4,7 @@ import {SvgXml} from 'react-native-svg';
 import {checkboxActiveSvg} from '../assets/icons/checkboxActive';
 import {checkboxPassiveSvg} from '../assets/icons/checkboxPassive'
 
-export type Props = {
+type Props = {
   isChecked: boolean,
   title: string,
   action: (event: GestureResponderEvent)  => void,

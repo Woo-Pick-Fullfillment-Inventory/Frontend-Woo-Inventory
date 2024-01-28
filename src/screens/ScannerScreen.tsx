@@ -15,7 +15,7 @@ const ScannerScreen = () => {
     const device = useCameraDevice('back');
 
     const scanner = useCodeScanner({
-        codeTypes: ['qr', 'ean-13'],
+        codeTypes: ['qr', 'ean-13', 'code-128'],
         onCodeScanned: (codes) => {
             console.log(`Scanned ${codes.length} codes!`)
         }

@@ -31,17 +31,17 @@ const App = () => {
         <Stack.Screen
           name="WelcomeScreen"
           component={WelcomeScreen}
-          options={{ title: 'Welcome', headerShown: false }}
+          options={{ title: '', headerShown: false }}
         />
         <Stack.Screen
           name="LoginScreen"
           component={LoginScreen}
-          options={{ title: 'Login', headerShown: false }}
+          options={{ title: '' }}
         />
         <Stack.Screen
           name="SignupScreen"
           component={SignupScreen}
-          options={{ title: 'Signup', headerShown: false }}
+          options={{ title: '' }}
         />
         <Stack.Screen
           name="ProfileScreen"

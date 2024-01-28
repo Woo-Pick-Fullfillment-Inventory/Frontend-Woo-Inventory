@@ -11,28 +11,26 @@ export const login = async (email: string, password: string) => {
 
   if (email && password) {
     try {
-        const response = await fetch(SIGNIN_ENDPOINT, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-              emailOrUsername: email,
-              password: password,
-          }),
-        }).then((res) => res.json());
-
-        if (response.type) {
-          Alert.alert(
-            'Invalid credential'
-          );
-        }
-        
-        if (response.jwtToken) {
-          Alert.alert(
-            'Success!'
-          );
-        }
+      const response = await fetch(SIGNIN_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            emailOrUsername: email,
+            password: password,
+        }),
+      });
+  
+      const responseData = await response.json(); // Wait for the JSON response
+  
+      if (responseData.type) {
+        Alert.alert('Invalid credential');
+      } else if (responseData.jwtToken) {
+        Alert.alert('Success!');
+      } else {
+        Alert.alert('Unexpected response from server');
+      }
 
     } catch (error) {
       console.error(error)

@@ -3,7 +3,7 @@ import {StyleSheet, Pressable} from 'react-native';
 
 import {PRIMARYCOLOR} from '../theme'
 
-export type Props = {
+type Props = {
   onPress: (event: import('react-native').GestureResponderEvent) => void,
   title: string,
 };

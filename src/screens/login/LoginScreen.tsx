@@ -62,11 +62,6 @@ export const LoginScreen = () => {
   );
 };
 
-export type Props = {
-  title: string,
-  placeholder: string,
-};
-
 const styles = StyleSheet.create({
   intro: {
     marginTop: 10
