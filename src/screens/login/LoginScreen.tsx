@@ -8,13 +8,12 @@ import { CheckBox } from '../../components/CheckBox';
 import { globalStyle } from '../../theme';
 import { logoSvg } from '../../assets/logo';
 
-import { signin, ErrorResponse  } from '../../redux/authSlice';
+import { signin, ErrorResponse } from '../../redux/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../redux/store';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../App';
-
-
+import * as Keychain from 'react-native-keychain';
 
 export const LoginScreen = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -33,6 +32,10 @@ export const LoginScreen = () => {
       // Successfully logged in
       if (signin.fulfilled.match(loginResult)) {
         navigation.navigate('MainMenuScreen');
+        if (checked) {
+          const jwtToken = loginResult.payload.jwtToken;
+          await Keychain.setGenericPassword('jwtToken', jwtToken);
+        }
         // handle when response is not ok
       } else if (signin.rejected.match(loginResult)) {
         /**
@@ -44,7 +47,8 @@ export const LoginScreen = () => {
         Alert.alert('Error', errorMessage);
       }
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Unexpected Error';;
+      const errorMessage =
+        error instanceof Error ? error.message : 'Unexpected Error';
       Alert.alert('Error', errorMessage);
     }
   };

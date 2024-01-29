@@ -8,15 +8,17 @@ import { useNavigation, NavigationProp  } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../redux/store';
 import { logout } from '../redux/authSlice';
+import * as Keychain from 'react-native-keychain';
 
 
 const MainMenuScreen = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const dispatch = useDispatch<AppDispatch>();
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await Keychain.resetGenericPassword();
     dispatch(logout());
-    navigation.navigate("WelcomeScreen")
+    navigation.navigate("WelcomeScreen");
   };
 
   return (

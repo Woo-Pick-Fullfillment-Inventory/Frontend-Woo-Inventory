@@ -7,7 +7,7 @@ export interface ErrorResponse {
   // Include other fields that your error response might have
 }
 export interface InitialState {
-  jwtToken: any;
+  // jwtToken: any;
   isLoggedIn: boolean;
 }
 
@@ -26,7 +26,7 @@ export interface SignupPayload {
 }
 
 const initialState: InitialState = {
-  jwtToken: null,
+  // jwtToken: null,
   isLoggedIn: false,
 };
 
@@ -34,16 +34,22 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
+    setIsLoggedIn: (state, action) => {
+      state.isLoggedIn = action.payload;
+    },
+    // setJWTToken: (state, action) => {
+    //   state.jwtToken = action.payload;
+    // },
     logout: state => {
       state.isLoggedIn = false;
-      state.jwtToken = null;
+      // state.jwtToken = null;
     },
   },
   extraReducers: builder => {
     builder
       .addCase(signin.fulfilled, (state, action) => {
         state.isLoggedIn = true;
-        state.jwtToken = action.payload.jwtToken;
+        // state.jwtToken = action.payload.jwtToken;
       })
       .addCase(signup.fulfilled, (state) => {
         state.isLoggedIn = true;
@@ -133,5 +139,5 @@ export const signup = createAsyncThunk(
   },
 );
 
-export const { logout } = authSlice.actions;
+export const { setIsLoggedIn, logout } = authSlice.actions; // export setJWTToken
 export default authSlice.reducer;
