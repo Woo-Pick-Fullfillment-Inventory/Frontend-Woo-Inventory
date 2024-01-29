@@ -8,29 +8,27 @@ import { CheckBox } from '../../components/CheckBox';
 import { globalStyle } from '../../theme';
 import { logoSvg } from '../../assets/logo';
 
-import { signin } from '../../redux/authSlice';
+import { signin, ErrorResponse  } from '../../redux/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../redux/store';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../App';
 
-interface ErrorResponse {
-  title?: string;
-  message?: string;
-  // Include other fields that your error response might have
-}
+
 
 export const LoginScreen = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [checked, setChecked] = useState(false);
   const [emailOrUsername, setEmailOrUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { status } = useSelector((state: RootState) => state.auth);
+  const [isLoading, setIsLoading] = useState(false);
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   const handleOnPressLogin = async () => {
     try {
+      setIsLoading(true);
       const loginResult = await dispatch(signin({ emailOrUsername, password }));
+      setIsLoading(false);
 
       // Successfully logged in
       if (signin.fulfilled.match(loginResult)) {
@@ -91,7 +89,7 @@ export const LoginScreen = () => {
       </View>
 
       <View style={styles.buttonSection}>
-        {status === 'loading' ? (
+        {isLoading ? (
           <Text>logging in ....</Text>
         ) : (
           <Button onPress={handleOnPressLogin} title={'Login'} />
