@@ -4,16 +4,16 @@ import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp } from '@react-navigation/native-stack';
 import {SvgXml} from 'react-native-svg';
 
-import {RootStackParamList} from '../../App';
-import {InputField} from '../../components/InputField';
-import {Button} from '../../components/Button';
-import {CheckBox} from '../../components/CheckBox';
-import {globalStyle} from '../../theme'
-import {logoSvg} from '../../assets/logo'
+import {RootStackParamList} from '../App';
+import {InputField} from '../components/InputField';
+import {Button} from '../components/Button';
+import {CheckBox} from '../components/CheckBox';
+import {globalStyle} from '../theme'
+import {logoSvg} from '../assets/logo'
 
-import { signup, ErrorResponse } from '../../redux/authSlice';
+import { signup, ErrorResponse } from '../redux/authSlice';
 import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../redux/store';
+import { AppDispatch } from '../redux/store';
 
 type SignupScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,

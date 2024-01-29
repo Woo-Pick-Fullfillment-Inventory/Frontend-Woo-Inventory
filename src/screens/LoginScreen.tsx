@@ -2,17 +2,17 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Text, Alert } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 
-import { InputField } from '../../components/InputField';
-import { Button } from '../../components/Button';
-import { CheckBox } from '../../components/CheckBox';
-import { globalStyle } from '../../theme';
-import { logoSvg } from '../../assets/logo';
+import { InputField } from '../components/InputField';
+import { Button } from '../components/Button';
+import { CheckBox } from '../components/CheckBox';
+import { globalStyle } from '../theme';
+import { logoSvg } from '../assets/logo';
 
-import { signin, ErrorResponse } from '../../redux/authSlice';
+import { signin, ErrorResponse } from '../redux/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../redux/store';
+import { AppDispatch, RootState } from '../redux/store';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { RootStackParamList } from '../../App';
+import { RootStackParamList } from '../App';
 import * as Keychain from 'react-native-keychain';
 
 export const LoginScreen = () => {
