@@ -26,32 +26,55 @@ export const LoginScreen = () => {
   const handleOnPressLogin = async () => {
     try {
       setIsLoading(true);
-      const loginResult = await dispatch(signin({ emailOrUsername, password }));
-      setIsLoading(false);
-
-      // Successfully logged in
-      if (signin.fulfilled.match(loginResult)) {
-        navigation.navigate('MainMenuScreen');
-        if (checked) {
-          const jwtToken = loginResult.payload.jwtToken;
-          await Keychain.setGenericPassword('jwtToken', jwtToken);
-        }
-        // handle when response is not ok
-      } else if (signin.rejected.match(loginResult)) {
-        /**
-         loginResult example {"error": {"message": "Rejected"}, "meta": {"aborted": false, "arg": {"emailOrUsername": "", "password": ""}, "condition": false, "rejectedWithValue": true, "requestId": "wKOE2rlcPwYaUgpjsAb8T", "requestStatus": "rejected"}, "payload": {"title": "invalid credentials", "type": "/auth/signin-failed"}, "type": "auth/signin/rejected"}
-         */
-
-        const errorPayload = loginResult.payload as ErrorResponse; // Cast to the error type
-        const errorMessage = errorPayload.title || 'Error occurred';
-        Alert.alert('Error', errorMessage);
+      const loginResult = await dispatch(signin({ emailOrUsername, password })).unwrap();
+  
+      // Successfully logged in, navigate to the MainMenuScreen
+      navigation.navigate('MainMenuScreen');
+      
+      if (checked) {
+        const jwtToken = loginResult.jwtToken;
+        await Keychain.setGenericPassword('jwtToken', jwtToken);
       }
     } catch (error) {
-      const errorMessage =
-        error instanceof Error ? error.message : 'Unexpected Error';
+      // Handle errors (both from rejected thunks and any other errors)
+      const errorResponse = error as ErrorResponse;
+      const errorMessage =  errorResponse.title || errorResponse.message || 'Unexpected Error';
       Alert.alert('Error', errorMessage);
+    } finally {
+      setIsLoading(false);
     }
   };
+  
+
+  // const handleOnPressLogin = async () => {
+  //   try {
+  //     setIsLoading(true);
+  //     const loginResult = await dispatch(signin({ emailOrUsername, password }));
+  //     setIsLoading(false);
+
+  //     // Successfully logged in
+  //     if (signin.fulfilled.match(loginResult)) {
+  //       navigation.navigate('MainMenuScreen');
+  //       if (checked) {
+  //         const jwtToken = loginResult.payload.jwtToken;
+  //         await Keychain.setGenericPassword('jwtToken', jwtToken);
+  //       }
+  //       // handle when response is not ok
+  //     } else if (signin.rejected.match(loginResult)) {
+  //       /**
+  //        loginResult example {"error": {"message": "Rejected"}, "meta": {"aborted": false, "arg": {"emailOrUsername": "", "password": ""}, "condition": false, "rejectedWithValue": true, "requestId": "wKOE2rlcPwYaUgpjsAb8T", "requestStatus": "rejected"}, "payload": {"title": "invalid credentials", "type": "/auth/signin-failed"}, "type": "auth/signin/rejected"}
+  //        */
+
+  //       const errorPayload = loginResult.payload as ErrorResponse; // Cast to the error type
+  //       const errorMessage = errorPayload.title || 'Error occurred';
+  //       Alert.alert('Error', errorMessage);
+  //     }
+  //   } catch (error) {
+  //     const errorMessage =
+  //       error instanceof Error ? error.message : 'Unexpected Error';
+  //     Alert.alert('Error', errorMessage);
+  //   }
+  // };
 
   return (
     <View style={globalStyle.screenContainer}>
