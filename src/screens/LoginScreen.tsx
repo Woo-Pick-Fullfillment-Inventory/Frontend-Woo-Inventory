@@ -44,37 +44,6 @@ export const LoginScreen = () => {
       setIsLoading(false);
     }
   };
-  
-
-  // const handleOnPressLogin = async () => {
-  //   try {
-  //     setIsLoading(true);
-  //     const loginResult = await dispatch(signin({ emailOrUsername, password }));
-  //     setIsLoading(false);
-
-  //     // Successfully logged in
-  //     if (signin.fulfilled.match(loginResult)) {
-  //       navigation.navigate('MainMenuScreen');
-  //       if (checked) {
-  //         const jwtToken = loginResult.payload.jwtToken;
-  //         await Keychain.setGenericPassword('jwtToken', jwtToken);
-  //       }
-  //       // handle when response is not ok
-  //     } else if (signin.rejected.match(loginResult)) {
-  //       /**
-  //        loginResult example {"error": {"message": "Rejected"}, "meta": {"aborted": false, "arg": {"emailOrUsername": "", "password": ""}, "condition": false, "rejectedWithValue": true, "requestId": "wKOE2rlcPwYaUgpjsAb8T", "requestStatus": "rejected"}, "payload": {"title": "invalid credentials", "type": "/auth/signin-failed"}, "type": "auth/signin/rejected"}
-  //        */
-
-  //       const errorPayload = loginResult.payload as ErrorResponse; // Cast to the error type
-  //       const errorMessage = errorPayload.title || 'Error occurred';
-  //       Alert.alert('Error', errorMessage);
-  //     }
-  //   } catch (error) {
-  //     const errorMessage =
-  //       error instanceof Error ? error.message : 'Unexpected Error';
-  //     Alert.alert('Error', errorMessage);
-  //   }
-  // };
 
   return (
     <View style={globalStyle.screenContainer}>

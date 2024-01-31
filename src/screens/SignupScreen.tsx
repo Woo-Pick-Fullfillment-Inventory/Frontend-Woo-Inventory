@@ -58,38 +58,6 @@ export const LoginScreen = () => {
       setIsLoading(false);
     }
   };
-  
-
-  // const handleOnPress = async () => {
-  //   try {
-  //     setIsLoading(true);
-  //     const loginResult = await dispatch(
-  //       signup({
-  //         appURL,
-  //         email,
-  //         username,
-  //         password,
-  //         passwordConfirmation,
-  //         token,
-  //       }),
-  //     );
-  //     setIsLoading(false);
-
-  //     // Successfully logged in
-  //     if (signup.fulfilled.match(loginResult)) {
-  //       navigation.navigate('MainMenuScreen');
-  //       // handle when response is not ok
-  //     } else if (signup.rejected.match(loginResult)) {
-  //       const errorPayload = loginResult.payload as ErrorResponse; // Cast to the error type
-  //       const errorMessage = errorPayload.title || 'Error occurred';
-  //       Alert.alert('Error', errorMessage);
-  //     }
-  //   } catch (error) {
-  //     const errorMessage =
-  //       error instanceof Error ? error.message : 'Unexpected Error';
-  //     Alert.alert('Error', errorMessage);
-  //   }
-  // };
 
   return (
     <View style={globalStyle.screenContainer}>
