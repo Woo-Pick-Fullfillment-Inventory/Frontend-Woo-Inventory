@@ -7,13 +7,15 @@ import { Button } from '../components/Button';
 import { CheckBox } from '../components/CheckBox';
 import { globalStyle } from '../theme';
 import { logoSvg } from '../assets/logo';
-
-import { signin, ErrorResponse } from '../redux/authSlice';
+import { ApiValidationErrorResponse } from '../constants/models';
+import { signin } from '../redux/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../redux/store';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../App';
 import * as Keychain from 'react-native-keychain';
+
+const isApiValidationErrorResponse = (result: unknown): result is ApiValidationErrorResponse => result!== undefined;
 
 export const LoginScreen = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -26,20 +28,11 @@ export const LoginScreen = () => {
   const handleOnPressLogin = async () => {
     try {
       setIsLoading(true);
-      const loginResult = await dispatch(signin({ emailOrUsername, password })).unwrap();
-  
-      // Successfully logged in, navigate to the MainMenuScreen
+      const loginResultSucceeded = await dispatch(signin({ emailOrUsername, password })).unwrap();
+      await Keychain.setGenericPassword('jwtToken', loginResultSucceeded.jwtToken);
       navigation.navigate('MainMenuScreen');
-      
-      if (checked) {
-        const jwtToken = loginResult.jwtToken;
-        await Keychain.setGenericPassword('jwtToken', jwtToken);
-      }
     } catch (error) {
-      // Handle errors (both from rejected thunks and any other errors)
-      const errorResponse = error as ErrorResponse;
-      const errorMessage =  errorResponse.title || errorResponse.message || 'Unexpected Error';
-      Alert.alert('Error', errorMessage);
+      isApiValidationErrorResponse(error) ? Alert.alert('Error ', error.message) : Alert.alert('Error');
     } finally {
       setIsLoading(false);
     }

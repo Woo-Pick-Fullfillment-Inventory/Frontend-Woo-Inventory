@@ -1,11 +1,6 @@
 // authSlice.js
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-export interface ErrorResponse {
-  title?: string;
-  message?: string;
-  // Include other fields that your error response might have
-}
 export interface InitialState {
   // jwtToken: any;
   isLoggedIn: boolean;
@@ -51,9 +46,9 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
         // state.jwtToken = action.payload.jwtToken;
       })
-      .addCase(signup.fulfilled, (state) => {
+      .addCase(signup.fulfilled, state => {
         state.isLoggedIn = true;
-      })
+      });
   },
 });
 
@@ -73,24 +68,14 @@ export const signin = createAsyncThunk(
         },
       );
 
-      if (response.ok) {
-        // If the response is OK, assume it's JSON
-        return await response.json();
-      } else {
-        // If the response is not OK, handle both JSON and non-JSON responses
-        // can be logic problem or server problem
-        const contentType = response.headers.get('content-type');
-        let errorDetail;
-        if (contentType && contentType.includes('application/json')) {
-          errorDetail = await response.json();
-        } else {
-          errorDetail = await response.text();
-        }
-        return rejectWithValue(errorDetail);
-      }
-    } catch (error: any) {
-      //catching exceptions that occur during the fetch operation itself, which are not related to the HTTP response status
-      return rejectWithValue(error.message);
+      if (!response.ok) {
+        const rejectedResponse = await response.json();
+        return rejectWithValue(rejectedResponse);
+      } 
+
+      return await response.json();
+    } catch (error) {
+      return rejectWithValue(error);
     }
   },
 );
@@ -98,7 +83,14 @@ export const signin = createAsyncThunk(
 export const signup = createAsyncThunk(
   'auth/signup',
   async (
-    { appURL, email, username, password, passwordConfirmation, token }: SignupPayload,
+    {
+      appURL,
+      email,
+      username,
+      password,
+      passwordConfirmation,
+      token,
+    }: SignupPayload,
     { rejectWithValue },
   ) => {
     try {

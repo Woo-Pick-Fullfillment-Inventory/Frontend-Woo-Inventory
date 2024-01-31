@@ -11,9 +11,12 @@ import { CheckBox } from '../components/CheckBox';
 import { globalStyle } from '../theme';
 import { logoSvg } from '../assets/logo';
 
-import { signup, ErrorResponse } from '../redux/authSlice';
+import { signup } from '../redux/authSlice';
+import { ApiValidationErrorResponse } from '../constants/models';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../redux/store';
+
+const isApiValidationErrorResponse = (result: unknown): result is ApiValidationErrorResponse => result !== undefined;
 
 type SignupScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -50,10 +53,7 @@ export const LoginScreen = () => {
       // Successfully signed up, navigate to the MainMenuScreen
       navigation.navigate('MainMenuScreen');
     } catch (error) {
-      // Handle errors (both from rejected thunks and any other errors)
-      const errorResponse = error as ErrorResponse;
-      const errorMessage =  errorResponse.title || errorResponse.message || 'Unexpected Error';
-      Alert.alert('Error', errorMessage);
+      isApiValidationErrorResponse(error) ? Alert.alert('Error ', error.message) : Alert.alert('Error');
     } finally {
       setIsLoading(false);
     }
