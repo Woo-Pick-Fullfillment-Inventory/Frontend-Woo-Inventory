@@ -1,7 +1,7 @@
 import {Text} from 'react-native-paper';
 import {StyleSheet, Pressable} from 'react-native';
 
-import {PRIMARYCOLOR} from '../theme'
+import {PRIMARYCOLOR, WHITECOLOR} from '../theme'
 
 type Props = {
   onPress: (event: import('react-native').GestureResponderEvent) => void,
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     lineHeight: 21,
     fontWeight: '400',
     letterSpacing: 0.25,
-    color: 'white',
+    color: WHITECOLOR,
     top: 2
   },
 });

@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     flex: 1.8,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: WHITECOLOR,
     width: '100%',
   },
   subContainerThree: {
