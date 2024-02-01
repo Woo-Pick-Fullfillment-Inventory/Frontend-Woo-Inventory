@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, View, Text, Pressable, Alert } from 'react-native';
+import { StyleSheet, View, Text, Pressable, Alert, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { SvgXml } from 'react-native-svg';
@@ -14,10 +14,12 @@ import { logoSvg } from '../assets/logo';
 import { signup, ErrorResponse } from '../redux/authSlice';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../redux/store';
+import { TextBase } from 'react-native';
 
 type SignupScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
-  'LoginScreen'
+  'LoginScreen',
+  'AgbScreen'
 >;
 
 export const LoginScreen = () => {
@@ -60,83 +62,86 @@ export const LoginScreen = () => {
   };
 
   return (
-    <View style={globalStyle.screenContainer}>
-      <SvgXml xml={logoSvg} width={100} />
+    <SafeAreaView style={globalStyle.container}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={globalStyle.mainContent}>
+          <SvgXml xml={logoSvg} width={112.5} />
+          <Text style={globalStyle.heading1}>Join Free</Text>
 
-      <View style={globalStyle.section}>
-        <Text style={globalStyle.heading1}>Join Free</Text>
+          <View style={styles.intro}>
+            <Text style={globalStyle.paragraph}>The ultimate solution for</Text>
+            <Text style={globalStyle.paragraph}>
+              optimal warehouse management
+            </Text>
+          </View>
 
-        <View style={styles.intro}>
-          <Text style={globalStyle.paragraph}>The ultimate solution for</Text>
-          <Text style={globalStyle.paragraph}>
-            optimal warehouse management
-          </Text>
+          <View style={globalStyle.section}>
+            <InputField
+              placeholder={'Input your app URL'}
+              value={appURL}
+              action={text => setAppURL(text)}
+            />
+            <InputField
+              placeholder={'Input your email address'}
+              value={email}
+              action={text => setEmail(text)}
+            />
+            <InputField
+              placeholder={'Public username'}
+              value={username}
+              action={text => setUsername(text)}
+            />
+            <InputField
+              placeholder={'Password'}
+              value={password}
+              action={text => setPassword(text)}
+              isPassword
+            />
+            <InputField
+              placeholder={'Confirm Password'}
+              value={passwordConfirmation}
+              action={text => setPasswordConfirmation(text)}
+              isPassword
+            />
+            <InputField
+              placeholder={'Insert Token'}
+              value={token}
+              action={text => setToken(text)}
+              isCamera
+            />
+
+            <Text>
+              <CheckBox
+                isChecked={checked}
+                title={'By joining you agree to our'}
+                action={() => setChecked(!checked)}
+              />
+              <Pressable
+                onPress={() => navigation.navigate('AgbScreen')}
+              >
+                <Text style={styles.agbLink}>
+                  {' Term & Condition'}
+                </Text>
+              </Pressable>
+            </Text>
+          </View>
+
+          <View style={styles.buttonSection}>
+            {isLoading ? (
+              <Text>signing up ...</Text>
+            ) : (
+              <Button onPress={handleOnPress} title={'Register'} />
+            )}
+            <Text style={styles.text}>
+              or
+              <Pressable onPress={() => navigation.navigate('LoginScreen')}>
+                <Text style={styles.loginLink}> Login</Text>
+              </Pressable>
+            </Text>
+          </View>
         </View>
-      </View>
-
-      <View style={globalStyle.section}>
-        <InputField
-          title={'AppURL'}
-          placeholder={'Input your app URL'}
-          value={appURL}
-          action={text => setAppURL(text)}
-        />
-        <InputField
-          title={'Email'}
-          placeholder={'Input your email address'}
-          value={email}
-          action={text => setEmail(text)}
-        />
-        <InputField
-          title={'Username'}
-          placeholder={'Public username'}
-          value={username}
-          action={text => setUsername(text)}
-        />
-        <InputField
-          title={'Password'}
-          placeholder={'Password'}
-          value={password}
-          action={text => setPassword(text)}
-          isPassword
-        />
-        <InputField
-          title={'Confirm Password'}
-          placeholder={'Confirm Password'}
-          value={passwordConfirmation}
-          action={text => setPasswordConfirmation(text)}
-          isPassword
-        />
-        <InputField
-          title={'Token'}
-          value={token}
-          action={text => setToken(text)}
-          isCamera
-        />
-
-        <Text>
-          <CheckBox
-            isChecked={checked}
-            title={'By joining you agree to our Term & Condition'}
-            action={() => setChecked(!checked)}
-          />
-        </Text>
-      </View>
-
-      <View style={styles.buttonSection}>
-        {isLoading ? (
-          <Text>signing up ...</Text>
-        ) : (
-          <Button onPress={handleOnPress} title={'Register'} />
-        )}
-        <Text style={styles.text}>
-          or
-          <Pressable onPress={() => navigation.navigate('LoginScreen')}>
-            <Text style={styles.link}> Login</Text>
-          </Pressable>
-        </Text>
-      </View>
-    </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -161,7 +166,14 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
 
-  link: {
+  agbLink: {
+    fontSize: 12, 
+		color: 'rgba(14, 56, 208, 0.56)',
+		fontWeight: '700',
+    top: 4
+  },
+
+  loginLink: {
     top: 3,
   },
 });

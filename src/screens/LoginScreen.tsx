@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, Alert } from 'react-native';
+import { StyleSheet, View, Text, Alert, SafeAreaView } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 
 import { InputField } from '../components/InputField';
@@ -9,8 +9,8 @@ import { globalStyle } from '../theme';
 import { logoSvg } from '../assets/logo';
 
 import { signin, ErrorResponse } from '../redux/authSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../redux/store';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../redux/store';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../App';
 import * as Keychain from 'react-native-keychain';
@@ -46,10 +46,10 @@ export const LoginScreen = () => {
   };
 
   return (
-    <View style={globalStyle.screenContainer}>
-      <SvgXml xml={logoSvg} width={100} />
+    <SafeAreaView style={globalStyle.container}>
+      <View style={globalStyle.mainContent}>
+        <SvgXml xml={logoSvg} width={112.5} />
 
-      <View style={globalStyle.section}>
         <Text style={globalStyle.heading1}>Login</Text>
 
         <View style={styles.intro}>
@@ -58,40 +58,37 @@ export const LoginScreen = () => {
             optimal warehouse management
           </Text>
         </View>
-      </View>
 
-      <View style={globalStyle.section}>
-        <InputField
-          title={'Email'}
-          placeholder={'Input your email address or username'}
-          value={emailOrUsername}
-          action={text => setEmailOrUsername(text)}
-        />
-        <InputField
-          title={'Password'}
-          placeholder={'Password'}
-          value={password}
-          action={text => setPassword(text)}
-          isPassword
-        />
-
-        <Text style={styles.checkboxWrapper}>
-          <CheckBox
-            isChecked={checked}
-            title={'Remember me'}
-            action={() => setChecked(!checked)}
+        <View style={globalStyle.section}>
+          <InputField
+            placeholder={'Input your email address or username'}
+            value={emailOrUsername}
+            action={text => setEmailOrUsername(text)}
           />
-        </Text>
-      </View>
+          <InputField
+            placeholder={'Password'}
+            value={password}
+            action={text => setPassword(text)}
+            isPassword
+          />
+          <Text style={styles.checkboxWrapper}>
+            <CheckBox
+              isChecked={checked}
+              title={'Remember me'}
+              action={() => setChecked(!checked)}
+            />
+          </Text>
+        </View>
 
-      <View style={styles.buttonSection}>
-        {isLoading ? (
-          <Text>logging in ....</Text>
-        ) : (
-          <Button onPress={handleOnPressLogin} title={'Login'} />
-        )}
+        <View style={styles.buttonSection}>
+          {isLoading ? (
+            <Text>logging in ....</Text>
+          ) : (
+            <Button onPress={handleOnPressLogin} title={'Login'} />
+          )}
+        </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

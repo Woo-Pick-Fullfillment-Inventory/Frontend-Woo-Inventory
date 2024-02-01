@@ -26,21 +26,18 @@ export const Button = (props: Props) => {
 const styles = StyleSheet.create({
   primaryBtn: {
     width: 270,
-    height: 40,
+    height: 30,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 12,
+    borderRadius: 37.5,
     backgroundColor: PRIMARYCOLOR,
   },
 
   text: {
-    fontSize: 22,
+    fontSize: 15,
     lineHeight: 21,
     fontWeight: '400',
     letterSpacing: 0.25,
     color: WHITECOLOR,
-    top: 2
   },
 });
-
-

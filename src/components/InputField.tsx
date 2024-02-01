@@ -7,14 +7,13 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import camera from '../assets/icons/camera.png';
 import show from '../assets/icons/show.png';
 import hide from '../assets/icons/hide.png';
-import {PRIMARYCOLOR} from '../theme'
+import * as globalStyles from '../theme'
 import {RootStackParamList} from '../App';
 import {useNavigation} from '@react-navigation/native';
 
 type InputFieldNavigationProp = NativeStackNavigationProp<RootStackParamList,'ScannerScreen'>;
 
 type Props = {
-  title: string,
   placeholder?: string,
   value: string
   action: (text: string) => void,
@@ -25,7 +24,6 @@ type Props = {
 export const InputField = (props: Props) => {
   const navigation = useNavigation<InputFieldNavigationProp>();
   const {
-    title,
     placeholder,
     value,
     action,
@@ -41,29 +39,25 @@ export const InputField = (props: Props) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>
-        {title}
-      </Text>
-
       <TextInput
         style={styles.inputText}
         value={value}
         placeholder={placeholder}
-        placeholderTextColor={'#C8CAD0'}
+        placeholderTextColor={globalStyles.GRAY_03}
         onChangeText={action}
         secureTextEntry={passwordVisible}
         right={isPassword && // if the field is password -> return eye icon
           <TextInput.Icon
             icon={passwordVisible ? show : hide}
             onPress={togglePasswordVisibility}
-            color={PRIMARYCOLOR}
+            color={globalStyles.PRIMARYCOLOR}
           />
           ||
           isCamera &&  // if icon source is defined -> return icon source
             <TextInput.Icon
               icon={camera}
               onPress={() => navigation.navigate('ScannerScreen')}
-              color={PRIMARYCOLOR}
+              color={globalStyles.PRIMARYCOLOR}
             />
           }
       />
@@ -76,22 +70,16 @@ const styles = StyleSheet.create({
     marginBottom: 2,
   },
 
-  title: {
-    fontSize: 10,
-    fontWeight: '400',
-    lineHeight: 13,
-    color: PRIMARYCOLOR
-  },
-
   inputText: {
     width: 270,
-    height: 30,
-    backgroundColor: '#fff',
+    height: 37.5,
+    backgroundColor: globalStyles.GRAY_01,
     marginBottom: 10,
-    fontSize: 10,
+    fontSize: 12,
     borderWidth: 1,
     borderRadius: 5,
-    borderColor: PRIMARYCOLOR,
+    borderColor: globalStyles.GRAY_02,
+    color: globalStyles.BLACKCOLOR,
   },
 });
 

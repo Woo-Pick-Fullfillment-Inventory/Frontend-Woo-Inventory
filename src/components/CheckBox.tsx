@@ -39,7 +39,6 @@ export const CheckBox = (props: Props) => {
 
 const styles = StyleSheet.create({ 
 	container: {
-		width: '100%',
 		justifyContent: 'flex-start', 
 		alignItems: 'flex-start', 
 		flexDirection: 'row',

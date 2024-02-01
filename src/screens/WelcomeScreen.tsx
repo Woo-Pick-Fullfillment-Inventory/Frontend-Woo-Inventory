@@ -3,7 +3,7 @@ import { View, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import { Text } from 'react-native-paper';
 import { SvgXml } from 'react-native-svg';
 import { logoSvg } from '../assets/logo.tsx';
-import { BLACKCOLOR, PRIMARYCOLOR, WHITECOLOR } from '../theme';
+import { BLACKCOLOR, PRIMARYCOLOR, WHITECOLOR, globalStyle } from '../theme';
 import { RootStackParamList } from '../App';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
@@ -62,10 +62,10 @@ const WelcomeScreen = () => {
           <Text style={styles.welcomeText}>Woo Inventory</Text>
         </View>
         <View style={styles.textContainer}>
-          <Text style={styles.enjoyText}>
+          <Text style={globalStyle.paragraph}>
             Enjoy the inventory when and where you
           </Text>
-          <Text style={styles.enjoyText}>want with this app.</Text>
+          <Text style={globalStyle.paragraph}>want with this app.</Text>
         </View>
       </View>
       <View style={styles.subContainerThree}>
@@ -116,6 +116,7 @@ const styles = StyleSheet.create({
   textContainer: {
     width: '100%',
     marginBottom: '3%',
+    color: BLACKCOLOR
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -131,11 +132,6 @@ const styles = StyleSheet.create({
     fontSize: 50,
     textAlign: 'center',
     fontWeight: '700',
-  },
-  enjoyText: {
-    fontSize: 20,
-    textAlign: 'center',
-    fontWeight: '400',
   },
   button: {
     backgroundColor: WHITECOLOR,

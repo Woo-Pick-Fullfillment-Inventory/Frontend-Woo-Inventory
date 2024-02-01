@@ -7,16 +7,21 @@ import { StyleSheet } from 'react-native';
 export const PRIMARYCOLOR = '#6600FF';
 export const BLACKCOLOR = '#000000';
 export const WHITECOLOR = '#FFFFFF';
+// Naming after specific color in Figma
+export const GRAY_01 = '#F6F6F6'; 
+export const GRAY_02 = '#E8E8E8';
+export const GRAY_03 = '#BDBDBD';
 
 export const globalStyle = StyleSheet.create({
   container: {
-    fontFamily: 'Inter'
-  },
-
-  screenContainer: {
     flex: 1,
     alignItems: 'center',
-    paddingTop: '20%',
+    backgroundColor: WHITECOLOR
+  },
+
+  mainContent: {
+    alignItems: 'center',
+    paddingBottom: 40,
     paddingHorizontal: 40,
     color: BLACKCOLOR,
   },
@@ -29,8 +34,10 @@ export const globalStyle = StyleSheet.create({
   heading1: {
     fontSize: 37.5,
     fontWeight: '700',
-    lineHeight: 45.5,
+    lineHeight: 46.5,
+    paddingVertical: 8,
     textAlign: 'center',
+    color: BLACKCOLOR
   },
 
   paragraph: {
@@ -38,9 +45,15 @@ export const globalStyle = StyleSheet.create({
     fontWeight: '400',
     lineHeight: 18,
     textAlign: 'center',
+    color: BLACKCOLOR
   },
 
   section: {
-    marginTop: 10,
+    marginTop: 30,
   },
+
+  hyperlink: {
+    color: 'linear-gradient(0deg, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56))'
+  }
+  
 });
