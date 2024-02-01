@@ -1,6 +1,4 @@
 // All colors must be defined here
-// Default unit of react native is dp
-// 1dp = 1.5px
 
 import { StyleSheet } from 'react-native';
 
@@ -22,7 +20,6 @@ export const globalStyle = StyleSheet.create({
   mainContent: {
     alignItems: 'center',
     paddingBottom: 40,
-    paddingHorizontal: 40,
     color: BLACKCOLOR,
   },
 
@@ -32,18 +29,18 @@ export const globalStyle = StyleSheet.create({
   },
 
   heading1: {
-    fontSize: 37.5,
+    fontSize: 50,
     fontWeight: '700',
-    lineHeight: 46.5,
+    lineHeight: 61,
     paddingVertical: 8,
     textAlign: 'center',
     color: BLACKCOLOR
   },
 
   paragraph: {
-    fontSize: 15,
+    fontSize: 20,
     fontWeight: '400',
-    lineHeight: 18,
+    lineHeight: 22.4,
     textAlign: 'center',
     color: BLACKCOLOR
   },

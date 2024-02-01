@@ -54,14 +54,12 @@ export const LoginScreen = () => {
 
         <View style={styles.intro}>
           <Text style={globalStyle.paragraph}>The ultimate solution for</Text>
-          <Text style={globalStyle.paragraph}>
-            optimal warehouse management
-          </Text>
+          <Text style={globalStyle.paragraph}>optimal warehouse management</Text>
         </View>
 
         <View style={globalStyle.section}>
           <InputField
-            placeholder={'Input your email address or username'}
+            placeholder={'Email address or username'}
             value={emailOrUsername}
             action={text => setEmailOrUsername(text)}
           />

@@ -50,9 +50,8 @@ const styles = StyleSheet.create({
 	},
 
 	title: { 
-		fontSize: 12, 
+		fontSize: 13, 
 		color: 'rgba(0, 0, 0, 0.56)', 
 		fontWeight: '400',
-		top: 1
 	}, 
 }); 

@@ -71,11 +71,11 @@ const styles = StyleSheet.create({
   },
 
   inputText: {
-    width: 270,
-    height: 37.5,
+    width: 300,
+    height: 40,
     backgroundColor: globalStyles.GRAY_01,
-    marginBottom: 10,
-    fontSize: 12,
+    marginBottom: 13,
+    fontSize: 16,
     borderWidth: 1,
     borderRadius: 5,
     borderColor: globalStyles.GRAY_02,

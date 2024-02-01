@@ -25,8 +25,8 @@ export const Button = (props: Props) => {
 
 const styles = StyleSheet.create({
   primaryBtn: {
-    width: 270,
-    height: 30,
+    width: 300,
+    height: 35,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 37.5,
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    fontSize: 15,
+    fontSize: 18,
     lineHeight: 21,
     fontWeight: '400',
     letterSpacing: 0.25,

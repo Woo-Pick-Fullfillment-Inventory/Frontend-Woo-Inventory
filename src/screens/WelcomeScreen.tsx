@@ -75,7 +75,7 @@ const WelcomeScreen = () => {
           </TouchableOpacity>
           <Text style={styles.separator}> | </Text>
           <TouchableOpacity style={styles.button} onPress={goToRegisterScreen}>
-            <Text>Register</Text>
+            <Text style={styles.buttonText}>Register</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -132,6 +132,7 @@ const styles = StyleSheet.create({
     fontSize: 50,
     textAlign: 'center',
     fontWeight: '700',
+    color: BLACKCOLOR,
   },
   button: {
     backgroundColor: WHITECOLOR,

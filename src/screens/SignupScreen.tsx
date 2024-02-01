@@ -77,17 +77,17 @@ export const LoginScreen = () => {
 
           <View style={globalStyle.section}>
             <InputField
-              placeholder={'Input your app URL'}
+              placeholder={'App URL'}
               value={appURL}
               action={text => setAppURL(text)}
             />
             <InputField
-              placeholder={'Input your email address'}
+              placeholder={'Email'}
               value={email}
               action={text => setEmail(text)}
             />
             <InputField
-              placeholder={'Public username'}
+              placeholder={'Username'}
               value={username}
               action={text => setUsername(text)}
             />
@@ -104,7 +104,7 @@ export const LoginScreen = () => {
               isPassword
             />
             <InputField
-              placeholder={'Insert Token'}
+              placeholder={'Token'}
               value={token}
               action={text => setToken(text)}
               isCamera
@@ -159,22 +159,23 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    fontSize: 15,
+    fontSize: 18,
     fontWeight: '400',
-    lineHeight: 18,
+    lineHeight: 22.4,
     textAlign: 'center',
     marginTop: 15,
   },
 
   agbLink: {
-    fontSize: 12, 
+    fontSize: 13, 
 		color: 'rgba(14, 56, 208, 0.56)',
 		fontWeight: '700',
-    top: 4
+    
   },
 
   loginLink: {
     top: 3,
+    fontSize: 18,
   },
 });
 
