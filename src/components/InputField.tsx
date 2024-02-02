@@ -1,7 +1,8 @@
 import {useState} from 'react';
 import {TextInput} from 'react-native-paper';
-import {StyleSheet, View} from 'react-native';
+import {View} from 'react-native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 import * as globalStyles from '../theme'
 import {RootStackParamList} from '../App';
@@ -63,19 +64,19 @@ export const InputField = (props: Props) => {
   )
 }
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   container: {
     marginBottom: 2,
   },
 
   inputText: {
-    width: 300,
-    height: 40,
+    width: '300rem',
+    height: '40rem',
     backgroundColor: globalStyles.GRAY_01,
-    marginBottom: 13,
-    fontSize: 16,
-    borderWidth: 1,
-    borderRadius: 5,
+    marginBottom: '10rem',
+    fontSize: '14rem',
+    borderWidth: '1rem',
+    borderRadius: '5rem',
     borderColor: globalStyles.GRAY_02,
     color: globalStyles.BLACKCOLOR,
   },

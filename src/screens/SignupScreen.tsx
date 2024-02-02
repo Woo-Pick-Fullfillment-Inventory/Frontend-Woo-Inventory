@@ -1,20 +1,20 @@
 import { useState } from 'react';
-import { StyleSheet, View, Text, Pressable, Alert, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, Pressable, Alert, SafeAreaView, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { SvgXml } from 'react-native-svg';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 import { RootStackParamList } from '../App';
 import { InputField } from '../components/InputField';
 import { Button } from '../components/Button';
 import { CheckBox } from '../components/CheckBox';
-import { globalStyle } from '../theme';
+import { BLACKCOLOR, globalStyle } from '../theme';
 import { logoSvg } from '../assets/logo';
 
 import { signup, ErrorResponse } from '../redux/authSlice';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../redux/store';
-import { TextBase } from 'react-native';
 
 type SignupScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -68,7 +68,7 @@ export const LoginScreen = () => {
           <SvgXml xml={logoSvg} width={112.5} />
           <Text style={globalStyle.heading1}>Join Free</Text>
 
-          <View style={styles.intro}>
+          <View>
             <Text style={globalStyle.paragraph}>The ultimate solution for</Text>
             <Text style={globalStyle.paragraph}>
               optimal warehouse management
@@ -145,38 +145,36 @@ export const LoginScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  intro: {
-    marginTop: 10,
-  },
-
+const styles = EStyleSheet.create({
   buttonSection: {
-    marginTop: 15,
+    marginTop: '15rem',
   },
 
   checkbox: {
-    width: 2,
+    width: '2rem',
   },
 
   text: {
-    fontSize: 18,
+    fontSize: '18rem',
     fontWeight: '400',
-    lineHeight: 22.4,
+    lineHeight: '22.4rem',
     textAlign: 'center',
-    marginTop: 15,
+    marginTop: '15rem',
+    color: BLACKCOLOR
   },
 
   agbLink: {
-    bottom: 1,
-    fontSize: 13, 
+    bottom: '1rem',
+    fontSize: '13rem', 
 		color: 'rgba(14, 56, 208, 0.56)',
 		fontWeight: '700',
     
   },
 
   loginLink: {
-    top: 3,
-    fontSize: 18,
+    top: '4rem',
+    fontSize: '18rem',
+    color: BLACKCOLOR
   },
 });
 

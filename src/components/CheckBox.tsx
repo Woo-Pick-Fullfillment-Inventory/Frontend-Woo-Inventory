@@ -1,5 +1,6 @@
-import {GestureResponderEvent, Pressable, StyleSheet, Text, View} from 'react-native';
+import {GestureResponderEvent, Pressable, Text, View} from 'react-native';
 import {Icon} from 'react-native-paper';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 type Props = {
   isChecked: boolean,
@@ -30,7 +31,7 @@ export const CheckBox = (props: Props) => {
 	); 
 }; 
 
-const styles = StyleSheet.create({ 
+const styles = EStyleSheet.create({ 
 	container: {
 		justifyContent: 'flex-start', 
 		alignItems: 'flex-start', 
@@ -38,9 +39,9 @@ const styles = StyleSheet.create({
 	},
 
 	title: { 
-		marginLeft: 3,
-		bottom: 1,
-		fontSize: 13,
+		marginLeft: '3rem',
+		bottom: '1rem',
+		fontSize: '13rem',
 		color: 'rgba(0, 0, 0, 0.56)', 
 		fontWeight: '400',
 	}, 

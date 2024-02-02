@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, Alert, SafeAreaView } from 'react-native';
+import { View, Text, Alert, SafeAreaView } from 'react-native';
 import { SvgXml } from 'react-native-svg';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 import { InputField } from '../components/InputField';
 import { Button } from '../components/Button';
@@ -90,13 +91,13 @@ export const LoginScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   intro: {
-    marginTop: 10,
+    marginTop: '10rem',
   },
 
   buttonSection: {
-    marginTop: 15,
+    marginTop: '15rem',
   },
 
   checkboxWrapper: {
