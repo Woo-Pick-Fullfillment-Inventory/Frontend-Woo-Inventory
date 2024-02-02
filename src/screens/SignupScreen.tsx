@@ -107,7 +107,7 @@ export const LoginScreen = () => {
               placeholder={'Token'}
               value={token}
               action={text => setToken(text)}
-              isCamera
+              icon='camera-outline'
             />
 
             <Text>
@@ -167,6 +167,7 @@ const styles = StyleSheet.create({
   },
 
   agbLink: {
+    bottom: 1,
     fontSize: 13, 
 		color: 'rgba(14, 56, 208, 0.56)',
 		fontWeight: '700',

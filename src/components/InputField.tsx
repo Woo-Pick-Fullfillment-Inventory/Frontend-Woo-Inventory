@@ -1,12 +1,8 @@
 import {useState} from 'react';
-import {Text, TextInput} from 'react-native-paper';
+import {TextInput} from 'react-native-paper';
 import {StyleSheet, View} from 'react-native';
-import {SvgXml} from 'react-native-svg';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
-import camera from '../assets/icons/camera.png';
-import show from '../assets/icons/show.png';
-import hide from '../assets/icons/hide.png';
 import * as globalStyles from '../theme'
 import {RootStackParamList} from '../App';
 import {useNavigation} from '@react-navigation/native';
@@ -18,7 +14,7 @@ type Props = {
   value: string
   action: (text: string) => void,
   isPassword?: boolean
-  isCamera?: boolean
+  icon?: string
 }
 
 export const InputField = (props: Props) => {
@@ -28,7 +24,7 @@ export const InputField = (props: Props) => {
     value,
     action,
     isPassword,
-    isCamera
+    icon
   } = props;
 
   const [passwordVisible, setPasswordVisible] = useState(isPassword);
@@ -48,16 +44,18 @@ export const InputField = (props: Props) => {
         secureTextEntry={passwordVisible}
         right={isPassword && // if the field is password -> return eye icon
           <TextInput.Icon
-            icon={passwordVisible ? show : hide}
+            icon={passwordVisible ? 'eye-outline' : 'eye-off-outline'}
             onPress={togglePasswordVisibility}
             color={globalStyles.PRIMARYCOLOR}
+            size={18}
           />
           ||
-          isCamera &&  // if icon source is defined -> return icon source
+          icon &&  // if icon source is defined -> return icon source
             <TextInput.Icon
-              icon={camera}
+              icon={icon}
               onPress={() => navigation.navigate('ScannerScreen')}
               color={globalStyles.PRIMARYCOLOR}
+              size={18}
             />
           }
       />
