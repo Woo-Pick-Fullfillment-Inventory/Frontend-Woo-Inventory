@@ -1,7 +1,8 @@
 import {Text} from 'react-native-paper';
-import {StyleSheet, Pressable} from 'react-native';
+import {Pressable} from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
-import {PRIMARYCOLOR} from '../theme'
+import {PRIMARYCOLOR, WHITECOLOR} from '../theme'
 
 type Props = {
   onPress: (event: import('react-native').GestureResponderEvent) => void,
@@ -23,24 +24,20 @@ export const Button = (props: Props) => {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   primaryBtn: {
-    width: 270,
-    height: 40,
+    width: '300rem',
+    height: '35rem',
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 12,
+    borderRadius: '37.5rem',
     backgroundColor: PRIMARYCOLOR,
   },
 
   text: {
-    fontSize: 22,
-    lineHeight: 21,
+    fontSize: '18rem',
+    lineHeight: '21rem',
     fontWeight: '400',
-    letterSpacing: 0.25,
-    color: 'white',
-    top: 2
+    color: WHITECOLOR,
   },
 });
-
-

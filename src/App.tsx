@@ -8,6 +8,7 @@ import AgbScreen from './screens/AgbScreen';
 import LoginScreen from './screens/LoginScreen';
 import SignupScreen from './screens/SignupScreen';
 import ScannerScreen from './screens/ScannerScreen';
+import { BLACKCOLOR } from './theme';
 
 
 export type RootStackParamList = {
@@ -36,12 +37,20 @@ const App = () => {
         <Stack.Screen
           name="LoginScreen"
           component={LoginScreen}
-          options={{ title: '' }}
+          options={{
+            title: '',
+            headerShadowVisible: false,
+            headerTintColor: BLACKCOLOR
+          }}
         />
         <Stack.Screen
           name="SignupScreen"
           component={SignupScreen}
-          options={{ title: '' }}
+          options={{
+            title: '',
+            headerShadowVisible: false,
+            headerTintColor: BLACKCOLOR
+          }}
         />
         <Stack.Screen
           name="ProfileScreen"

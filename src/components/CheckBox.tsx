@@ -1,8 +1,6 @@
-import {GestureResponderEvent, Pressable, StyleSheet, Text, View} from 'react-native';
-import {SvgXml} from 'react-native-svg';
-
-import {checkboxActiveSvg} from '../assets/icons/checkboxActive';
-import {checkboxPassiveSvg} from '../assets/icons/checkboxPassive'
+import {GestureResponderEvent, Pressable, Text, View} from 'react-native';
+import {Icon} from 'react-native-paper';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 type Props = {
   isChecked: boolean,
@@ -17,18 +15,14 @@ export const CheckBox = (props: Props) => {
 		<View style={styles.container}> 
 			<Pressable onPress={action}>
 				{isChecked?
-					<SvgXml
-						xml={checkboxActiveSvg}
-						width={13}
-						height={13}
-						style={styles.checkbox}
+					<Icon
+						source={'checkbox-outline'}
+						size={13}
 					/>
 					:
-					<SvgXml
-						xml={checkboxPassiveSvg}
-						width={13}
-						height={13}
-						style={styles.checkbox}
+					<Icon
+						source={'checkbox-blank-outline'}
+						size={13}
 					/>
 				}
 			</Pressable>
@@ -37,23 +31,18 @@ export const CheckBox = (props: Props) => {
 	); 
 }; 
 
-const styles = StyleSheet.create({ 
+const styles = EStyleSheet.create({ 
 	container: {
-		width: '100%',
 		justifyContent: 'flex-start', 
 		alignItems: 'flex-start', 
 		flexDirection: 'row',
 	},
 
-	checkbox: {
-		marginRight: 4,
-		top: 2,
-	},
-
 	title: { 
-		fontSize: 12, 
+		marginLeft: '3rem',
+		bottom: '1rem',
+		fontSize: '13rem',
 		color: 'rgba(0, 0, 0, 0.56)', 
 		fontWeight: '400',
-		top: 1
 	}, 
 }); 

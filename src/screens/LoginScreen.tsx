@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, Alert } from 'react-native';
+import { View, Text, Alert, SafeAreaView } from 'react-native';
 import { SvgXml } from 'react-native-svg';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 import { InputField } from '../components/InputField';
 import { Button } from '../components/Button';
 import { CheckBox } from '../components/CheckBox';
 import { globalStyle } from '../theme';
 import { logoSvg } from '../assets/logo';
+
 import { ApiValidationErrorResponse } from '../constants/models';
 import { signin } from '../redux/authSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../redux/store';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../redux/store';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../App';
 import * as Keychain from 'react-native-keychain';
@@ -39,62 +41,57 @@ export const LoginScreen = () => {
   };
 
   return (
-    <View style={globalStyle.screenContainer}>
-      <SvgXml xml={logoSvg} width={100} />
+    <SafeAreaView style={globalStyle.container}>
+      <View style={globalStyle.mainContent}>
+        <SvgXml xml={logoSvg} width={112.5} />
 
-      <View style={globalStyle.section}>
         <Text style={globalStyle.heading1}>Login</Text>
 
         <View style={styles.intro}>
           <Text style={globalStyle.paragraph}>The ultimate solution for</Text>
-          <Text style={globalStyle.paragraph}>
-            optimal warehouse management
+          <Text style={globalStyle.paragraph}>optimal warehouse management</Text>
+        </View>
+
+        <View style={globalStyle.section}>
+          <InputField
+            placeholder={'Email address or username'}
+            value={emailOrUsername}
+            action={text => setEmailOrUsername(text)}
+          />
+          <InputField
+            placeholder={'Password'}
+            value={password}
+            action={text => setPassword(text)}
+            isPassword
+          />
+          <Text style={styles.checkboxWrapper}>
+            <CheckBox
+              isChecked={checked}
+              title={'Remember me'}
+              action={() => setChecked(!checked)}
+            />
           </Text>
         </View>
-      </View>
 
-      <View style={globalStyle.section}>
-        <InputField
-          title={'Email'}
-          placeholder={'Input your email address or username'}
-          value={emailOrUsername}
-          action={text => setEmailOrUsername(text)}
-        />
-        <InputField
-          title={'Password'}
-          placeholder={'Password'}
-          value={password}
-          action={text => setPassword(text)}
-          isPassword
-        />
-
-        <Text style={styles.checkboxWrapper}>
-          <CheckBox
-            isChecked={checked}
-            title={'Remember me'}
-            action={() => setChecked(!checked)}
-          />
-        </Text>
+        <View style={styles.buttonSection}>
+          {isLoading ? (
+            <Text>logging in ....</Text>
+          ) : (
+            <Button onPress={handleOnPressLogin} title={'Login'} />
+          )}
+        </View>
       </View>
-
-      <View style={styles.buttonSection}>
-        {isLoading ? (
-          <Text>logging in ....</Text>
-        ) : (
-          <Button onPress={handleOnPressLogin} title={'Login'} />
-        )}
-      </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   intro: {
-    marginTop: 10,
+    marginTop: '10rem',
   },
 
   buttonSection: {
-    marginTop: 15,
+    marginTop: '15rem',
   },
 
   checkboxWrapper: {

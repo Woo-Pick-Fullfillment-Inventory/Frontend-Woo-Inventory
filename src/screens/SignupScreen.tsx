@@ -1,14 +1,15 @@
 import { useState } from 'react';
-import { StyleSheet, View, Text, Pressable, Alert } from 'react-native';
+import { View, Text, Pressable, Alert, SafeAreaView, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { SvgXml } from 'react-native-svg';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 import { RootStackParamList } from '../App';
 import { InputField } from '../components/InputField';
 import { Button } from '../components/Button';
 import { CheckBox } from '../components/CheckBox';
-import { globalStyle } from '../theme';
+import { BLACKCOLOR, globalStyle } from '../theme';
 import { logoSvg } from '../assets/logo';
 
 import { signup } from '../redux/authSlice';
@@ -20,7 +21,8 @@ const isApiValidationErrorResponse = (result: unknown): result is ApiValidationE
 
 type SignupScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
-  'LoginScreen'
+  'LoginScreen',
+  'AgbScreen'
 >;
 
 export const LoginScreen = () => {
@@ -60,109 +62,119 @@ export const LoginScreen = () => {
   };
 
   return (
-    <View style={globalStyle.screenContainer}>
-      <SvgXml xml={logoSvg} width={100} />
+    <SafeAreaView style={globalStyle.container}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={globalStyle.mainContent}>
+          <SvgXml xml={logoSvg} width={112.5} />
+          <Text style={globalStyle.heading1}>Join Free</Text>
 
-      <View style={globalStyle.section}>
-        <Text style={globalStyle.heading1}>Join Free</Text>
+          <View>
+            <Text style={globalStyle.paragraph}>The ultimate solution for</Text>
+            <Text style={globalStyle.paragraph}>
+              optimal warehouse management
+            </Text>
+          </View>
 
-        <View style={styles.intro}>
-          <Text style={globalStyle.paragraph}>The ultimate solution for</Text>
-          <Text style={globalStyle.paragraph}>
-            optimal warehouse management
-          </Text>
+          <View style={globalStyle.section}>
+            <InputField
+              placeholder={'App URL'}
+              value={appURL}
+              action={text => setAppURL(text)}
+            />
+            <InputField
+              placeholder={'Email'}
+              value={email}
+              action={text => setEmail(text)}
+            />
+            <InputField
+              placeholder={'Username'}
+              value={username}
+              action={text => setUsername(text)}
+            />
+            <InputField
+              placeholder={'Password'}
+              value={password}
+              action={text => setPassword(text)}
+              isPassword
+            />
+            <InputField
+              placeholder={'Confirm Password'}
+              value={passwordConfirmation}
+              action={text => setPasswordConfirmation(text)}
+              isPassword
+            />
+            <InputField
+              placeholder={'Token'}
+              value={token}
+              action={text => setToken(text)}
+              icon='camera-outline'
+            />
+
+            <Text>
+              <CheckBox
+                isChecked={checked}
+                title={'By joining you agree to our'}
+                action={() => setChecked(!checked)}
+              />
+              <Pressable
+                onPress={() => navigation.navigate('AgbScreen')}
+              >
+                <Text style={styles.agbLink}>
+                  {' Term & Condition'}
+                </Text>
+              </Pressable>
+            </Text>
+          </View>
+
+          <View style={styles.buttonSection}>
+            {isLoading ? (
+              <Text>signing up ...</Text>
+            ) : (
+              <Button onPress={handleOnPressSignUp} title={'Register'} />
+            )}
+            <Text style={styles.text}>
+              or
+              <Pressable onPress={() => navigation.navigate('LoginScreen')}>
+                <Text style={styles.loginLink}> Login</Text>
+              </Pressable>
+            </Text>
+          </View>
         </View>
-      </View>
-
-      <View style={globalStyle.section}>
-        <InputField
-          title={'AppURL'}
-          placeholder={'Input your app URL'}
-          value={appURL}
-          action={text => setAppURL(text)}
-        />
-        <InputField
-          title={'Email'}
-          placeholder={'Input your email address'}
-          value={email}
-          action={text => setEmail(text)}
-        />
-        <InputField
-          title={'Username'}
-          placeholder={'Public username'}
-          value={username}
-          action={text => setUsername(text)}
-        />
-        <InputField
-          title={'Password'}
-          placeholder={'Password'}
-          value={password}
-          action={text => setPassword(text)}
-          isPassword
-        />
-        <InputField
-          title={'Confirm Password'}
-          placeholder={'Confirm Password'}
-          value={passwordConfirmation}
-          action={text => setPasswordConfirmation(text)}
-          isPassword
-        />
-        <InputField
-          title={'Token'}
-          value={token}
-          action={text => setToken(text)}
-          isCamera
-        />
-
-        <Text>
-          <CheckBox
-            isChecked={checked}
-            title={'By joining you agree to our Term & Condition'}
-            action={() => setChecked(!checked)}
-          />
-        </Text>
-      </View>
-
-      <View style={styles.buttonSection}>
-        {isLoading ? (
-          <Text>signing up ...</Text>
-        ) : (
-          <Button onPress={handleOnPressSignUp} title={'Register'} />
-        )}
-        <Text style={styles.text}>
-          or
-          <Pressable onPress={() => navigation.navigate('LoginScreen')}>
-            <Text style={styles.link}> Login</Text>
-          </Pressable>
-        </Text>
-      </View>
-    </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
-const styles = StyleSheet.create({
-  intro: {
-    marginTop: 10,
-  },
-
+const styles = EStyleSheet.create({
   buttonSection: {
-    marginTop: 15,
+    marginTop: '15rem',
   },
 
   checkbox: {
-    width: 2,
+    width: '2rem',
   },
 
   text: {
-    fontSize: 15,
+    fontSize: '18rem',
     fontWeight: '400',
-    lineHeight: 18,
+    lineHeight: '22.4rem',
     textAlign: 'center',
-    marginTop: 15,
+    marginTop: '15rem',
+    color: BLACKCOLOR
   },
 
-  link: {
-    top: 3,
+  agbLink: {
+    bottom: '1rem',
+    fontSize: '13rem', 
+		color: 'rgba(14, 56, 208, 0.56)',
+		fontWeight: '700',
+    
+  },
+
+  loginLink: {
+    top: '4rem',
+    fontSize: '18rem',
+    color: BLACKCOLOR
   },
 });
 
