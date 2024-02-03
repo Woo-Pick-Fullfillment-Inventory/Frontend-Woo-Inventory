@@ -36,7 +36,7 @@ export const LoginScreen = () => {
   const [token, setToken] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleOnPress = async () => {
+  const handleOnPressSignUp = async () => {
     try {
       setIsLoading(true);
       await dispatch(
@@ -127,7 +127,7 @@ export const LoginScreen = () => {
         {isLoading ? (
           <Text>signing up ...</Text>
         ) : (
-          <Button onPress={handleOnPress} title={'Register'} />
+          <Button onPress={handleOnPressSignUp} title={'Register'} />
         )}
         <Text style={styles.text}>
           or
