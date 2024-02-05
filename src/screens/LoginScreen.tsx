@@ -9,15 +9,13 @@ import { CheckBox } from '../components/CheckBox';
 import { globalStyle } from '../theme';
 import { logoSvg } from '../assets/logo';
 
-import { ApiValidationErrorResponse } from '../constants/models';
 import { signin } from '../redux/authSlice';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../redux/store';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../App';
 import * as Keychain from 'react-native-keychain';
-
-const isApiValidationErrorResponse = (result: unknown): result is ApiValidationErrorResponse => result!== undefined;
+import { isApiValidationErrorResponse } from '../constants/models';
 
 export const LoginScreen = () => {
   const dispatch = useDispatch<AppDispatch>();

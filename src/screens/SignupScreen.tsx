@@ -13,11 +13,9 @@ import { BLACKCOLOR, globalStyle } from '../theme';
 import { logoSvg } from '../assets/logo';
 
 import { signup } from '../redux/authSlice';
-import { ApiValidationErrorResponse } from '../constants/models';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../redux/store';
-
-const isApiValidationErrorResponse = (result: unknown): result is ApiValidationErrorResponse => result !== undefined;
+import { isApiValidationErrorResponse } from '../constants/models';
 
 type SignupScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
