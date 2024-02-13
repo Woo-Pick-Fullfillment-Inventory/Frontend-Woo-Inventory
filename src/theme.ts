@@ -27,22 +27,6 @@ export const globalStyle = EStyleSheet.create({
     color: BLACKCOLOR,
   },
 
-  headerRightSection: {
-    display: 'flex',
-    flexDirection: 'row'
-  },
-
-  headerMenuIcon: {
-    bottom: '7rem'
-  },
-
-  headerIcon: {
-    margin: 0,
-    padding: 0,
-    width: '28rem'
-  },
-
-
   logo: {
     width: '10rem',
     resizeMode: 'contain'

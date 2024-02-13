@@ -1,8 +1,9 @@
 import { IconButton } from 'react-native-paper';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { useNavigation, DrawerActions } from '@react-navigation/native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
-import { PRIMARYCOLOR, WHITECOLOR, globalStyle } from '../theme';
+import { PRIMARYCOLOR, WHITECOLOR } from '../theme';
 
 export const Header = ({navigation}: any) => {
   const drawerNavigation = useNavigation();
@@ -15,7 +16,7 @@ export const Header = ({navigation}: any) => {
     },
     headerLeft: () => (
       <IconButton
-        style={globalStyle.headerMenuIcon}
+        style={styles.headerMenuIcon}
         icon='menu'
         iconColor={WHITECOLOR}
         size={30}
@@ -25,30 +26,30 @@ export const Header = ({navigation}: any) => {
       />
     ),
     headerRight: () => (
-      <View style={globalStyle.headerRightSection}>
+      <View style={styles.headerRightSection}>
         <IconButton
-          style={globalStyle.headerIcon}
+          style={styles.headerIcon}
           icon='bell-outline'
           iconColor={WHITECOLOR}
           size={20}
           onPress={() => console.log('Pressed')}
         />
         <IconButton
-          style={globalStyle.headerIcon}
+          style={styles.headerIcon}
           icon='cog-outline'
           iconColor={WHITECOLOR}
           size={20}
           onPress={() => console.log('Pressed')}
         />
         <IconButton
-          style={globalStyle.headerIcon}
+          style={styles.headerIcon}
           icon='message-outline'
           iconColor={WHITECOLOR}
           size={20}
           onPress={() => console.log('Pressed')}
         />
         <IconButton
-          style={globalStyle.headerIcon}
+          style={styles.headerIcon}
           icon='account-outline'
           iconColor={WHITECOLOR}
           size={20}
@@ -58,3 +59,20 @@ export const Header = ({navigation}: any) => {
     ),
   })
 }
+
+export const styles = EStyleSheet.create({
+  headerRightSection: {
+    display: 'flex',
+    flexDirection: 'row'
+  },
+
+  headerMenuIcon: {
+    bottom: Platform.OS == "ios" ? '7rem': '0'
+  },
+
+  headerIcon: {
+    margin: 0,
+    padding: 0,
+    width: '28rem'
+  },
+});
