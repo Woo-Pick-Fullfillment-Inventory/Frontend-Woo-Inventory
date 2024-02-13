@@ -79,15 +79,11 @@ const StackNav = () => {
           options={{ title: 'Dashboard' }}
         />
       </Stack.Group>
-
-      <Drawer.Screen name="Dashboard" component={StackNav} />
     </Stack.Navigator>
   )
 }
 
 const App = () => {
-  const Drawer = createDrawerNavigator()
-
   return (
     <NavigationContainer>
       <Drawer.Navigator
@@ -98,7 +94,7 @@ const App = () => {
         }}
         drawerContent={() => <DrawerContent />}
       >
-        <Drawer.Screen name="Dashboard" component={StackNav} />
+        <Drawer.Screen name='Dashboard' component={StackNav} />
       </Drawer.Navigator>
     </NavigationContainer>
   );

@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { DrawerItem } from '@react-navigation/drawer';
 import { Icon } from 'react-native-paper';
 import { View } from 'react-native';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 import { BLACKCOLOR } from '../theme';
 
@@ -47,7 +48,7 @@ export const DrawerContent = () => {
   const navigation = useNavigation();
 
   return (
-    <View>
+    <View style={styles.container}>
       {drawerList.map((item, index) => {
         return (
           <DrawerItem
@@ -71,3 +72,8 @@ export const DrawerContent = () => {
   )
 }
 
+const styles = EStyleSheet.create({
+  container: {
+    top: '7%'
+  }
+});
