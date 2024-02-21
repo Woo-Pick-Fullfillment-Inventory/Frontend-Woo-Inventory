@@ -10,12 +10,10 @@ type Props = {
   route: RouteProp<RootStackParamList, 'ProfileScreen'>;
 };
 
-const ProfileScreen: React.FC<Props> = ({ route }) => {
-  const name = route.params?.name;
-
+const ProfileScreen = () => {
   return (
     <View>
-      <Text>This is {name ? `${name}'s` : 'the'} profile</Text>
+      <Text>This is profile</Text>
       <PasswordInput />
     </View>
   );
