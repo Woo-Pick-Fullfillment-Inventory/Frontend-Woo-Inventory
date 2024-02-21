@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, Alert, SafeAreaView } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import * as Keychain from 'react-native-keychain';
 
 import { InputField } from '../components/InputField';
 import { Button } from '../components/Button';
@@ -9,12 +10,13 @@ import { CheckBox } from '../components/CheckBox';
 import { globalStyle } from '../theme';
 import { logoSvg } from '../assets/logo';
 
-import { signin, ErrorResponse } from '../redux/authSlice';
+import { signin } from '../redux/authSlice';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../redux/store';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../App';
-import * as Keychain from 'react-native-keychain';
+
+import { isApiValidationErrorResponse } from '../constants/models';
 
 export const LoginScreen = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -27,20 +29,11 @@ export const LoginScreen = () => {
   const handleOnPressLogin = async () => {
     try {
       setIsLoading(true);
-      const loginResult = await dispatch(signin({ emailOrUsername, password })).unwrap();
-  
-      // Successfully logged in, navigate to the MainMenuScreen
+      const loginResultSucceeded = await dispatch(signin({ emailOrUsername, password })).unwrap();
+      await Keychain.setGenericPassword('jwtToken', loginResultSucceeded.jwtToken);
       navigation.navigate('MainMenuScreen');
-      
-      if (checked) {
-        const jwtToken = loginResult.jwtToken;
-        await Keychain.setGenericPassword('jwtToken', jwtToken);
-      }
     } catch (error) {
-      // Handle errors (both from rejected thunks and any other errors)
-      const errorResponse = error as ErrorResponse;
-      const errorMessage =  errorResponse.title || errorResponse.message || 'Unexpected Error';
-      Alert.alert('Error', errorMessage);
+      isApiValidationErrorResponse(error) ? Alert.alert('Error ', error.message) : Alert.alert('Error');
     } finally {
       setIsLoading(false);
     }

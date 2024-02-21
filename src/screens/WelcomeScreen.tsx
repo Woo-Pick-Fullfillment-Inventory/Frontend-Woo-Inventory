@@ -1,5 +1,11 @@
 import React, { useEffect } from 'react';
-import { View, StyleSheet, TouchableOpacity, Platform } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Platform,
+  Alert,
+} from 'react-native';
 import { Text } from 'react-native-paper';
 import { SvgXml } from 'react-native-svg';
 import { logoSvg } from '../assets/logo.tsx';
@@ -24,18 +30,12 @@ const WelcomeScreen = () => {
 
   useEffect(() => {
     SplashScreen.hide();
+    // TODO do we need to handle errors?
     const checkForToken = async () => {
-      try {
-        const credentials = await Keychain.getGenericPassword();
-        if (credentials) {
-          dispatch(setIsLoggedIn(true));
-          navigation.navigate('MainMenuScreen');
-        } else {
-          dispatch(setIsLoggedIn(false));
-        }
-      } catch (error) {
-        console.error('Failed to retrieve token:', error);
-        dispatch(setIsLoggedIn(false));
+      const credentials = await Keychain.getGenericPassword();
+      if (credentials) {
+        dispatch(setIsLoggedIn(true));
+        navigation.navigate('MainMenuScreen');
       }
     };
 
