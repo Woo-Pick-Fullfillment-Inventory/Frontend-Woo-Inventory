@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, Alert, SafeAreaView } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import * as Keychain from 'react-native-keychain';
 
 import { InputField } from '../components/InputField';
 import { Button } from '../components/Button';
@@ -14,7 +15,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../redux/store';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../App';
-import * as Keychain from 'react-native-keychain';
+
 import { isApiValidationErrorResponse } from '../constants/models';
 
 export const LoginScreen = () => {
