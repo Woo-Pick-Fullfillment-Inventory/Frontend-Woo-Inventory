@@ -2,9 +2,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 export interface InitialState {
-  userData: any; // Replace 'any' with a more specific type if possible
+  userData: unknown; // Replace 'any' with a more specific type if possible
   loading: boolean;
-  error: any;
+  error: unknown;
   isLoggedIn: boolean;
 }
 
@@ -85,7 +85,7 @@ export const signin = createAsyncThunk(
       }
 
       return await response.json();
-    } catch (error: any) {
+    } catch (error: unknown) {
       return rejectWithValue(error.message);
     }
   },
@@ -117,7 +117,7 @@ export const signup = createAsyncThunk(
       }
 
       return await response.json();
-    } catch (error: any) {
+    } catch (error: unknown) {
       return rejectWithValue(error);
     }
   },
