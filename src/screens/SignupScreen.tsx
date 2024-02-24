@@ -1,7 +1,6 @@
 // YourComponent.js
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { signup } from '../redux/authSlice';
+import { useSelector } from 'react-redux';
 import { View } from 'react-native';
 import { TextInput, Text, Button } from 'react-native-paper';
 import { RootState } from '../redux/store';
@@ -11,8 +10,7 @@ const SignupScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [token, setToken] = useState('');
-  const dispatch = useDispatch();
-  const { userData, loading, error, isLoggedIn } = useSelector((state: RootState) => state.auth);
+  const { userData, loading, error } = useSelector((state: RootState) => state.auth);
 
   const handleSubmit = () => {
     // dispatch(signup({ appURL, email, password, token }));

@@ -2,7 +2,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 export interface InitialState {
-  userData: unknown; // Replace 'any' with a more specific type if possible
+  userData: unknown;
   loading: boolean;
   error: unknown;
   isLoggedIn: boolean;
@@ -86,7 +86,7 @@ export const signin = createAsyncThunk(
 
       return await response.json();
     } catch (error: unknown) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error);
     }
   },
 );

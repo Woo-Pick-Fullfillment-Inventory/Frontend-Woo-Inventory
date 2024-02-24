@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { signin, logout, SigninPayload } from '../redux/authSlice';
+import { logout } from '../redux/authSlice';
 import { Text, TextInput, Button } from 'react-native-paper';
 import { RootState } from '../redux/store';
 

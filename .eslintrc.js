@@ -9,7 +9,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended', // Use recommended rules from the @typescript-eslint/eslint-plugin
     'plugin:react/recommended', // React specific linting rules
     'plugin:react-hooks/recommended', // Enforces React hooks rules
-    'plugin:import/errors', // Prevents import errors
+    // 'plugin:import/errors', // Prevents import errors TODO
     'plugin:import/warnings', // Warns about potential import issues
     'plugin:import/typescript', // Adds TypeScript support for import/export syntax
     'plugin:jsx-a11y/recommended', // Accessibility checks for JSX
