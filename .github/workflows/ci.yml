@@ -5,6 +5,8 @@ on: [push, pull_request]
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -16,7 +18,7 @@ jobs:
         run: echo "Building the project"
       - name: Test TODO
         run: echo "Running tests"
-      # - name: Trigger CD Workflow TODO 
+      # - name: Trigger CD Workflow TODO
       #   aif: github.event_name == 'push' && github.ref == 'refs/heads/main'
       #   uses: actions/github-script@v5
       #   with:
