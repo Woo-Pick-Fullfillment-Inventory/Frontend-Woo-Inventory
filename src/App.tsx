@@ -7,6 +7,8 @@ import WelcomeScreen from './screens/WelcomeScreen';
 import AgbScreen from './screens/AgbScreen';
 import LoginScreen from './screens/LoginScreen';
 import SignupScreen from './screens/SignupScreen';
+import ScannerScreen from './screens/ScannerScreen';
+import { BLACKCOLOR } from './theme';
 
 
 export type RootStackParamList = {
@@ -18,31 +20,37 @@ export type RootStackParamList = {
   MainMenuScreen: undefined;
   WelcomeScreen: undefined;
   AgbScreen: undefined;
+  ScannerScreen: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const App = () => {
-
-
-
   return (
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
           name="WelcomeScreen"
           component={WelcomeScreen}
-          options={{ title: 'Welcome', headerShown: false }}
+          options={{ title: '', headerShown: false }}
         />
         <Stack.Screen
           name="LoginScreen"
           component={LoginScreen}
-          options={{ title: 'Login' }}
+          options={{
+            title: '',
+            headerShadowVisible: false,
+            headerTintColor: BLACKCOLOR
+          }}
         />
         <Stack.Screen
           name="SignupScreen"
           component={SignupScreen}
-          options={{ title: 'Signup' }}
+          options={{
+            title: '',
+            headerShadowVisible: false,
+            headerTintColor: BLACKCOLOR
+          }}
         />
         <Stack.Screen
           name="ProfileScreen"
@@ -54,7 +62,12 @@ const App = () => {
           component={MainMenuScreen}
           options={{ title: 'MainMenuScreen' }}
         />
-        <Stack.Screen name="AgbScreen" component={AgbScreen} />
+        <Stack.Screen
+          name="ScannerScreen"
+          component={ScannerScreen}
+          options={{ title: 'MainMenuScreen' }}
+        />
+        <Stack.Screen name="AgbScreen" component={ScannerScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

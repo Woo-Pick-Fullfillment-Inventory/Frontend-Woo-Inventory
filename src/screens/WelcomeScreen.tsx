@@ -1,22 +1,44 @@
-import React from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useEffect } from 'react';
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 import { Text } from 'react-native-paper';
 import { SvgXml } from 'react-native-svg';
 import { logoSvg } from '../assets/logo.tsx';
-import { BLACKCOLOR, PRIMARYCOLOR, WHITECOLOR } from '../theme'
+import { BLACKCOLOR, PRIMARYCOLOR, WHITECOLOR, globalStyle } from '../theme';
 import { RootStackParamList } from '../App';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 import SplashScreen from 'react-native-splash-screen';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../redux/store.ts';
+import * as Keychain from 'react-native-keychain';
+import { setIsLoggedIn } from '../redux/authSlice.ts';
 
-type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList,'LoginScreen' | 'SignupScreen'>;
+type HomeScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'LoginScreen' | 'SignupScreen'
+>;
 
 const WelcomeScreen = () => {
-  React.useEffect(() => {
-    SplashScreen.hide();
-  }, []);
-
+  const dispatch = useDispatch<AppDispatch>();
   const navigation = useNavigation<HomeScreenNavigationProp>();
+
+  useEffect(() => {
+    SplashScreen.hide();
+    // TODO do we need to handle errors?
+    const checkForToken = async () => {
+      const credentials = await Keychain.getGenericPassword();
+      if (credentials) {
+        dispatch(setIsLoggedIn(true));
+        navigation.navigate('MainMenuScreen');
+      }
+    };
+
+    checkForToken();
+  }, [dispatch]);
 
   const goToLoginScreen = () => {
     navigation.navigate('LoginScreen');
@@ -31,27 +53,29 @@ const WelcomeScreen = () => {
       <View style={styles.subContainerOne}></View>
       <View style={styles.subContainerTwo}>
         <View style={styles.logo}>
-         <SvgXml xml={logoSvg} width="100%" height="100%" />
+          <SvgXml xml={logoSvg} width="100%" height="100%" />
         </View>
         <View style={styles.textContainer}>
-         <Text style={styles.welcomeText}>Say Hello To</Text>
-         <Text style={styles.welcomeText}>Woo Inventory</Text>
+          <Text style={styles.welcomeText}>Say Hello To</Text>
+          <Text style={styles.welcomeText}>Woo Inventory</Text>
         </View>
         <View style={styles.textContainer}>
-         <Text style={styles.enjoyText}>Enjoy the inventory when and where you</Text>
-         <Text style={styles.enjoyText}>want with this app.</Text>
+          <Text style={globalStyle.paragraph}>
+            Enjoy the inventory when and where you
+          </Text>
+          <Text style={globalStyle.paragraph}>want with this app.</Text>
         </View>
       </View>
       <View style={styles.subContainerThree}>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={goToLoginScreen}>
-          <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
-        <Text style={styles.separator}> | </Text>
-        <TouchableOpacity style={styles.button} onPress={goToRegisterScreen}>
-          <Text >Register</Text>
-        </TouchableOpacity>
-       </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={goToLoginScreen}>
+            <Text style={styles.buttonText}>Login</Text>
+          </TouchableOpacity>
+          <Text style={styles.separator}> | </Text>
+          <TouchableOpacity style={styles.button} onPress={goToRegisterScreen}>
+            <Text style={styles.buttonText}>Register</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -77,7 +101,7 @@ const styles = StyleSheet.create({
     flex: 1.8,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: WHITECOLOR,
     width: '100%',
   },
   subContainerThree: {
@@ -90,6 +114,7 @@ const styles = StyleSheet.create({
   textContainer: {
     width: '100%',
     marginBottom: '3%',
+    color: BLACKCOLOR
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -105,11 +130,7 @@ const styles = StyleSheet.create({
     fontSize: 50,
     textAlign: 'center',
     fontWeight: '700',
-  },
-  enjoyText: {
-    fontSize: 20,
-    textAlign: 'center',
-    fontWeight: '400',
+    color: BLACKCOLOR,
   },
   button: {
     backgroundColor: WHITECOLOR,
