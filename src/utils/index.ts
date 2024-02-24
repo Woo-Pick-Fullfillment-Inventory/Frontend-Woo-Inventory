@@ -1,5 +1,5 @@
 export const utils = {
-  notifyError: (error: any) => {
+  notifyError: (error: unknown) => {
     return error;
   },
 };

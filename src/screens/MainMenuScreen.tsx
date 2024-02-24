@@ -2,7 +2,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../App';
 import { useNavigation, NavigationProp  } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';

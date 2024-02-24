@@ -18,7 +18,7 @@ import { RootStackParamList } from '../App';
 
 import { isApiValidationErrorResponse } from '../constants/models';
 
-export const LoginScreen = () => {
+const LoginScreen = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [checked, setChecked] = useState(false);
   const [emailOrUsername, setEmailOrUsername] = useState('');

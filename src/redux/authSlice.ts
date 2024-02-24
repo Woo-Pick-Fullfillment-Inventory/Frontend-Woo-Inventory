@@ -42,7 +42,7 @@ const authSlice = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(signin.fulfilled, (state, action) => {
+      .addCase(signin.fulfilled, (state) => {
         state.isLoggedIn = true;
         // state.jwtToken = action.payload.jwtToken;
       })
@@ -125,7 +125,7 @@ export const signup = createAsyncThunk(
         }
         return rejectWithValue(errorDetail);
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       return rejectWithValue(error);
     }
   },

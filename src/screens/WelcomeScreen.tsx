@@ -38,7 +38,7 @@ const WelcomeScreen = () => {
     };
 
     checkForToken();
-  }, [dispatch]);
+  });
 
   const goToLoginScreen = () => {
     navigation.navigate('LoginScreen');

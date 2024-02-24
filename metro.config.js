@@ -1,4 +1,4 @@
-const {getDefaultConfig, mergeConfig} = import('@react-native/metro-config');
+const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
 
 /**
  * Metro configuration
@@ -6,6 +6,13 @@ const {getDefaultConfig, mergeConfig} = import('@react-native/metro-config');
  *
  * @type {import('metro-config').MetroConfig}
  */
-const config = {};
+async function getConfig() {
+    const defaultConfig = await getDefaultConfig(__dirname);
+    const config = {
+        // Your custom configuration here
+    };
 
-module.exports = mergeConfig(getDefaultConfig(__dirname), config);
+    return mergeConfig(defaultConfig, config);
+}
+
+module.exports = getConfig();
