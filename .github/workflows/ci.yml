@@ -8,6 +8,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Install Dependencies
+        uses: npm install
       - name: Run eslint
         run: npm run lint
       - name: Build TODO
