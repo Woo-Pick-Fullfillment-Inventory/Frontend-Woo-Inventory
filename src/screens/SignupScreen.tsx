@@ -23,7 +23,7 @@ type SignupScreenNavigationProp = NativeStackNavigationProp<
   'AgbScreen'
 >;
 
-export const LoginScreen = () => {
+const SignupScreen = () => {
   const navigation = useNavigation<SignupScreenNavigationProp>();
   const dispatch = useDispatch<AppDispatch>();
 
@@ -176,4 +176,4 @@ const styles = EStyleSheet.create({
   },
 });
 
-export default LoginScreen;
+export default SignupScreen;

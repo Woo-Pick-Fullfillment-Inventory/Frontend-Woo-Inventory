@@ -2,7 +2,15 @@
   "extends": "@react-native/typescript-config/tsconfig.json",
   "compilerOptions": {
     "jsx": "react-native",
-    "moduleResolution": "node",
-    "esModuleInterop": true
-  }
+    "moduleResolution": "node16",
+    "esModuleInterop": true,
+    "baseUrl": ".", // Base directory to resolve non-relative module names
+    "paths": {
+      "*": ["src/*"],
+      "*.ts": ["src/*"],
+      "*.tsx": ["src/*"]
+    }
+  },
+  "allowSyntheticDefaultImports": true, // Allows default imports from modules with no default export
+  "esModuleInterop": true, // Enables emit interoperability between CommonJS and ES Modules
 }

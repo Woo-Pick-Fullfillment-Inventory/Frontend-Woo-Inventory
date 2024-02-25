@@ -1,13 +1,15 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import ProfileScreen from './screens/ProfileScreen';
-import MainMenuScreen from './screens/MainMenuScreen';
-import WelcomeScreen from './screens/WelcomeScreen';
-import LoginScreen from './screens/LoginScreen';
-import SignupScreen from './screens/SignupScreen';
-import ScannerScreen from './screens/ScannerScreen';
 import { BLACKCOLOR } from './theme';
+import {
+  ProfileScreen,
+  MainMenuScreen,
+  WelcomeScreen,
+  LoginScreen,
+  SignupScreen,
+  ScannerScreen,
+} from './screens';
 
 
 export type RootStackParamList = {
@@ -39,7 +41,7 @@ const App = () => {
           options={{
             title: '',
             headerShadowVisible: false,
-            headerTintColor: BLACKCOLOR
+            headerTintColor: BLACKCOLOR,
           }}
         />
         <Stack.Screen
@@ -48,7 +50,7 @@ const App = () => {
           options={{
             title: '',
             headerShadowVisible: false,
-            headerTintColor: BLACKCOLOR
+            headerTintColor: BLACKCOLOR,
           }}
         />
         <Stack.Screen

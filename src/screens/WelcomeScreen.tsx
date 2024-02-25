@@ -1,9 +1,5 @@
 import React, { useEffect } from 'react';
-import {
-  View,
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Text } from 'react-native-paper';
 import { SvgXml } from 'react-native-svg';
 import { logoSvg } from '../assets/logo.tsx';
@@ -114,7 +110,7 @@ const styles = StyleSheet.create({
   textContainer: {
     width: '100%',
     marginBottom: '3%',
-    color: BLACKCOLOR
+    color: BLACKCOLOR,
   },
   buttonContainer: {
     flexDirection: 'row',
