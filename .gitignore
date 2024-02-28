@@ -64,3 +64,7 @@ yarn-error.log
 
 # testing
 /coverage
+
+# upload key
+my-upload-kay.keystore
+my-upload-key.keystore.base64.txt
