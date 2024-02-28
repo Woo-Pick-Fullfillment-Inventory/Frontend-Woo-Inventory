@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "192134186241",
+    "project_id": "woo-inventory-frontend",
+    "storage_bucket": "woo-inventory-frontend.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:192134186241:android:ea66850a72df91eeb08700",
+        "android_client_info": {
+          "package_name": "com.wooinventoryfrontend"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJOSw8X0RwV3T8TEdwjWHbYyWg0vERSbs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
