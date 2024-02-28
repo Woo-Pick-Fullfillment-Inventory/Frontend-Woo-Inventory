@@ -26,12 +26,12 @@ jobs:
       - name: Test TODO
         run: echo "Running tests"
 
-      - name: Build Android Debug APK
-        run: npx react-native run-android --variant=debug
+      # - name: Build Android Debug APK
+      #   run: npx react-native run-android --variant=debug
 
-      - name: Upload APK
-        uses: actions/upload-artifact@v2
-        with:
-          name: app-debug.apk
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+      # - name: Upload APK
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: app-debug.apk
+      #     path: android/app/build/outputs/apk/debug/app-debug.apk
 
