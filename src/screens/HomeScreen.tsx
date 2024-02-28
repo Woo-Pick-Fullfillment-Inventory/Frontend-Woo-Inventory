@@ -1,6 +1,6 @@
 // HomeScreen.js
 import React from 'react';
-import { Button, Text } from 'react-native-paper';
+import { Button } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { View, StyleSheet } from 'react-native';

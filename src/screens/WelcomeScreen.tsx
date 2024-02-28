@@ -3,8 +3,6 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
-  Platform,
-  Alert,
 } from 'react-native';
 import { Text } from 'react-native-paper';
 import { SvgXml } from 'react-native-svg';
@@ -40,7 +38,7 @@ const WelcomeScreen = () => {
     };
 
     checkForToken();
-  }, [dispatch]);
+  });
 
   const goToLoginScreen = () => {
     navigation.navigate('LoginScreen');

@@ -1,0 +1,34 @@
+name: Continuous Integration
+
+on: [push, pull_request]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install Dependencies
+        run: npm install
+      - name: Run eslint
+        run: npm run lint
+      - name: Build TODO
+        run: echo "Building the project"
+      - name: Test TODO
+        run: echo "Running tests"
+      # - name: Trigger CD Workflow TODO
+      #   aif: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      #   uses: actions/github-script@v5
+      #   with:
+      #     script: |
+      #       github.actions.createWorkflowDispatch({
+      #         owner: context.repo.owner,
+      #         repo: context.repo.repo,
+      #         workflow_id: 'cd.yml',
+      #         ref: 'main',
+      #         inputs: {
+      #           'ci_build_id': $a{{ github.run_id }}
+      #         }
+      #       })
