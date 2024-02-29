@@ -14,10 +14,12 @@ jobs:
       - name: Check out Git repository # clone the repo to local ci workspace
         uses: actions/checkout@v2
 
-      - name: Set up our JDK environment # setup JDK environment: mandatory as we need to build  android project
-        uses: actions/setup-java@v1.4.3
+      - name: Set up JDK 17 # Set up JDK to version matches development
+        uses: actions/setup-java@v2
         with:
-          java-version: 1.8
+          java-version: '17'
+          distribution: 'zulu'
+          cache: 'maven'
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
