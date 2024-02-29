@@ -14,12 +14,11 @@ jobs:
       - name: Check out Git repository # clone the repo to local ci workspace
         uses: actions/checkout@v2
 
-      - name: Set up JDK 17 # Set up JDK to version matches development
+      - name: Set up JDK 17
         uses: actions/setup-java@v2
         with:
           java-version: '17'
-          distribution: 'zulu'
-          cache: 'maven'
+          distribution: 'temurin' # Switch to Temurin, which is the successor to AdoptOpenJDK
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -50,12 +49,14 @@ jobs:
           key: ${{ runner.os }}-gradle-caches-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-caches-
+              
       - name: Make Gradlew Executable
         run: cd android && chmod +x ./gradlew
-
+      
+      # clean cache and bundle new apk
       - name: Generate App APK
         run: |
-          cd android && ./gradlew assembleRelease --no-daemon
+          cd android && ./gradlew clean && ./gradlew assembleRelease --no-daemon
 
       ## sign generated apk
       - name: Sign APK
@@ -72,5 +73,5 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: app
-          path: ./packages/app-mobile/android/app/build/outputs/apk/debug/app-debug.apk
+          path: android/app/build/outputs/apk/release/app-release.apk
           retention-days: 14
