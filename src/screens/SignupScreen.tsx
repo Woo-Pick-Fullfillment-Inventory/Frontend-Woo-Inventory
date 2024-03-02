@@ -9,6 +9,7 @@ import { RootStackParamList } from '../App';
 import { InputField } from '../components/InputField';
 import { Button } from '../components/Button';
 import { CheckBox } from '../components/CheckBox';
+import Checkbox from 'react-native-paper/lib/typescript/components/Checkbox/Checkbox';
 import { BLACKCOLOR, globalStyle } from '../theme';
 import { logoSvg } from '../assets/logo';
 
