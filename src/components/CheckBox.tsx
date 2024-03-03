@@ -34,13 +34,12 @@ export const CheckBox = (props: Props) => {
 const styles = EStyleSheet.create({ 
 	container: {
 		justifyContent: 'flex-start', 
-		alignItems: 'flex-start', 
+		alignItems: 'center',
 		flexDirection: 'row',
 	},
 
 	title: { 
 		marginLeft: '3rem',
-		bottom: '1rem',
 		fontSize: '13rem',
 		color: 'rgba(0, 0, 0, 0.56)', 
 		fontWeight: '400',
