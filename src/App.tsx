@@ -9,7 +9,6 @@ import SignupScreen from './screens/SignupScreen';
 import ScannerScreen from './screens/ScannerScreen';
 import { BLACKCOLOR } from './theme';
 
-
 export type RootStackParamList = {
   HomeScreen: undefined; // No parameters expected
   AuthScreen: undefined;
@@ -39,7 +38,7 @@ const App = () => {
           options={{
             title: '',
             headerShadowVisible: false,
-            headerTintColor: BLACKCOLOR
+            headerTintColor: BLACKCOLOR,
           }}
         />
         <Stack.Screen
@@ -48,7 +47,7 @@ const App = () => {
           options={{
             title: '',
             headerShadowVisible: false,
-            headerTintColor: BLACKCOLOR
+            headerTintColor: BLACKCOLOR,
           }}
         />
         <Stack.Screen
@@ -59,12 +58,16 @@ const App = () => {
         <Stack.Screen
           name="MainMenuScreen"
           component={MainMenuScreen}
-          options={{ title: 'MainMenuScreen' }}
+          options={{
+            title: 'MainMenuScreen',
+            gestureEnabled: false, // So that user can not swipe back in IOS
+            headerBackVisible: false
+          }}
         />
         <Stack.Screen
           name="ScannerScreen"
           component={ScannerScreen}
-          options={{ title: 'MainMenuScreen' }}
+          options={{ title: 'Scanner Screen' }}
         />
         <Stack.Screen name="AgbScreen" component={ScannerScreen} />
       </Stack.Navigator>
