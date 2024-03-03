@@ -1,5 +1,12 @@
 import { useState } from 'react';
-import { View, Text, Pressable, Alert, SafeAreaView, ScrollView } from 'react-native';
+import {
+  View,
+  Text,
+  Pressable,
+  Alert,
+  SafeAreaView,
+  ScrollView,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { SvgXml } from 'react-native-svg';
@@ -47,13 +54,15 @@ export const LoginScreen = () => {
           password,
           passwordConfirmation,
           token,
-        })
+        }),
       ).unwrap();
-  
+
       // Successfully signed up, navigate to the MainMenuScreen
       navigation.navigate('MainMenuScreen');
     } catch (error) {
-      isApiValidationErrorResponse(error) ? Alert.alert('Error ', error.message) : Alert.alert('Error');
+      isApiValidationErrorResponse(error)
+        ? Alert.alert('Error ', error.message)
+        : Alert.alert('Error');
     } finally {
       setIsLoading(false);
     }
@@ -105,7 +114,7 @@ export const LoginScreen = () => {
               placeholder={'Token'}
               value={token}
               action={text => setToken(text)}
-              icon='camera-outline'
+              icon="camera-outline"
             />
 
             <Text>
@@ -114,12 +123,8 @@ export const LoginScreen = () => {
                 title={'By joining you agree to our'}
                 action={() => setChecked(!checked)}
               />
-              <Pressable
-                onPress={() => navigation.navigate('AgbScreen')}
-              >
-                <Text style={styles.agbLink}>
-                  {' Term & Condition'}
-                </Text>
+              <Pressable onPress={() => navigation.navigate('AgbScreen')}>
+                <Text style={styles.agbLink}>{' Term & Condition'}</Text>
               </Pressable>
             </Text>
           </View>
@@ -128,14 +133,16 @@ export const LoginScreen = () => {
             {isLoading ? (
               <Text>signing up ...</Text>
             ) : (
-              <Button onPress={handleOnPressSignUp} title={'Register'} />
+              <>
+                <Button onPress={handleOnPressSignUp} title={'Register'} />
+                <Text style={styles.text}>
+                  or
+                  <Pressable onPress={() => navigation.navigate('LoginScreen')}>
+                    <Text style={styles.loginLink}> Login</Text>
+                  </Pressable>
+                </Text>
+              </>
             )}
-            <Text style={styles.text}>
-              or
-              <Pressable onPress={() => navigation.navigate('LoginScreen')}>
-                <Text style={styles.loginLink}> Login</Text>
-              </Pressable>
-            </Text>
           </View>
         </View>
       </ScrollView>
@@ -158,21 +165,19 @@ const styles = EStyleSheet.create({
     lineHeight: '22.4rem',
     textAlign: 'center',
     marginTop: '15rem',
-    color: BLACKCOLOR
+    color: BLACKCOLOR,
   },
 
   agbLink: {
-    bottom: '1rem',
-    fontSize: '13rem', 
-		color: 'rgba(14, 56, 208, 0.56)',
-		fontWeight: '700',
-    
+    fontSize: '13rem',
+    color: 'rgba(14, 56, 208, 0.56)',
+    fontWeight: '700',
   },
 
   loginLink: {
     top: '4rem',
     fontSize: '18rem',
-    color: BLACKCOLOR
+    color: BLACKCOLOR,
   },
 });
 
