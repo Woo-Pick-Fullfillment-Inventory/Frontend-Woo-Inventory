@@ -6,6 +6,8 @@ import {
   Alert,
   SafeAreaView,
   ScrollView,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -70,82 +72,90 @@ export const LoginScreen = () => {
 
   return (
     <SafeAreaView style={globalStyle.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={globalStyle.mainContent}>
-          <SvgXml xml={logoSvg} width={112.5} />
-          <Text style={globalStyle.heading1}>Join Free</Text>
+      <KeyboardAvoidingView // IOS need this to be scrollable when typing
+        style={{ flex: 1 }}
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={globalStyle.mainContent}>
+            <SvgXml xml={logoSvg} width={112.5} />
+            <Text style={globalStyle.heading1}>Join Free</Text>
 
-          <View>
-            <Text style={globalStyle.paragraph}>The ultimate solution for</Text>
-            <Text style={globalStyle.paragraph}>
-              optimal warehouse management
-            </Text>
-          </View>
+            <View>
+              <Text style={globalStyle.paragraph}>
+                The ultimate solution for
+              </Text>
+              <Text style={globalStyle.paragraph}>
+                optimal warehouse management
+              </Text>
+            </View>
 
-          <View style={globalStyle.section}>
-            <InputField
-              placeholder={'App URL'}
-              value={appURL}
-              action={text => setAppURL(text)}
-            />
-            <InputField
-              placeholder={'Email'}
-              value={email}
-              action={text => setEmail(text)}
-            />
-            <InputField
-              placeholder={'Username'}
-              value={username}
-              action={text => setUsername(text)}
-            />
-            <InputField
-              placeholder={'Password'}
-              value={password}
-              action={text => setPassword(text)}
-              isPassword
-            />
-            <InputField
-              placeholder={'Confirm Password'}
-              value={passwordConfirmation}
-              action={text => setPasswordConfirmation(text)}
-              isPassword
-            />
-            <InputField
-              placeholder={'Token'}
-              value={token}
-              action={text => setToken(text)}
-              icon="camera-outline"
-            />
-
-            <Text>
-              <CheckBox
-                isChecked={checked}
-                title={'By joining you agree to our'}
-                action={() => setChecked(!checked)}
+            <View style={globalStyle.section}>
+              <InputField
+                placeholder={'App URL'}
+                value={appURL}
+                action={text => setAppURL(text)}
               />
-              <Pressable onPress={() => navigation.navigate('AgbScreen')}>
-                <Text style={styles.agbLink}>{' Term & Condition'}</Text>
-              </Pressable>
-            </Text>
-          </View>
+              <InputField
+                placeholder={'Email'}
+                value={email}
+                action={text => setEmail(text)}
+              />
+              <InputField
+                placeholder={'Username'}
+                value={username}
+                action={text => setUsername(text)}
+              />
+              <InputField
+                placeholder={'Password'}
+                value={password}
+                action={text => setPassword(text)}
+                isPassword
+              />
+              <InputField
+                placeholder={'Confirm Password'}
+                value={passwordConfirmation}
+                action={text => setPasswordConfirmation(text)}
+                isPassword
+              />
+              <InputField
+                placeholder={'Token'}
+                value={token}
+                action={text => setToken(text)}
+                icon="camera-outline"
+              />
 
-          <View style={styles.buttonSection}>
-            {isLoading ? (
-              <Text>signing up ...</Text>
-            ) : (
-              <>
-                <Button onPress={handleOnPressSignUp} title={'Register'} />
-                <Text style={styles.text}>
-                  or
-                  <Pressable onPress={() => navigation.navigate('LoginScreen')}>
-                    <Text style={styles.loginLink}> Login</Text>
-                  </Pressable>
-                </Text>
-              </>
-            )}
+              <Text>
+                <CheckBox
+                  isChecked={checked}
+                  title={'By joining you agree to our'}
+                  action={() => setChecked(!checked)}
+                />
+                <Pressable onPress={() => navigation.navigate('AgbScreen')}>
+                  <Text style={styles.agbLink}>{' Term & Condition'}</Text>
+                </Pressable>
+              </Text>
+            </View>
+
+            <View style={styles.buttonSection}>
+              {isLoading ? (
+                <Text>signing up ...</Text>
+              ) : (
+                <>
+                  <Button onPress={handleOnPressSignUp} title={'Register'} />
+                  <Text style={styles.text}>
+                    or
+                    <Pressable
+                      onPress={() => navigation.navigate('LoginScreen')}>
+                      <Text style={styles.loginLink}> Login</Text>
+                    </Pressable>
+                  </Text>
+                </>
+              )}
+            </View>
           </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };
