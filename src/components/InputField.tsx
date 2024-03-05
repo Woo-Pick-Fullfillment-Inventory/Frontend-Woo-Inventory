@@ -13,7 +13,7 @@ type InputFieldNavigationProp = NativeStackNavigationProp<RootStackParamList,'Sc
 type Props = {
   placeholder?: string,
   value: string
-  action: (text: string) => void,
+  onChangeText: (text: string) => void,
   isPassword?: boolean
   icon?: string
 }
@@ -23,7 +23,7 @@ export const InputField = (props: Props) => {
   const {
     placeholder,
     value,
-    action,
+    onChangeText,
     isPassword,
     icon
   } = props;
@@ -41,7 +41,7 @@ export const InputField = (props: Props) => {
         value={value}
         placeholder={placeholder}
         placeholderTextColor={globalStyles.GRAY_03}
-        onChangeText={action}
+        onChangeText={onChangeText}
         secureTextEntry={passwordVisible}
         right={isPassword && // if the field is password -> return eye icon
           <TextInput.Icon
@@ -73,7 +73,7 @@ const styles = EStyleSheet.create({
     width: '300rem',
     height: '40rem',
     backgroundColor: globalStyles.GRAY_01,
-    marginBottom: '10rem',
+    marginTop: '5rem',
     fontSize: '14rem',
     borderWidth: '1rem',
     borderRadius: '5rem',

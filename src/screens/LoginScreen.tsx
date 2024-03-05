@@ -3,14 +3,14 @@ import { View, Text, Alert, SafeAreaView } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import * as Keychain from 'react-native-keychain';
+import { useForm, Controller } from 'react-hook-form';
 
 import { InputField } from '../components/InputField';
 import { Button } from '../components/Button';
-import { CheckBox } from '../components/CheckBox';
 import { globalStyle } from '../theme';
 import { logoSvg } from '../assets/logo';
 
-import { signin } from '../redux/authSlice';
+import { SigninPayload, signin } from '../redux/authSlice';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../redux/store';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
@@ -20,20 +20,35 @@ import { isApiValidationErrorResponse } from '../constants/models';
 
 const LoginScreen = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const [checked, setChecked] = useState(false);
-  const [emailOrUsername, setEmailOrUsername] = useState('');
-  const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
-  const handleOnPressLogin = async () => {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      emailOrUsername: '',
+      password: '',
+    },
+  });
+
+  const handleOnPressLogin = async (data: SigninPayload) => {
     try {
       setIsLoading(true);
-      const loginResultSucceeded = await dispatch(signin({ emailOrUsername, password })).unwrap();
-      await Keychain.setGenericPassword('jwtToken', loginResultSucceeded.jwtToken);
+      const loginResultSucceeded = await dispatch(
+        signin(data),
+      ).unwrap();
+      await Keychain.setGenericPassword(
+        'jwtToken',
+        loginResultSucceeded.jwtToken,
+      );
       navigation.navigate('MainMenuScreen');
     } catch (error) {
-      isApiValidationErrorResponse(error) ? Alert.alert('Error ', error.message) : Alert.alert('Error');
+      isApiValidationErrorResponse(error)
+        ? Alert.alert('Error ', error.message)
+        : Alert.alert('Error');
     } finally {
       setIsLoading(false);
     }
@@ -48,35 +63,51 @@ const LoginScreen = () => {
 
         <View style={styles.intro}>
           <Text style={globalStyle.paragraph}>The ultimate solution for</Text>
-          <Text style={globalStyle.paragraph}>optimal warehouse management</Text>
+          <Text style={globalStyle.paragraph}>
+            optimal warehouse management
+          </Text>
         </View>
 
         <View style={globalStyle.section}>
-          <InputField
-            placeholder={'Email address or username'}
-            value={emailOrUsername}
-            action={text => setEmailOrUsername(text)}
+          <Controller
+            control={control}
+            rules={{
+              required: true,
+            }}
+            render={({ field: { onChange, value } }) => (
+              <InputField
+                placeholder="Email or user name"
+                onChangeText={onChange}
+                value={value}
+              />
+            )}
+            name="emailOrUsername"
           />
-          <InputField
-            placeholder={'Password'}
-            value={password}
-            action={text => setPassword(text)}
-            isPassword
+          {errors.emailOrUsername && <Text>Email or username is required.</Text>}
+
+          <Controller
+            control={control}
+            rules={{
+              required: true,
+            }}
+            render={({ field: { onChange, value } }) => (
+              <InputField
+                placeholder="Password"
+                onChangeText={onChange}
+                value={value}
+                isPassword
+              />
+            )}
+            name="password"
           />
-          <Text style={styles.checkboxWrapper}>
-            <CheckBox
-              isChecked={checked}
-              title={'Remember me'}
-              action={() => setChecked(!checked)}
-            />
-          </Text>
+          {errors.password && <Text>Password is required.</Text>}
         </View>
 
         <View style={styles.buttonSection}>
           {isLoading ? (
             <Text>logging in ....</Text>
           ) : (
-            <Button onPress={handleOnPressLogin} title={'Login'} />
+            <Button onPress={handleSubmit(handleOnPressLogin)} title={'Login'} />
           )}
         </View>
       </View>

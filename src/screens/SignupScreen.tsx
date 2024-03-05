@@ -11,6 +11,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { SvgXml } from 'react-native-svg';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { useForm, Controller } from 'react-hook-form';
 
 import { RootStackParamList } from '../App';
 import { InputField } from '../components/InputField';
@@ -19,7 +20,7 @@ import { CheckBox } from '../components/CheckBox';
 import { BLACKCOLOR, globalStyle } from '../theme';
 import { logoSvg } from '../assets/logo';
 
-import { signup } from '../redux/authSlice';
+import { SignupPayload, signup } from '../redux/authSlice';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../redux/store';
 import { isApiValidationErrorResponse } from '../constants/models';
@@ -30,31 +31,33 @@ type SignupScreenNavigationProp = NativeStackNavigationProp<
   'AgbScreen'
 >;
 
-export const LoginScreen = () => {
+const SignupScreen = () => {
   const navigation = useNavigation<SignupScreenNavigationProp>();
   const dispatch = useDispatch<AppDispatch>();
 
   const [checked, setChecked] = useState(false);
-  const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirmation, setPasswordConfirmation] = useState('');
-  const [appURL, setAppURL] = useState('');
-  const [token, setToken] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleOnPressSignUp = async () => {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      appURL: '',
+      email: '',
+      username: '',
+      password: '',
+      passwordConfirmation: '',
+      token: '',
+    },
+  });
+
+  const handleOnPressSignUp = async (data: SignupPayload) => {
     try {
       setIsLoading(true);
       await dispatch(
-        signup({
-          appURL,
-          email,
-          username,
-          password,
-          passwordConfirmation,
-          token,
-        }),
+        signup(data),
       ).unwrap();
 
       // Successfully signed up, navigate to the MainMenuScreen
@@ -83,39 +86,92 @@ export const LoginScreen = () => {
           </View>
 
           <View style={globalStyle.section}>
-            <InputField
-              placeholder={'App URL'}
-              value={appURL}
-              action={text => setAppURL(text)}
+            <Controller
+              control={control}
+              rules={{ required: true }}
+              render={({ field: { onChange, value } }) => (
+                <InputField
+                  placeholder="App URL"
+                  onChangeText={onChange}
+                  value={value}
+                />
+              )}
+              name="appURL"
             />
-            <InputField
-              placeholder={'Email'}
-              value={email}
-              action={text => setEmail(text)}
+            {errors.appURL && <Text>App URL is required.</Text>}
+
+            <Controller
+              control={control}
+              rules={{ required: true }}
+              render={({ field: { onChange, value } }) => (
+                <InputField
+                  placeholder="Email"
+                  onChangeText={onChange}
+                  value={value}
+                />
+              )}
+              name="email"
             />
-            <InputField
-              placeholder={'Username'}
-              value={username}
-              action={text => setUsername(text)}
+            {errors.email && <Text>Email is required.</Text>}
+
+            <Controller
+              control={control}
+              rules={{ required: true }}
+              render={({ field: { onChange, value } }) => (
+                <InputField
+                  placeholder="User name"
+                  onChangeText={onChange}
+                  value={value}
+                />
+              )}
+              name="username"
             />
-            <InputField
-              placeholder={'Password'}
-              value={password}
-              action={text => setPassword(text)}
-              isPassword
+            {errors.username && <Text>Username is required.</Text>}
+
+            <Controller
+              control={control}
+              rules={{ required: true }}
+              render={({ field: { onChange, value } }) => (
+                <InputField
+                  placeholder="Password"
+                  onChangeText={onChange}
+                  value={value}
+                  isPassword
+                />
+              )}
+              name="password"
             />
-            <InputField
-              placeholder={'Confirm Password'}
-              value={passwordConfirmation}
-              action={text => setPasswordConfirmation(text)}
-              isPassword
+            {errors.password && <Text>Password is required.</Text>}
+
+            <Controller
+              control={control}
+              rules={{ required: true }}
+              render={({ field: { onChange, value } }) => (
+                <InputField
+                  placeholder="Confirm Password"
+                  onChangeText={onChange}
+                  value={value}
+                  isPassword
+                />
+              )}
+              name="passwordConfirmation"
             />
-            <InputField
-              placeholder={'Token'}
-              value={token}
-              action={text => setToken(text)}
-              icon="camera-outline"
+            {errors.passwordConfirmation && <Text>Password confirmation is required.</Text>}
+
+            <Controller
+              control={control}
+              rules={{ required: true }}
+              render={({ field: { onChange, value } }) => (
+                <InputField
+                  placeholder="Token"
+                  onChangeText={onChange}
+                  value={value}
+                  icon="camera-outline"
+                />
+              )}
+              name="token"
             />
+            {errors.token && <Text>Token is required.</Text>}
 
             <Text>
               <CheckBox
@@ -134,7 +190,7 @@ export const LoginScreen = () => {
               <Text>signing up ...</Text>
             ) : (
               <>
-                <Button onPress={handleOnPressSignUp} title={'Register'} />
+                <Button onPress={handleSubmit(handleOnPressSignUp)} title={'Register'} />
                 <Text style={styles.text}>
                   or
                   <Pressable onPress={() => navigation.navigate('LoginScreen')}>
@@ -181,4 +237,4 @@ const styles = EStyleSheet.create({
   },
 });
 
-export default LoginScreen;
+export default SignupScreen;
