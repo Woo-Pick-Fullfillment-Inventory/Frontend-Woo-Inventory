@@ -1,32 +1,29 @@
-import {useState} from 'react';
-import {TextInput} from 'react-native-paper';
-import {View} from 'react-native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import { useState } from 'react';
+import { TextInput } from 'react-native-paper';
+import { View } from 'react-native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-import * as globalStyles from '../theme'
-import {RootStackParamList} from '../App';
-import {useNavigation} from '@react-navigation/native';
+import * as globalStyles from '../theme';
+import { RootStackParamList } from '../App';
+import { useNavigation } from '@react-navigation/native';
 
-type InputFieldNavigationProp = NativeStackNavigationProp<RootStackParamList,'ScannerScreen'>;
+type InputFieldNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'ScannerScreen'
+>;
 
 type Props = {
-  placeholder?: string,
-  value: string
-  onChangeText: (text: string) => void,
-  isPassword?: boolean
-  icon?: string
-}
+  placeholder?: string;
+  value: string;
+  onChangeText: (text: string) => void;
+  isPassword?: boolean;
+  icon?: string;
+};
 
 export const InputField = (props: Props) => {
   const navigation = useNavigation<InputFieldNavigationProp>();
-  const {
-    placeholder,
-    value,
-    onChangeText,
-    isPassword,
-    icon
-  } = props;
+  const { placeholder, value, onChangeText, isPassword, icon } = props;
 
   const [passwordVisible, setPasswordVisible] = useState(isPassword);
 
@@ -43,29 +40,32 @@ export const InputField = (props: Props) => {
         placeholderTextColor={globalStyles.GRAY_03}
         onChangeText={onChangeText}
         secureTextEntry={passwordVisible}
-        right={isPassword && // if the field is password -> return eye icon
-          <TextInput.Icon
-            icon={passwordVisible ? 'eye-outline' : 'eye-off-outline'}
-            onPress={togglePasswordVisibility}
-            color={globalStyles.PRIMARYCOLOR}
-            size={18}
-          />
-          ||
-          icon &&  // if icon source is defined -> return icon source
+        right={
+          (isPassword && ( // if the field is password -> return eye icon
+            <TextInput.Icon
+              icon={passwordVisible ? 'eye-outline' : 'eye-off-outline'}
+              onPress={togglePasswordVisibility}
+              color={globalStyles.PRIMARYCOLOR}
+              size={18}
+            />
+          )) ||
+          (icon && ( // if icon source is defined -> return icon source
             <TextInput.Icon
               icon={icon}
               onPress={() => navigation.navigate('ScannerScreen')}
               color={globalStyles.PRIMARYCOLOR}
               size={18}
             />
-          }
+          ))
+        }
       />
     </View>
-  )
-}
+  );
+};
 
 const styles = EStyleSheet.create({
   container: {
+    width: '300rem',
     marginBottom: 2,
   },
 
@@ -81,4 +81,3 @@ const styles = EStyleSheet.create({
     color: globalStyles.BLACKCOLOR,
   },
 });
-

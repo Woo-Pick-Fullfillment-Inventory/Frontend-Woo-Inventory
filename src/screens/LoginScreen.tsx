@@ -17,6 +17,7 @@ import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../App';
 
 import { isApiValidationErrorResponse } from '../constants/models';
+import { emailRegex, passwordRegex } from '../constants';
 
 const LoginScreen = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -37,9 +38,7 @@ const LoginScreen = () => {
   const handleOnPressLogin = async (data: SigninPayload) => {
     try {
       setIsLoading(true);
-      const loginResultSucceeded = await dispatch(
-        signin(data),
-      ).unwrap();
+      const loginResultSucceeded = await dispatch(signin(data)).unwrap();
       await Keychain.setGenericPassword(
         'jwtToken',
         loginResultSucceeded.jwtToken,
@@ -72,7 +71,11 @@ const LoginScreen = () => {
           <Controller
             control={control}
             rules={{
-              required: true,
+              required: 'Email is required',
+              pattern: {
+                value: emailRegex,
+                message: 'Please enter a valid email address.',
+              },
             }}
             render={({ field: { onChange, value } }) => (
               <InputField
@@ -83,12 +86,20 @@ const LoginScreen = () => {
             )}
             name="emailOrUsername"
           />
-          {errors.emailOrUsername && <Text>Email or username is required.</Text>}
+          {errors.emailOrUsername && (
+            <Text style={globalStyle.errorText}>
+              {errors.emailOrUsername.message}
+            </Text>
+          )}
 
           <Controller
             control={control}
             rules={{
-              required: true,
+              required: 'password is required',
+              pattern: {
+                value: passwordRegex,
+                message: 'Password does not meet complexity requirements.',
+              },
             }}
             render={({ field: { onChange, value } }) => (
               <InputField
@@ -100,14 +111,21 @@ const LoginScreen = () => {
             )}
             name="password"
           />
-          {errors.password && <Text>Password is required.</Text>}
+          {errors.password && (
+            <Text style={globalStyle.errorText}>
+              {errors.password.message}
+            </Text>
+          )}
         </View>
 
         <View style={styles.buttonSection}>
           {isLoading ? (
             <Text>logging in ....</Text>
           ) : (
-            <Button onPress={handleSubmit(handleOnPressLogin)} title={'Login'} />
+            <Button
+              onPress={handleSubmit(handleOnPressLogin)}
+              title={'Login'}
+            />
           )}
         </View>
       </View>

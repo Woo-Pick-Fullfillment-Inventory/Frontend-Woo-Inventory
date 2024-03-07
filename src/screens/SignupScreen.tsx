@@ -24,6 +24,7 @@ import { SignupPayload, signup } from '../redux/authSlice';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../redux/store';
 import { isApiValidationErrorResponse } from '../constants/models';
+import { emailRegex, passwordRegex } from '../constants';
 
 type SignupScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -41,6 +42,7 @@ const SignupScreen = () => {
   const {
     control,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -53,12 +55,12 @@ const SignupScreen = () => {
     },
   });
 
+  const password = watch("password");
+
   const handleOnPressSignUp = async (data: SignupPayload) => {
     try {
       setIsLoading(true);
-      await dispatch(
-        signup(data),
-      ).unwrap();
+      await dispatch(signup(data)).unwrap();
 
       // Successfully signed up, navigate to the MainMenuScreen
       navigation.navigate('MainMenuScreen');
@@ -98,11 +100,19 @@ const SignupScreen = () => {
               )}
               name="appURL"
             />
-            {errors.appURL && <Text>App URL is required.</Text>}
+            {errors.appURL && (
+              <Text style={globalStyle.errorText}>App URL is required.</Text>
+            )}
 
             <Controller
               control={control}
-              rules={{ required: true }}
+              rules={{
+                required: 'Email is required.',
+                pattern: {
+                  value: emailRegex,
+                  message: 'Please enter a valid email address.',
+                },
+              }}
               render={({ field: { onChange, value } }) => (
                 <InputField
                   placeholder="Email"
@@ -112,7 +122,9 @@ const SignupScreen = () => {
               )}
               name="email"
             />
-            {errors.email && <Text>Email is required.</Text>}
+            {errors.email && (
+              <Text style={globalStyle.errorText}>{errors.email.message}</Text>
+            )}
 
             <Controller
               control={control}
@@ -126,11 +138,19 @@ const SignupScreen = () => {
               )}
               name="username"
             />
-            {errors.username && <Text>Username is required.</Text>}
+            {errors.username && (
+              <Text style={globalStyle.errorText}>Username is required.</Text>
+            )}
 
             <Controller
               control={control}
-              rules={{ required: true }}
+              rules={{
+                required: 'Password is required',
+                pattern: {
+                  value: passwordRegex,
+                  message: 'Password does not meet complexity requirements.',
+                },
+              }}
               render={({ field: { onChange, value } }) => (
                 <InputField
                   placeholder="Password"
@@ -141,11 +161,19 @@ const SignupScreen = () => {
               )}
               name="password"
             />
-            {errors.password && <Text>Password is required.</Text>}
+            {errors.password && (
+              <Text style={globalStyle.errorText}>
+                {errors.password.message}
+              </Text>
+            )}
 
             <Controller
               control={control}
-              rules={{ required: true }}
+              rules={{
+                required: 'Password is required',
+                validate: value =>
+                  value === password || 'The passwords do not match',
+              }}
               render={({ field: { onChange, value } }) => (
                 <InputField
                   placeholder="Confirm Password"
@@ -156,11 +184,15 @@ const SignupScreen = () => {
               )}
               name="passwordConfirmation"
             />
-            {errors.passwordConfirmation && <Text>Password confirmation is required.</Text>}
+            {errors.passwordConfirmation && (
+              <Text style={globalStyle.errorText}>
+                {errors.passwordConfirmation.message}
+              </Text>
+            )}
 
             <Controller
               control={control}
-              rules={{ required: true }}
+              rules={{ required: 'Token is required' }}
               render={({ field: { onChange, value } }) => (
                 <InputField
                   placeholder="Token"
@@ -171,7 +203,9 @@ const SignupScreen = () => {
               )}
               name="token"
             />
-            {errors.token && <Text>Token is required.</Text>}
+            {errors.token && (
+              <Text style={globalStyle.errorText}>Token is required.</Text>
+            )}
 
             <Text>
               <CheckBox
@@ -190,7 +224,10 @@ const SignupScreen = () => {
               <Text>signing up ...</Text>
             ) : (
               <>
-                <Button onPress={handleSubmit(handleOnPressSignUp)} title={'Register'} />
+                <Button
+                  onPress={handleSubmit(handleOnPressSignUp)}
+                  title={'Register'}
+                />
                 <Text style={styles.text}>
                   or
                   <Pressable onPress={() => navigation.navigate('LoginScreen')}>
