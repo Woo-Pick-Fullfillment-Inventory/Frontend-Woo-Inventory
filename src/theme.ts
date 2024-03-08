@@ -4,13 +4,13 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 
 // Calculate rem ratio with the most common mobile screen size
 export const entireScreenWidth = Dimensions.get('window').width;
-EStyleSheet.build({$rem: entireScreenWidth / 390});
+EStyleSheet.build({ $rem: entireScreenWidth / 390 });
 
 export const PRIMARYCOLOR = '#6600FF';
 export const BLACKCOLOR = '#000000';
 export const WHITECOLOR = '#FFFFFF';
 // Naming after specific color in Figma
-export const GRAY_01 = '#F6F6F6'; 
+export const GRAY_01 = '#F6F6F6';
 export const GRAY_02 = '#E8E8E8';
 export const GRAY_03 = '#BDBDBD';
 
@@ -18,7 +18,9 @@ export const globalStyle = EStyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: WHITECOLOR
+    justifyContent: 'center',
+    width: '100%',
+    backgroundColor: WHITECOLOR,
   },
 
   mainContent: {
@@ -29,7 +31,7 @@ export const globalStyle = EStyleSheet.create({
 
   logo: {
     width: '10rem',
-    resizeMode: 'contain'
+    resizeMode: 'contain',
   },
 
   heading1: {
@@ -38,7 +40,7 @@ export const globalStyle = EStyleSheet.create({
     lineHeight: '51rem',
     paddingVertical: '8rem',
     textAlign: 'center',
-    color: BLACKCOLOR
+    color: BLACKCOLOR,
   },
 
   paragraph: {
@@ -46,7 +48,7 @@ export const globalStyle = EStyleSheet.create({
     fontWeight: '400',
     lineHeight: '20rem',
     textAlign: 'center',
-    color: BLACKCOLOR
+    color: BLACKCOLOR,
   },
 
   section: {
@@ -54,6 +56,11 @@ export const globalStyle = EStyleSheet.create({
   },
 
   hyperlink: {
-    color: 'linear-gradient(0deg, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56))'
-  }
+    color: 'linear-gradient(0deg, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56))',
+  },
+
+  errorText: {
+    maxWidth: '300rem',
+    color: 'red', 
+  },
 });
