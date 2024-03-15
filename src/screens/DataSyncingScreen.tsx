@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, ActivityIndicator, Alert, StyleSheet } from 'react-native';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
-import { RootStackParamList } from 'App';
 import { productService } from '../services/productService';
 import * as Keychain from 'react-native-keychain';
 import { delayCallback } from '../utils';
 import { isApiValidationErrorResponse } from '../constants';
+import { RootStackParamList } from '../App';
 
 const DataSyncingScreen = () => {
   const [isLoading, setIsLoading] = useState(true); // Initially set loading to true
@@ -17,7 +17,7 @@ const DataSyncingScreen = () => {
     const fetchDataSyncing = async () => {
       try {
         const credentials = await Keychain.getGenericPassword();
-        if (!credentials || !credentials.password) throw new Error("No JwtToken found");
+        if (!credentials || !credentials.password) throw new Error("No jwtToken found");
   
         const result = await productService.areProductsSynced(credentials.password);
         
@@ -25,12 +25,12 @@ const DataSyncingScreen = () => {
           await productService.productSync({ action: "sync-products" }, credentials.password);
           setSyncedMessage("Data Synced Done");
           delayCallback(() => navigation.navigate("MainMenuScreen"),2000);
-        } 
+        } else {
+          setSyncedMessage("Data Syned Done");
+          delayCallback(() => navigation.navigate("MainMenuScreen"),2000);
+          setIsLoading(false); 
+        }
 
-        setSyncedMessage("Data Syned Done");
-        delayCallback(() => navigation.navigate("MainMenuScreen"),2000);
-        setIsLoading(false); 
-  
       } catch (error) {
         setIsLoading(false);
         isApiValidationErrorResponse(error)
