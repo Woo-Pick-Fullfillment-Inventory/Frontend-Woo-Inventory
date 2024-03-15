@@ -6,6 +6,7 @@ import ScannerScreen from './ScannerScreen';
 import SignupScreen from './SignupScreen';
 import WelcomeScreen from './WelcomeScreen';
 import HomeScreen from './HomeScreen';
+import DataSyncingScreen from './DataSyncingScreen';
 
 export {
   LoginScreen,
@@ -16,4 +17,5 @@ export {
   SignupScreen,
   WelcomeScreen,
   HomeScreen,
+  DataSyncingScreen
 };

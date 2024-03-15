@@ -43,7 +43,7 @@ const LoginScreen = () => {
         'jwtToken',
         loginResultSucceeded.jwtToken,
       );
-      navigation.navigate('MainMenuScreen');
+      navigation.navigate('DataSyncingScreen');
     } catch (error) {
       isApiValidationErrorResponse(error)
         ? Alert.alert('Error ', error.message)
