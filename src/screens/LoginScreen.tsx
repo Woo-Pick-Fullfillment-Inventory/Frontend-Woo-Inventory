@@ -16,8 +16,7 @@ import { AppDispatch } from '../redux/store';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../App';
 
-import { isApiValidationErrorResponse } from '../constants/models';
-import { emailRegex, passwordRegex } from '../constants';
+import { emailRegex, isApiValidationErrorResponse, passwordRegex } from '../constants';
 
 const LoginScreen = () => {
   const dispatch = useDispatch<AppDispatch>();

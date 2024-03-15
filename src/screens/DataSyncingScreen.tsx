@@ -3,9 +3,9 @@ import { View, Text, ActivityIndicator, Alert, StyleSheet } from 'react-native';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { RootStackParamList } from 'App';
 import { productService } from '../services/productService';
-import { isApiValidationErrorResponse } from '../constants/models';
 import * as Keychain from 'react-native-keychain';
-import { delayCallback } from '../utils/delayCallback';
+import { delayCallback } from '../utils';
+import { isApiValidationErrorResponse } from '../constants';
 
 const DataSyncingScreen = () => {
   const [isLoading, setIsLoading] = useState(true); // Initially set loading to true
@@ -25,11 +25,10 @@ const DataSyncingScreen = () => {
           await productService.productSync({ action: "sync-products" }, credentials.password);
           setSyncedMessage("Data Synced Done");
           delayCallback(() => navigation.navigate("MainMenuScreen"),2000);
-        } else {
-          setSyncedMessage("Data Already Synced");
-          delayCallback(() => navigation.navigate("MainMenuScreen"),2000);
-        }
-  
+        } 
+
+        setSyncedMessage("Data Syned Done");
+        delayCallback(() => navigation.navigate("MainMenuScreen"),2000);
         setIsLoading(false); 
   
       } catch (error) {
