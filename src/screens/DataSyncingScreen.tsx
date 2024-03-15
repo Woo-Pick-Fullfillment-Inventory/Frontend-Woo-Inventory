@@ -6,10 +6,11 @@ import * as Keychain from 'react-native-keychain';
 import { delayCallback } from '../utils';
 import { isApiValidationErrorResponse } from '../constants';
 import { RootStackParamList } from '../App';
+import { GRAY_03, LARGE_SIZE, PRIMARYCOLOR } from '../theme';
 
 const DataSyncingScreen = () => {
-  const [isLoading, setIsLoading] = useState(true); // Initially set loading to true
-  const [syncedMessage, setSyncedMessage] = useState(""); // State to hold the message
+  const [isLoading, setIsLoading] = useState(true); 
+  const [syncedMessage, setSyncedMessage] = useState("");
 
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
@@ -46,7 +47,7 @@ const DataSyncingScreen = () => {
     <View style={styles.container}>
       {isLoading ? (
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#0000ff" />
+          <ActivityIndicator size={LARGE_SIZE} color={PRIMARYCOLOR} />
           <Text>Data Syncing...</Text>
         </View>
       ) : (
@@ -69,7 +70,7 @@ const styles = StyleSheet.create({
     syncedMessageText: {
       fontSize: 16,
       fontWeight: 'bold',
-      color: '#333',
+      color: GRAY_03,
       marginTop: 20,
     },
   });
