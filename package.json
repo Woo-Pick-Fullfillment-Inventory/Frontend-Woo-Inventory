@@ -9,7 +9,8 @@
     "start": "react-native start --verbose",
     "test": "jest",
     "np": "np --no-publish",
-    "postversion": "react-native-version"
+    "postversion": "react-native-version",
+    "lint:fix": "npx eslint 'src/**/*' --fix"
   },
   "dependencies": {
     "@react-navigation/native": "^6.1.9",
@@ -18,6 +19,7 @@
     "@tanstack/react-query": "^5.24.1",
     "axios": "^1.6.7",
     "react": "18.2.0",
+    "react-hook-form": "^7.51.0",
     "react-native": "0.73.2",
     "react-native-extended-stylesheet": "^0.12.0",
     "react-native-keychain": "^8.1.2",
@@ -62,5 +64,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Woo-Pick-Fullfillment-Inventory/WooInventoryFrontend.git"
-  }
+  },
+  "pre-commit": [
+    "lint",
+    "build"
+  ]
 }

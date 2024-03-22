@@ -62,7 +62,7 @@ export const signin = createAsyncThunk(
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            emailOrUsername,
+            email_or_username: emailOrUsername,
             password,
           }),
         },
@@ -100,11 +100,11 @@ export const signup = createAsyncThunk(
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            appURL,
+            app_url : appURL,
             email,
             username,
             password,
-            passwordConfirmation,
+            password_confirmation: passwordConfirmation,
             token,
           }),
         },

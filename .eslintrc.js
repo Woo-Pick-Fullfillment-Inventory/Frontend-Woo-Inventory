@@ -1,3 +1,4 @@
+// TODO : to be completed
 module.exports = {
   env: {
     browser: true, // Indicates that the code is run in the browser environment
@@ -43,6 +44,7 @@ module.exports = {
     'no-unused-vars': 'off', // Handled by @typescript-eslint/no-unused-vars
     '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }], // Ignore unused variables starting with _
     'jsx-a11y/accessible-emoji': 'off', // Consider your project's accessibility needs
+    'import/extensions': "off", // turnoff import extension
   },
   overrides: [
     {

@@ -68,3 +68,6 @@ yarn-error.log
 # upload key
 my-upload-kay.keystore
 my-upload-key.keystore.base64.txt
+
+# vscode settings
+.vscode/

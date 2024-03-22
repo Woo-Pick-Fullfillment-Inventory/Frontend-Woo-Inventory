@@ -4,4 +4,6 @@ interface ApiValidationErrorResponse {
   message: string;
 }
 
-export const isApiValidationErrorResponse = (result: unknown): result is ApiValidationErrorResponse => result!== undefined;
+const isApiValidationErrorResponse = (result: unknown): result is ApiValidationErrorResponse => result!== undefined;
+
+export default isApiValidationErrorResponse;
