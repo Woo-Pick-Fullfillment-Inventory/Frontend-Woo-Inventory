@@ -1,5 +1,2 @@
-export const utils = {
-  notifyError: (error: unknown) => {
-    return error;
-  },
-};
+export { default as notifyError } from "./notifyError";
+export { default as delayCallback } from "./delayCallback";

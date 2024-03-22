@@ -1,1 +1,2 @@
-export * from './regex'
+export * from './regex';
+export { default as isApiValidationErrorResponse } from "./models";

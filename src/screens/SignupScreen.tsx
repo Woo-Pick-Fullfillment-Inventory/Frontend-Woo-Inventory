@@ -25,8 +25,7 @@ import { logoSvg } from '../assets/logo';
 import { SignupPayload, signup } from '../redux/authSlice';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../redux/store';
-import { isApiValidationErrorResponse } from '../constants/models';
-import { emailRegex, passwordRegex } from '../constants';
+import { emailRegex, isApiValidationErrorResponse, passwordRegex } from '../constants';
 
 type SignupScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,

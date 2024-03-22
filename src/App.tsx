@@ -9,7 +9,9 @@ import {
   LoginScreen,
   SignupScreen,
   ScannerScreen,
+  DataSyncingScreen,
 } from './screens';
+
 
 export type RootStackParamList = {
   HomeScreen: undefined; // No parameters expected
@@ -21,6 +23,7 @@ export type RootStackParamList = {
   WelcomeScreen: undefined;
   AgbScreen: undefined;
   ScannerScreen: undefined;
+  DataSyncingScreen: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -46,6 +49,15 @@ const App = () => {
         <Stack.Screen
           name="SignupScreen"
           component={SignupScreen}
+          options={{
+            title: '',
+            headerShadowVisible: false,
+            headerTintColor: BLACKCOLOR,
+          }}
+        />
+        <Stack.Screen
+          name="DataSyncingScreen"
+          component={DataSyncingScreen}
           options={{
             title: '',
             headerShadowVisible: false,
