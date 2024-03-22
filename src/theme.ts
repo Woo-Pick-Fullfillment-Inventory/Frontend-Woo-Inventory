@@ -14,6 +14,8 @@ export const GRAY_01 = '#F6F6F6';
 export const GRAY_02 = '#E8E8E8';
 export const GRAY_03 = '#BDBDBD';
 
+export const LARGE_SIZE = 'large';
+
 export const globalStyle = EStyleSheet.create({
   container: {
     flex: 1,

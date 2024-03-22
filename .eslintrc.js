@@ -1,3 +1,4 @@
+// TODO : to be completed
 module.exports = {
   env: {
     browser: true, // Indicates that the code is run in the browser environment
