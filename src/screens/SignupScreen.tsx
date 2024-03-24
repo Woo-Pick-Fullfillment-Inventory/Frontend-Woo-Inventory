@@ -16,7 +16,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import { useForm, Controller } from 'react-hook-form';
 
 import { RootStackParamList } from '../App';
-import { InputField } from '../components/InputField';
+import { InputField } from '../components/inputs/InputField';
 import { Button } from '../components/Button';
 import { CheckBox } from '../components/CheckBox';
 import { BLACKCOLOR, globalStyle } from '../theme';

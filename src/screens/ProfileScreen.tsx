@@ -4,7 +4,7 @@ import { RouteProp } from '@react-navigation/native';
 import React from 'react';
 import { View } from 'react-native';
 import { Text } from 'react-native-paper';
-import PasswordInput from '../components/PasswordInput';
+import PasswordInput from '../components/inputs/PasswordInput';
 
 type Props = {
   route: RouteProp<RootStackParamList, 'ProfileScreen'>;

@@ -5,7 +5,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import * as Keychain from 'react-native-keychain';
 import { useForm, Controller } from 'react-hook-form';
 
-import { InputField } from '../components/InputField';
+import { InputField } from '../components/inputs/InputField';
 import { Button } from '../components/Button';
 import { globalStyle } from '../theme';
 import { logoSvg } from '../assets/logo';

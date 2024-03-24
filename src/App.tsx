@@ -9,6 +9,7 @@ import {
   LoginScreen,
   SignupScreen,
   ScannerScreen,
+  AddProductScreen,
 } from './screens';
 
 export type RootStackParamList = {
@@ -21,6 +22,7 @@ export type RootStackParamList = {
   WelcomeScreen: undefined;
   AgbScreen: undefined;
   ScannerScreen: undefined;
+  AddProductScreen: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -63,7 +65,7 @@ const App = () => {
           options={{
             title: 'MainMenuScreen',
             gestureEnabled: false, // So that user can not swipe back in IOS
-            headerBackVisible: false
+            headerBackVisible: false,
           }}
         />
         <Stack.Screen
@@ -72,6 +74,7 @@ const App = () => {
           options={{ title: 'Scanner Screen' }}
         />
         <Stack.Screen name="AgbScreen" component={ScannerScreen} />
+        <Stack.Screen name="AddProductScreen" component={AddProductScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

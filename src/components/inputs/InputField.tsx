@@ -1,11 +1,12 @@
 import { useState } from 'react';
+import type { ComponentPropsWithoutRef } from 'react';
 import { TextInput } from 'react-native-paper';
-import { View } from 'react-native';
+import { View, KeyboardTypeOptions } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-import * as globalStyles from '../theme';
-import { RootStackParamList } from '../App';
+import * as globalStyles from '../../theme';
+import { RootStackParamList } from '../../App';
 import { useNavigation } from '@react-navigation/native';
 
 type InputFieldNavigationProp = NativeStackNavigationProp<
@@ -13,17 +14,25 @@ type InputFieldNavigationProp = NativeStackNavigationProp<
   'ScannerScreen'
 >;
 
-type Props = {
+interface Props extends ComponentPropsWithoutRef<"input"> {
   placeholder?: string;
   value: string;
   onChangeText: (text: string) => void;
   isPassword?: boolean;
   icon?: string;
+  keyboardType?: KeyboardTypeOptions;
 };
 
-export const InputField = (props: Props) => {
+// TODO clean up props
+export const InputField = ({
+  placeholder,
+  value,
+  onChangeText,
+  isPassword,
+  icon,
+  keyboardType
+}: Props) => {
   const navigation = useNavigation<InputFieldNavigationProp>();
-  const { placeholder, value, onChangeText, isPassword, icon } = props;
 
   const [passwordVisible, setPasswordVisible] = useState(isPassword);
 
@@ -40,6 +49,7 @@ export const InputField = (props: Props) => {
         placeholderTextColor={globalStyles.GRAY_03}
         onChangeText={onChangeText}
         secureTextEntry={passwordVisible}
+        keyboardType={keyboardType}
         right={
           (isPassword && ( // if the field is password -> return eye icon
             <TextInput.Icon
