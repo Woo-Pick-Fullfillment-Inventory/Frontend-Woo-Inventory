@@ -1,27 +1,38 @@
 // MainMenu.js
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Button } from 'react-native-paper';
-import { RootStackParamList } from '../App';
-import { useNavigation, NavigationProp  } from '@react-navigation/native';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../redux/store';
-import { logout } from '../redux/authSlice';
+import { StyleSheet, View } from 'react-native';
 import * as Keychain from 'react-native-keychain';
+import { Button } from 'react-native-paper';
+import { useDispatch } from 'react-redux';
+import { RootStackParamList } from '../App';
+import { logout } from '../redux/authSlice';
+import { AppDispatch } from '../redux/store';
 
+type MainMenuScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'ProductsScreen'
+>;
 
 const MainMenuScreen = () => {
-  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const navigation = useNavigation<MainMenuScreenNavigationProp>();
   const dispatch = useDispatch<AppDispatch>();
 
   const handleLogout = async () => {
     await Keychain.resetGenericPassword();
     dispatch(logout());
-    navigation.navigate("WelcomeScreen");
+    navigation.navigate('WelcomeScreen');
   };
 
   return (
     <View style={styles.container}>
+      <Button
+        mode="contained"
+        onPress={() => navigation.navigate('ProductsScreen')}>
+        Products
+      </Button>
+      <View style={{ height: 20 }} />
       <Button mode="contained" onPress={handleLogout}>
         Logout
       </Button>
