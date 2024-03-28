@@ -12,6 +12,7 @@ import {
   ScannerScreen,
   DataSyncingScreen,
 } from './screens';
+import ProductsScreen from './screens/Products';
 
 export type RootStackParamList = {
   HomeScreen: undefined; // No parameters expected
@@ -70,6 +71,11 @@ const App = () => {
           <Stack.Screen
             name="ProfileScreen"
             component={ProfileScreen}
+            options={{ title: 'Profile' }}
+          />
+          <Stack.Screen
+            name="ProductsScreen"
+            component={ProductsScreen}
             options={{ title: 'Profile' }}
           />
           <Stack.Screen

@@ -19,7 +19,7 @@ export const ApiService = async (customConfig?: CreateAxiosDefaults) => {
       if (token) {
         // config.headers.Authorization = token.password;
         config.headers.Authorization =
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0NjRkMThjZC1jMDNiLTQzNmEtODFhZC02Y2RhOTdjMjUyNWEiLCJpYXQiOjE3MDkzMDk4Nzd9.8bDo05dHsKiaPD3MkaN_kGU4FzDP4beDxnZZnbjjuag';
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0NjRkMThjZC1jMDNiLTQzNmEtODFhZC02Y2RhOTdjMjUyNWEiLCJpYXQiOjE3MDg5ODM2Mzl9.QtBi0AsrygH-rb2nXPNJtAKu-kdaJuSWm8xdAvafFp0';
       }
       console.log('🚀 ~ ApiService ~ config:', config);
       return config;
@@ -35,6 +35,7 @@ export const ApiService = async (customConfig?: CreateAxiosDefaults) => {
     function (response: AxiosResponse) {
       // Any status code that lie within the range of 2xx cause this function to trigger
       // Do something with response data
+      console.log('🚀 ~ ApiService ~ response:', response);
       return response;
     },
     function (error: AxiosError) {
