@@ -1,8 +1,9 @@
 import React from 'react';
-import { Image, Text, View } from 'react-native';
-import { GRAY_02 } from '../../../theme';
+import { Text, View } from 'react-native';
+import { GRAY_02 } from '../../../../theme';
+import { IProduct } from '../../../../types/product';
 
-const ProductRow = ({ item }: any) => {
+const ProductRow = ({ item }: { item: IProduct }) => {
   return (
     <View
       style={{
@@ -13,7 +14,7 @@ const ProductRow = ({ item }: any) => {
         display: 'flex',
         flexDirection: 'row',
       }}>
-      <Image alt="" source={{ uri: item.image_src }} width={60} height={60} />
+      {/* <Image alt="" source={{ uri: item.images }} width={60} height={60} /> */}
       <View style={{ marginRight: 10 }} />
       <View style={{ flex: 1 }}>
         <Text style={{ fontWeight: 'bold' }}>{item.name}</Text>
