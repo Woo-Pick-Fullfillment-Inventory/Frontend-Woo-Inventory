@@ -11,3 +11,9 @@ export interface IProduct {
   stock_quantity: number;
   images: image[];
 }
+
+export interface IProductsAPIResponse {
+  products: IProduct[];
+  last_product: number | string | undefined;
+  total_products: number;
+}

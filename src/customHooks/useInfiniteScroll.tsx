@@ -2,7 +2,7 @@ import { QueryKey, useInfiniteQuery } from '@tanstack/react-query';
 
 interface IUseInfiniteScroll {
   queryKey: QueryKey;
-  fetchPage: (pageParam: number) => Promise<any>;
+  fetchPage: (pageParam: number) => Promise<unknown>;
   options?: any;
 }
 

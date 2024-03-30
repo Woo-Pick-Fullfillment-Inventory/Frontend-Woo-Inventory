@@ -21,10 +21,12 @@ const ProductsScreen = () => {
 
   return (
     <TabView
+      // renderTabBar={renderTabBar}
       navigationState={{ index, routes }}
       renderScene={renderScene}
       onIndexChange={setIndex}
       initialLayout={{ width: layout.width }}
+      lazy
     />
   );
 };

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { BLACKCOLOR } from './theme';
+import { BLACKCOLOR, PRIMARYCOLOR, WHITECOLOR } from './theme';
 import {
   ProfileScreen,
   MainMenuScreen,
@@ -13,6 +13,7 @@ import {
   DataSyncingScreen,
 } from './screens';
 import ProductsScreen from './screens/Products';
+import HeaderRight from './components/HeaderRight';
 
 export type RootStackParamList = {
   HomeScreen: undefined; // No parameters expected
@@ -35,7 +36,13 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: { backgroundColor: PRIMARYCOLOR },
+            headerTitleAlign: 'center',
+            headerTintColor: WHITECOLOR,
+            headerRight: HeaderRight,
+          }}>
           <Stack.Screen
             name="WelcomeScreen"
             component={WelcomeScreen}
@@ -76,7 +83,7 @@ const App = () => {
           <Stack.Screen
             name="ProductsScreen"
             component={ProductsScreen}
-            options={{ title: 'Profile' }}
+            options={{ title: 'Product' }}
           />
           <Stack.Screen
             name="MainMenuScreen"
