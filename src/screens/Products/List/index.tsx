@@ -70,34 +70,36 @@ const ProductListScreen = () => {
       {isLoading ? (
         <ActivityIndicator />
       ) : (
-        <FlatList
-          data={data?.pages.flatMap((item: any) => item?.products)}
-          renderItem={({ item }) => <ProductRow item={item} />}
-          keyExtractor={item => item.id}
-          onEndReached={loadMore}
-          onEndReachedThreshold={0}
-          ListFooterComponent={
-            isFetchingNextPage ? <ActivityIndicator /> : null
-          }
-        />
+        <>
+          <FlatList
+            data={data?.pages.flatMap((item: any) => item?.products)}
+            renderItem={({ item }) => <ProductRow item={item} />}
+            keyExtractor={item => item.id}
+            onEndReached={loadMore}
+            onEndReachedThreshold={0}
+            ListFooterComponent={
+              isFetchingNextPage ? <ActivityIndicator /> : null
+            }
+          />
+          <View style={styles.floatingBar}>
+            <TouchableOpacity style={styles.floatingItem} onPress={() => {}}>
+              <AntDesignIcon name="download" size={30} color="white" />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.floatingItem} onPress={() => {}}>
+              <MaterialIcon name="add-circle-outline" size={30} color="white" />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.floatingItem} onPress={() => {}}>
+              <MaterialIcon name="search" size={30} color="white" />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.floatingItem} onPress={() => {}}>
+              <MaterialIcon name="sort" size={30} color="white" />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.floatingItem} onPress={() => {}}>
+              <MaterialIcon name="filter-alt" size={30} color="white" />
+            </TouchableOpacity>
+          </View>
+        </>
       )}
-      <View style={styles.floatingBar}>
-        <TouchableOpacity style={styles.floatingItem} onPress={() => {}}>
-          <AntDesignIcon name="download" size={30} color="white" />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.floatingItem} onPress={() => {}}>
-          <MaterialIcon name="add-circle-outline" size={30} color="white" />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.floatingItem} onPress={() => {}}>
-          <MaterialIcon name="search" size={30} color="white" />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.floatingItem} onPress={() => {}}>
-          <MaterialIcon name="sort" size={30} color="white" />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.floatingItem} onPress={() => {}}>
-          <MaterialIcon name="filter-alt" size={30} color="white" />
-        </TouchableOpacity>
-      </View>
     </SafeAreaView>
   );
 };
