@@ -1,19 +1,10 @@
-import UseInfiniteScroll from '../../../customHooks/useInfiniteScroll';
 import React, { useEffect, useState } from 'react';
-import {
-  ActivityIndicator,
-  FlatList,
-  SafeAreaView,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { ActivityIndicator, FlatList, SafeAreaView } from 'react-native';
+import UseInfiniteScroll from '../../../customHooks/useInfiniteScroll';
 import { productService } from '../../../services/productService';
 import { notifyError } from '../../../utils';
+import FloatingBar from '../components/FloatingBar';
 import ProductRow from '../components/ProductRow';
-import { PRIMARYCOLOR } from '../../../theme';
-import AntDesignIcon from 'react-native-vector-icons/AntDesign';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
 const ProductListScreen = () => {
   const [lastProduct, setLastProduct] = useState('');
@@ -76,11 +67,16 @@ const ProductListScreen = () => {
             renderItem={({ item }) => <ProductRow item={item} />}
             keyExtractor={item => item.id}
             onEndReached={loadMore}
+<<<<<<< HEAD
             onEndReachedThreshold={0}
+=======
+            onEndReachedThreshold={50}
+>>>>>>> 41d3ee7c3f55ce219e1e1e7872c9b3f05e7aa669
             ListFooterComponent={
               isFetchingNextPage ? <ActivityIndicator /> : null
             }
           />
+<<<<<<< HEAD
           <View style={styles.floatingBar}>
             <TouchableOpacity style={styles.floatingItem} onPress={() => {}}>
               <AntDesignIcon name="download" size={30} color="white" />
@@ -98,27 +94,13 @@ const ProductListScreen = () => {
               <MaterialIcon name="filter-alt" size={30} color="white" />
             </TouchableOpacity>
           </View>
+=======
+          <FloatingBar />
+>>>>>>> 41d3ee7c3f55ce219e1e1e7872c9b3f05e7aa669
         </>
       )}
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  floatingBar: {
-    position: 'absolute',
-    bottom: 10,
-    backgroundColor: PRIMARYCOLOR,
-    marginHorizontal: 'auto',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
-    borderRadius: 30,
-    padding: 10,
-  },
-  floatingItem: {
-    marginHorizontal: 20,
-  },
-});
 
 export default ProductListScreen;
