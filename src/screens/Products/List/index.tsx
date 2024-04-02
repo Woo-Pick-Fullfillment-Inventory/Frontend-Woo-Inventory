@@ -62,41 +62,19 @@ const ProductListScreen = () => {
         <ActivityIndicator />
       ) : (
         <>
-          <FlatList
-            data={data?.pages.flatMap((item: any) => item?.products)}
-            renderItem={({ item }) => <ProductRow item={item} />}
-            keyExtractor={item => item.id}
-            onEndReached={loadMore}
-<<<<<<< HEAD
-            onEndReachedThreshold={0}
-=======
-            onEndReachedThreshold={50}
->>>>>>> 41d3ee7c3f55ce219e1e1e7872c9b3f05e7aa669
-            ListFooterComponent={
-              isFetchingNextPage ? <ActivityIndicator /> : null
-            }
-          />
-<<<<<<< HEAD
-          <View style={styles.floatingBar}>
-            <TouchableOpacity style={styles.floatingItem} onPress={() => {}}>
-              <AntDesignIcon name="download" size={30} color="white" />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.floatingItem} onPress={() => {}}>
-              <MaterialIcon name="add-circle-outline" size={30} color="white" />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.floatingItem} onPress={() => {}}>
-              <MaterialIcon name="search" size={30} color="white" />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.floatingItem} onPress={() => {}}>
-              <MaterialIcon name="sort" size={30} color="white" />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.floatingItem} onPress={() => {}}>
-              <MaterialIcon name="filter-alt" size={30} color="white" />
-            </TouchableOpacity>
-          </View>
-=======
+          {hasNextPage && ( // Only render the FlatList if there are more pages to fetch
+            <FlatList
+              data={data?.pages.flatMap((item: any) => item?.products)}
+              renderItem={({ item }) => <ProductRow item={item} />}
+              keyExtractor={item => item.id}
+              onEndReached={loadMore}
+              onEndReachedThreshold={0.5} // Adjust the threshold as needed
+              ListFooterComponent={
+                isFetchingNextPage ? <ActivityIndicator /> : null
+              }
+            />
+          )}
           <FloatingBar />
->>>>>>> 41d3ee7c3f55ce219e1e1e7872c9b3f05e7aa669
         </>
       )}
     </SafeAreaView>

@@ -3,15 +3,20 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 import { GRAY_02, PRIMARYCOLOR } from '../../../../theme';
 import { IProduct } from '../../../../types/product';
 
+// TODO: move to constants
+const BLANK_IMAGE_URL = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
+
 const ProductRow = ({ item }: { item: IProduct }) => {
   return (
     <View style={styles.container}>
-      <Image
-        alt=""
-        source={{ uri: item.images[0].src }}
-        width={60}
-        height={60}
-      />
+      {item.images[0] && (
+        <Image
+          alt=""
+          source={{ uri: item.images[0].src !== undefined ? item.images[0].src : BLANK_IMAGE_URL }}
+          width={60}
+          height={60}
+        />
+      )}
       <View style={{ marginRight: 10 }} />
       <View style={{ flex: 1 }}>
         <Text numberOfLines={1} style={{ fontWeight: 'bold', width: 250 }}>

@@ -1,11 +1,4 @@
 import React from 'react';
-<<<<<<< HEAD
-
-const FloatingBar = () => {
-  return <div>FloatingBar</div>;
-};
-
-=======
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { PRIMARYCOLOR } from '../../../../theme';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
@@ -70,5 +63,4 @@ const styles = StyleSheet.create({
   },
 });
 
->>>>>>> 41d3ee7c3f55ce219e1e1e7872c9b3f05e7aa669
 export default FloatingBar;
