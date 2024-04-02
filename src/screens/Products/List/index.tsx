@@ -6,6 +6,8 @@ import { notifyError } from '../../../utils';
 import FloatingBar from '../components/FloatingBar';
 import ProductRow from '../components/ProductRow';
 
+// todo: isLoading should be disappeared after reaching the end of the list
+
 const ProductListScreen = () => {
   const [lastProduct, setLastProduct] = useState('');
   const [queryData, setQueryData] = useState({
@@ -62,18 +64,16 @@ const ProductListScreen = () => {
         <ActivityIndicator />
       ) : (
         <>
-          {hasNextPage && ( // Only render the FlatList if there are more pages to fetch
-            <FlatList
-              data={data?.pages.flatMap((item: any) => item?.products)}
-              renderItem={({ item }) => <ProductRow item={item} />}
-              keyExtractor={item => item.id}
-              onEndReached={loadMore}
-              onEndReachedThreshold={0.5} // Adjust the threshold as needed
-              ListFooterComponent={
-                isFetchingNextPage ? <ActivityIndicator /> : null
-              }
-            />
-          )}
+          <FlatList
+            data={data?.pages.flatMap((item: any) => item?.products)}
+            renderItem={({ item }) => <ProductRow item={item} />}
+            keyExtractor={item => item.id}
+            onEndReached={loadMore}
+            onEndReachedThreshold={50}
+            ListFooterComponent={
+              isFetchingNextPage ? <ActivityIndicator /> : null
+            }
+          />
           <FloatingBar />
         </>
       )}

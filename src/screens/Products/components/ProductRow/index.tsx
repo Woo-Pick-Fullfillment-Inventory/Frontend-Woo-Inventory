@@ -2,17 +2,22 @@ import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { GRAY_02, PRIMARYCOLOR } from '../../../../theme';
 import { IProduct } from '../../../../types/product';
-
-// TODO: move to constants
-const BLANK_IMAGE_URL = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
+import { BLANK_IMAGE_URL } from '../../../../constants';
 
 const ProductRow = ({ item }: { item: IProduct }) => {
   return (
     <View style={styles.container}>
-      {item.images[0] && (
+      {item.images[0] ? (
         <Image
           alt=""
-          source={{ uri: item.images[0].src !== undefined ? item.images[0].src : BLANK_IMAGE_URL }}
+          source={{ uri: item.images[0].src }}
+          width={60}
+          height={60}
+        />
+      ) : (
+        <Image
+          alt=""
+          source={{ uri: BLANK_IMAGE_URL }}
           width={60}
           height={60}
         />
