@@ -5,6 +5,7 @@ import { productService } from '../../../services/productService';
 import { notifyError } from '../../../utils';
 import FloatingBar from '../components/FloatingBar';
 import ProductRow from '../components/ProductRow';
+import { IProduct } from '../../../types/product';
 
 // todo: isLoading should be disappeared after reaching the end of the list
 
@@ -65,6 +66,7 @@ const ProductListScreen = () => {
       ) : (
         <>
           <FlatList
+            // todo: null check ? is not recommended to bypass the null check
             data={data?.pages.flatMap((item: any) => item?.products)}
             renderItem={({ item }) => <ProductRow item={item} />}
             keyExtractor={item => item.id}
