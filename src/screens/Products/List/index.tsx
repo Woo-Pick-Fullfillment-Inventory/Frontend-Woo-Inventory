@@ -16,6 +16,7 @@ export interface IQueryData {
     limit: number;
   };
 }
+import { IProduct } from '../../../types/product';
 
 const ProductListScreen = () => {
   const [lastProduct, setLastProduct] = useState('');
@@ -76,6 +77,7 @@ const ProductListScreen = () => {
       ) : (
         <>
           <FlatList
+            // todo: null check ? is not recommended to bypass the null check
             data={data?.pages.flatMap((item: any) => item?.products)}
             renderItem={({ item }) => <ProductRow item={item} />}
             keyExtractor={item => item?.id}

@@ -9,21 +9,21 @@ const HeaderRight = () => {
     <View style={styles.container}>
       <TouchableOpacity
         onPress={() => {
-          console.log();
+          console.log('Notifications pressed');
         }}>
         <Ionicons name="notifications-outline" size={24} color="white" />
       </TouchableOpacity>
       <View style={{ marginRight: 4 }} />
       <TouchableOpacity
         onPress={() => {
-          console.log();
+          console.log('Messenger pressed');
         }}>
         <MaterialIcons name="messenger-outline" size={24} color="white" />
       </TouchableOpacity>
       <View style={{ marginRight: 4 }} />
       <TouchableOpacity
         onPress={() => {
-          console.log();
+          console.log('User pressed');
         }}>
         <AntDesign name="user" size={24} color="white" />
       </TouchableOpacity>

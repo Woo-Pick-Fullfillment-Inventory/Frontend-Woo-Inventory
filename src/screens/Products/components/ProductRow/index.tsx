@@ -2,16 +2,26 @@ import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { GRAY_02, PRIMARYCOLOR } from '../../../../theme';
 import { IProduct } from '../../../../types/product';
+import { BLANK_IMAGE_URL } from '../../../../constants';
 
 const ProductRow = ({ item }: { item: IProduct }) => {
   return (
     <View style={styles.container}>
-      <Image
-        alt=""
-        source={{ uri: item?.images[0].src }}
-        width={60}
-        height={60}
-      />
+      {item.images[0] ? (
+        <Image
+          alt=""
+          source={{ uri: item.images[0].src }}
+          width={60}
+          height={60}
+        />
+      ) : (
+        <Image
+          alt=""
+          source={{ uri: BLANK_IMAGE_URL }}
+          width={60}
+          height={60}
+        />
+      )}
       <View style={{ marginRight: 10 }} />
       <View style={{ flex: 1 }}>
         <Text numberOfLines={1} style={{ fontWeight: 'bold', width: 250 }}>
