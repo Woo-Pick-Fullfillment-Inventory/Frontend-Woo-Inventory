@@ -13,6 +13,7 @@ export const productService = {
     },
   ) => {
     const res = (await ApiService()).post('/products:search', data);
+    console.log('🚀 ~ data:', data);
     return res;
   },
   productSync: async (data: { action: string }, jwtToken: string) =>

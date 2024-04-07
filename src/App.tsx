@@ -14,6 +14,8 @@ import {
 } from './screens';
 import ProductsScreen from './screens/Products';
 import HeaderRight from './components/HeaderRight';
+import { NativeBaseProvider } from 'native-base';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export type RootStackParamList = {
   HomeScreen: undefined; // No parameters expected
@@ -34,75 +36,79 @@ const queryClient = new QueryClient();
 
 const App = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerStyle: { backgroundColor: PRIMARYCOLOR },
-            headerTitleAlign: 'center',
-            headerTintColor: WHITECOLOR,
-            headerRight: HeaderRight,
-          }}>
-          <Stack.Screen
-            name="WelcomeScreen"
-            component={WelcomeScreen}
-            options={{ title: '', headerShown: false }}
-          />
-          <Stack.Screen
-            name="LoginScreen"
-            component={LoginScreen}
-            options={{
-              title: '',
-              headerShadowVisible: false,
-              headerTintColor: BLACKCOLOR,
-            }}
-          />
-          <Stack.Screen
-            name="SignupScreen"
-            component={SignupScreen}
-            options={{
-              title: '',
-              headerShadowVisible: false,
-              headerTintColor: BLACKCOLOR,
-            }}
-          />
-          <Stack.Screen
-            name="DataSyncingScreen"
-            component={DataSyncingScreen}
-            options={{
-              title: '',
-              headerShadowVisible: false,
-              headerTintColor: BLACKCOLOR,
-            }}
-          />
-          <Stack.Screen
-            name="ProfileScreen"
-            component={ProfileScreen}
-            options={{ title: 'Profile' }}
-          />
-          <Stack.Screen
-            name="ProductsScreen"
-            component={ProductsScreen}
-            options={{ title: 'Product' }}
-          />
-          <Stack.Screen
-            name="MainMenuScreen"
-            component={MainMenuScreen}
-            options={{
-              title: 'MainMenuScreen',
-              gestureEnabled: false, // So that user can not swipe back in IOS
-              headerBackVisible: false,
-            }}
-          />
-          <Stack.Screen
-            name="ScannerScreen"
-            component={ScannerScreen}
-            options={{ title: 'Scanner Screen' }}
-          />
-          <Stack.Screen name="AgbScreen" component={ScannerScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </QueryClientProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <NativeBaseProvider>
+        <QueryClientProvider client={queryClient}>
+          <NavigationContainer>
+            <Stack.Navigator
+              screenOptions={{
+                headerStyle: { backgroundColor: PRIMARYCOLOR },
+                headerTitleAlign: 'center',
+                headerTintColor: WHITECOLOR,
+                headerRight: HeaderRight,
+              }}>
+              <Stack.Screen
+                name="WelcomeScreen"
+                component={WelcomeScreen}
+                options={{ title: '', headerShown: false }}
+              />
+              <Stack.Screen
+                name="LoginScreen"
+                component={LoginScreen}
+                options={{
+                  title: '',
+                  headerShadowVisible: false,
+                  headerTintColor: BLACKCOLOR,
+                }}
+              />
+              <Stack.Screen
+                name="SignupScreen"
+                component={SignupScreen}
+                options={{
+                  title: '',
+                  headerShadowVisible: false,
+                  headerTintColor: BLACKCOLOR,
+                }}
+              />
+              <Stack.Screen
+                name="DataSyncingScreen"
+                component={DataSyncingScreen}
+                options={{
+                  title: '',
+                  headerShadowVisible: false,
+                  headerTintColor: BLACKCOLOR,
+                }}
+              />
+              <Stack.Screen
+                name="ProfileScreen"
+                component={ProfileScreen}
+                options={{ title: 'Profile' }}
+              />
+              <Stack.Screen
+                name="ProductsScreen"
+                component={ProductsScreen}
+                options={{ title: 'Product' }}
+              />
+              <Stack.Screen
+                name="MainMenuScreen"
+                component={MainMenuScreen}
+                options={{
+                  title: 'MainMenuScreen',
+                  gestureEnabled: false, // So that user can not swipe back in IOS
+                  headerBackVisible: false,
+                }}
+              />
+              <Stack.Screen
+                name="ScannerScreen"
+                component={ScannerScreen}
+                options={{ title: 'Scanner Screen' }}
+              />
+              <Stack.Screen name="AgbScreen" component={ScannerScreen} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </QueryClientProvider>
+      </NativeBaseProvider>
+    </GestureHandlerRootView>
   );
 };
 

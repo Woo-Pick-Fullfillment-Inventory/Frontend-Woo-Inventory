@@ -1,13 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList, SafeAreaView } from 'react-native';
+import { ActivityIndicator, FlatList, SafeAreaView, Text } from 'react-native';
 import UseInfiniteScroll from '../../../customHooks/useInfiniteScroll';
 import { productService } from '../../../services/productService';
 import { notifyError } from '../../../utils';
 import FloatingBar from '../components/FloatingBar';
 import ProductRow from '../components/ProductRow';
+import SortActionSheet from './components/SortActionSheet';
+
+export interface IQueryData {
+  sorting_criteria: {
+    field: string;
+    direction: string;
+  };
+  pagination_criteria: {
+    limit: number;
+  };
+}
 
 const ProductListScreen = () => {
   const [lastProduct, setLastProduct] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
   const [queryData, setQueryData] = useState({
     sorting_criteria: {
       field: 'id',
@@ -21,6 +33,7 @@ const ProductListScreen = () => {
   const fetchData = async () => {
     try {
       const res = await productService.getProducts(queryData);
+      console.log('🚀 ~ fetchData ~ res:', res);
       setLastProduct(res.data.last_product);
       return res.data;
     } catch (error) {
@@ -36,7 +49,7 @@ const ProductListScreen = () => {
     isLoading,
     isFetching,
   } = UseInfiniteScroll({
-    queryKey: ['products'],
+    queryKey: ['products', queryData],
     fetchPage: fetchData,
   });
 
@@ -65,15 +78,30 @@ const ProductListScreen = () => {
           <FlatList
             data={data?.pages.flatMap((item: any) => item?.products)}
             renderItem={({ item }) => <ProductRow item={item} />}
-            keyExtractor={item => item.id}
+            keyExtractor={item => item?.id}
             onEndReached={loadMore}
-            onEndReachedThreshold={50}
+            onEndReachedThreshold={0}
             ListFooterComponent={
               isFetchingNextPage ? <ActivityIndicator /> : null
             }
+            ListEmptyComponent={<Text>No Data</Text>}
           />
-          <FloatingBar />
+          <FloatingBar
+            onAdd={() => console.log('add')}
+            onDownload={() => console.log('download')}
+            onFilter={() => console.log('filter')}
+            onSearch={() => console.log('search')}
+            onSort={() => setIsOpen(true)}
+          />
         </>
+      )}
+      {isOpen && (
+        <SortActionSheet
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          setQueryData={setQueryData}
+          queryData={queryData}
+        />
       )}
     </SafeAreaView>
   );

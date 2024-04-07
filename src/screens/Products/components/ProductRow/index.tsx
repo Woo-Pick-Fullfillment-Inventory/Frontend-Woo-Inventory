@@ -8,14 +8,14 @@ const ProductRow = ({ item }: { item: IProduct }) => {
     <View style={styles.container}>
       <Image
         alt=""
-        source={{ uri: item.images[0].src }}
+        source={{ uri: item?.images[0].src }}
         width={60}
         height={60}
       />
       <View style={{ marginRight: 10 }} />
       <View style={{ flex: 1 }}>
         <Text numberOfLines={1} style={{ fontWeight: 'bold', width: 250 }}>
-          {item.name}
+          {item?.name}
         </Text>
         <View style={{ marginBottom: 8 }} />
         <Text>Product group - $5</Text>

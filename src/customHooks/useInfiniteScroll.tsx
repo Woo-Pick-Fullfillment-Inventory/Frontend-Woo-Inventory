@@ -17,7 +17,7 @@ const UseInfiniteScroll = ({
       queryFn: ({ pageParam = 1 }: { pageParam: number }) =>
         fetchPage(pageParam),
       ...options,
-      getNextPageParam: (lastPage: any) => lastPage.products.length > 0,
+      getNextPageParam: (lastPage: any) => lastPage?.products.length > 0,
     });
 
   return {

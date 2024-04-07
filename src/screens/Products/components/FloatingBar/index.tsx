@@ -4,42 +4,36 @@ import { PRIMARYCOLOR } from '../../../../theme';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
-const FloatingBar = () => {
+interface IFloatingBar {
+  onDownload: () => void;
+  onAdd: () => void;
+  onSearch: () => void;
+  onSort: () => void;
+  onFilter: () => void;
+}
+
+const FloatingBar = ({
+  onDownload,
+  onAdd,
+  onSearch,
+  onSort,
+  onFilter,
+}: IFloatingBar) => {
   return (
     <View style={styles.floatingBar}>
-      <TouchableOpacity
-        style={styles.floatingItem}
-        onPress={() => {
-          console.log();
-        }}>
+      <TouchableOpacity onPress={onDownload}>
         <AntDesignIcon name="download" size={30} color="white" />
       </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.floatingItem}
-        onPress={() => {
-          console.log();
-        }}>
+      <TouchableOpacity onPress={onAdd}>
         <MaterialIcon name="add-circle-outline" size={30} color="white" />
       </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.floatingItem}
-        onPress={() => {
-          console.log();
-        }}>
+      <TouchableOpacity onPress={onSearch}>
         <MaterialIcon name="search" size={30} color="white" />
       </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.floatingItem}
-        onPress={() => {
-          console.log();
-        }}>
+      <TouchableOpacity onPress={onSort}>
         <MaterialIcon name="sort" size={30} color="white" />
       </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.floatingItem}
-        onPress={() => {
-          console.log();
-        }}>
+      <TouchableOpacity onPress={onFilter}>
         <MaterialIcon name="filter-alt" size={30} color="white" />
       </TouchableOpacity>
     </View>
@@ -57,9 +51,7 @@ const styles = StyleSheet.create({
     width: '100%',
     borderRadius: 30,
     padding: 10,
-  },
-  floatingItem: {
-    marginHorizontal: 20,
+    paddingHorizontal: 20,
   },
 });
 
