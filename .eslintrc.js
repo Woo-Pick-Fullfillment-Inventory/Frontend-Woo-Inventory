@@ -8,6 +8,9 @@ module.exports = {
   extends: [
     'eslint:recommended', // Start with ESLint recommended rules
     'plugin:@typescript-eslint/recommended', // Use recommended rules from the @typescript-eslint/eslint-plugin
+    'plugin:import/errors',
+    'plugin:import/warnings',
+    'plugin:import/typescript',
     'plugin:react/recommended', // React specific linting rules
     'plugin:react-hooks/recommended', // Enforces React hooks rules
     // 'plugin:import/errors', // Prevents import errors TODO
@@ -44,7 +47,12 @@ module.exports = {
     'no-unused-vars': 'off', // Handled by @typescript-eslint/no-unused-vars
     '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }], // Ignore unused variables starting with _
     'jsx-a11y/accessible-emoji': 'off', // Consider your project's accessibility needs
-    'import/extensions': "off", // turnoff import extension
+    'import/extensions': 'off', // turnoff import extension
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      },
+    },
   },
   overrides: [
     {
