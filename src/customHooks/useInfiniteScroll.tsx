@@ -3,7 +3,9 @@ import { IProductsAPIResponse } from '../types/product';
 
 interface IUseInfiniteScroll {
   queryKey: QueryKey;
-  fetchPage: (pageParam: number) => Promise<IProductsAPIResponse>;
+  fetchPage: (pageParam: {
+    last_product?: number | string;
+  }) => Promise<IProductsAPIResponse>;
   options?: any;
 }
 
@@ -12,13 +14,17 @@ const UseInfiniteScroll = ({
   fetchPage,
   options,
 }: IUseInfiniteScroll) => {
-  const { fetchNextPage, hasNextPage, isFetchingNextPage, ...result } =
+  const { fetchNextPage, hasNextPage, isFetchingNextPage, ...rest } =
     useInfiniteQuery({
       queryKey,
-      queryFn: ({ pageParam = 1 }: { pageParam: number }) =>
-        fetchPage(pageParam),
-      getNextPageParam: (lastPage: IProductsAPIResponse) =>
-        lastPage.products.length > 0,
+      queryFn: ({
+        pageParam,
+      }: {
+        pageParam: { last_product?: number | string };
+      }) => fetchPage(pageParam),
+      getNextPageParam: (lastPage: IProductsAPIResponse) => ({
+        last_product: lastPage?.last_product || '',
+      }),
       ...options,
     });
 
@@ -26,7 +32,7 @@ const UseInfiniteScroll = ({
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-    ...result,
+    ...rest,
   };
 };
 

@@ -24,6 +24,7 @@ export const ApiService = async (customConfig?: CreateAxiosDefaults) => {
     },
     function (error) {
       // Do something with request error
+      console.log('🚀 ~ ApiService ~ error:', error);
       return Promise.reject(error);
     },
   );

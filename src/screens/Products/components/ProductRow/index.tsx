@@ -7,10 +7,10 @@ import { BLANK_IMAGE_URL } from '../../../../constants';
 const ProductRow = ({ item }: { item: IProduct }) => {
   return (
     <View style={styles.container}>
-      {item.images[0] ? (
+      {item?.images[0] ? (
         <Image
           alt=""
-          source={{ uri: item.images[0].src }}
+          source={{ uri: item?.images[0].src }}
           width={60}
           height={60}
         />

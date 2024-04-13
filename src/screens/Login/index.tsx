@@ -4,17 +4,18 @@ import { SvgXml } from 'react-native-svg';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import { useForm, Controller } from 'react-hook-form';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
-
-import {
-  emailRegex,
-  isApiValidationErrorResponse,
-  passwordRegex,
-} from '../../constants';
 import { logoSvg } from 'src/assets/logo';
 import { InputField } from 'src/components/InputField';
 import { globalStyle } from 'src/theme';
 import { RootStackParamList } from 'src/types/navigation';
-// import { SigninPayload } from 'types/authentication';
+import { authenticationService } from 'src/services/authenticationService';
+import { SigninPayload } from 'src/types/authentication';
+import {
+  isApiValidationErrorResponse,
+  emailRegex,
+  passwordRegex,
+} from 'src/constants';
+import * as Keychain from 'react-native-keychain';
 
 const LoginScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -26,19 +27,23 @@ const LoginScreen = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      emailOrUsername: '',
+      email_or_username: '',
       password: '',
     },
   });
 
-  const handleOnPressLogin = async (data: any) => {
+  const handleOnPressLogin = async (data: SigninPayload) => {
     try {
       setIsLoading(true);
-      // const loginResultSucceeded = await dispatch(signin(data)).unwrap();
-      // await Keychain.setGenericPassword(
-      //   'jwtToken',
-      //   loginResultSucceeded.jwtToken,
-      // );
+      const loginResultSucceeded = await authenticationService.signin(data);
+      console.log(
+        '🚀 ~ handleOnPressLogin ~ loginResultSucceeded:',
+        loginResultSucceeded,
+      );
+      await Keychain.setGenericPassword(
+        'jwtToken',
+        loginResultSucceeded.data.jwtToken,
+      );
       navigation.navigate('DataSyncingScreen');
     } catch (error) {
       console.log('🚀 ~ handleOnPressLogin ~ error:', error);
@@ -81,11 +86,11 @@ const LoginScreen = () => {
                 value={value}
               />
             )}
-            name="emailOrUsername"
+            name="email_or_username"
           />
-          {errors.emailOrUsername && (
+          {errors.email_or_username && (
             <Text style={globalStyle.errorText}>
-              {errors.emailOrUsername.message}
+              {errors.email_or_username.message}
             </Text>
           )}
 

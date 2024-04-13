@@ -1,5 +1,5 @@
 export interface SigninPayload {
-  emailOrUsername: string;
+  email_or_username: string;
   password: string;
 }
 
@@ -8,6 +8,6 @@ export interface SignupPayload {
   email: string;
   username: string;
   password: string;
-  passwordConfirmation: string;
+  password_confirmation: string;
   token: string;
 }

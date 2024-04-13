@@ -1,8 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList, SafeAreaView, Text } from 'react-native';
-import UseInfiniteScroll from '../../../customHooks/useInfiniteScroll';
-import { productService } from '../../../services/productService';
-import { notifyError } from '../../../utils';
+import React, { useState } from 'react';
+import {
+  ActivityIndicator,
+  Dimensions,
+  FlatList,
+  SafeAreaView,
+  Text,
+  View,
+} from 'react-native';
+import UseInfiniteScroll from 'src/customHooks/useInfiniteScroll';
+import { productService } from 'src/services/productService';
+import { notifyError } from 'src/utils';
 import FloatingBar from '../components/FloatingBar';
 import ProductRow from '../components/ProductRow';
 import SortActionSheet from './components/SortActionSheet';
@@ -14,14 +21,13 @@ export interface IQueryData {
   };
   pagination_criteria: {
     limit: number;
+    last_product?: number | string;
   };
 }
-import { IProduct } from '../../../types/product';
 
 const ProductListScreen = () => {
-  const [lastProduct, setLastProduct] = useState('');
   const [isOpen, setIsOpen] = useState(false);
-  const [queryData, setQueryData] = useState({
+  const [queryData, setQueryData] = useState<IQueryData>({
     sorting_criteria: {
       field: 'id',
       direction: 'asc',
@@ -31,11 +37,16 @@ const ProductListScreen = () => {
     },
   });
 
-  const fetchData = async () => {
+  const fetchPage = async (pageParam: { last_product?: number | string }) => {
+    const queryParams = {
+      ...queryData,
+      pagination_criteria: {
+        limit: 10,
+        last_product: pageParam?.last_product,
+      },
+    };
     try {
-      const res = await productService.getProducts(queryData);
-      console.log('🚀 ~ fetchData ~ res:', res);
-      setLastProduct(res.data.last_product);
+      const res = await productService.getProducts(queryParams);
       return res.data;
     } catch (error) {
       notifyError(error);
@@ -51,7 +62,7 @@ const ProductListScreen = () => {
     isFetching,
   } = UseInfiniteScroll({
     queryKey: ['products', queryData],
-    fetchPage: fetchData,
+    fetchPage,
   });
 
   const loadMore = () => {
@@ -60,16 +71,6 @@ const ProductListScreen = () => {
     }
   };
 
-  useEffect(() => {
-    setQueryData(prev => ({
-      ...prev,
-      pagination_criteria: {
-        ...prev.pagination_criteria,
-        last_product: lastProduct,
-      },
-    }));
-  }, [lastProduct]);
-
   return (
     <SafeAreaView style={{ margin: 20 }}>
       {isLoading ? (
@@ -77,7 +78,6 @@ const ProductListScreen = () => {
       ) : (
         <>
           <FlatList
-            // todo: null check ? is not recommended to bypass the null check
             data={data?.pages.flatMap((item: any) => item?.products)}
             renderItem={({ item }) => <ProductRow item={item} />}
             keyExtractor={item => item?.id}
@@ -86,7 +86,17 @@ const ProductListScreen = () => {
             ListFooterComponent={
               isFetchingNextPage ? <ActivityIndicator /> : null
             }
-            ListEmptyComponent={<Text>No Data</Text>}
+            ListEmptyComponent={
+              <View
+                style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  width: '100%',
+                  height: Dimensions.get('screen').height - 250,
+                }}>
+                <Text>No Data</Text>
+              </View>
+            }
           />
           <FloatingBar
             onAdd={() => console.log('add')}
