@@ -37,6 +37,19 @@ module.exports = {
     react: {
       version: 'detect', // Automatically detect the version of React to use
     },
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx'],
+    },
+    'import/resolver': {
+      typescript: {
+        alwaysTryTypes: true, // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`
+
+        // Choose from one of the "project" configs below or omit to use <root>/tsconfig.json by default
+
+        // use <root>/path/to/folder/tsconfig.json
+        project: 'path/to/folder',
+      },
+    },
   },
   rules: {
     // Define custom rules or override default rules here
@@ -48,11 +61,7 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }], // Ignore unused variables starting with _
     'jsx-a11y/accessible-emoji': 'off', // Consider your project's accessibility needs
     'import/extensions': 'off', // turnoff import extension
-    'import/resolver': {
-      node: {
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
-      },
-    },
+    'import/resolver': 'off',
   },
   overrides: [
     {
