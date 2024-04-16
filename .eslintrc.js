@@ -8,6 +8,9 @@ module.exports = {
   extends: [
     'eslint:recommended', // Start with ESLint recommended rules
     'plugin:@typescript-eslint/recommended', // Use recommended rules from the @typescript-eslint/eslint-plugin
+    'plugin:import/errors',
+    'plugin:import/warnings',
+    'plugin:import/typescript',
     'plugin:react/recommended', // React specific linting rules
     'plugin:react-hooks/recommended', // Enforces React hooks rules
     // 'plugin:import/errors', // Prevents import errors TODO
@@ -34,6 +37,19 @@ module.exports = {
     react: {
       version: 'detect', // Automatically detect the version of React to use
     },
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx'],
+    },
+    'import/resolver': {
+      typescript: {
+        alwaysTryTypes: true, // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`
+
+        // Choose from one of the "project" configs below or omit to use <root>/tsconfig.json by default
+
+        // use <root>/path/to/folder/tsconfig.json
+        project: 'path/to/folder',
+      },
+    },
   },
   rules: {
     // Define custom rules or override default rules here
@@ -44,7 +60,8 @@ module.exports = {
     'no-unused-vars': 'off', // Handled by @typescript-eslint/no-unused-vars
     '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }], // Ignore unused variables starting with _
     'jsx-a11y/accessible-emoji': 'off', // Consider your project's accessibility needs
-    'import/extensions': "off", // turnoff import extension
+    'import/extensions': 'off', // turnoff import extension
+    'import/resolver': 'off', // turnoff import resolver => config when developer want to use absolute import
   },
   overrides: [
     {

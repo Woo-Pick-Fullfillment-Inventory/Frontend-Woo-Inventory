@@ -1,29 +1,23 @@
 import React, { useState } from 'react';
-import { View, Text, Alert, SafeAreaView } from 'react-native';
+import { View, Text, Alert, SafeAreaView, Button } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import * as Keychain from 'react-native-keychain';
 import { useForm, Controller } from 'react-hook-form';
-
-import { InputField } from '../components/InputField';
-import { Button } from '../components/Button';
-import { globalStyle } from '../theme';
-import { logoSvg } from '../assets/logo';
-
-import { SigninPayload, signin } from '../redux/authSlice';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../redux/store';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { RootStackParamList } from '../App';
-
+import { logoSvg } from 'src/assets/logo';
+import { InputField } from 'src/components/InputField';
+import { globalStyle } from 'src/theme';
+import { RootStackParamList } from 'src/types/navigation';
+import { authenticationService } from 'src/services/authenticationService';
+import { SigninPayload } from 'src/types/authentication';
 import {
-  emailRegex,
   isApiValidationErrorResponse,
+  emailRegex,
   passwordRegex,
-} from '../constants';
+} from 'src/constants';
+import * as Keychain from 'react-native-keychain';
 
 const LoginScreen = () => {
-  const dispatch = useDispatch<AppDispatch>();
   const [isLoading, setIsLoading] = useState(false);
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
@@ -33,7 +27,7 @@ const LoginScreen = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      emailOrUsername: '',
+      email_or_username: '',
       password: '',
     },
   });
@@ -41,10 +35,14 @@ const LoginScreen = () => {
   const handleOnPressLogin = async (data: SigninPayload) => {
     try {
       setIsLoading(true);
-      const loginResultSucceeded = await dispatch(signin(data)).unwrap();
+      const loginResultSucceeded = await authenticationService.signin(data);
+      console.log(
+        '🚀 ~ handleOnPressLogin ~ loginResultSucceeded:',
+        loginResultSucceeded,
+      );
       await Keychain.setGenericPassword(
         'jwtToken',
-        loginResultSucceeded.jwtToken,
+        loginResultSucceeded.data.jwtToken,
       );
       navigation.navigate('DataSyncingScreen');
     } catch (error) {
@@ -88,11 +86,11 @@ const LoginScreen = () => {
                 value={value}
               />
             )}
-            name="emailOrUsername"
+            name="email_or_username"
           />
-          {errors.emailOrUsername && (
+          {errors.email_or_username && (
             <Text style={globalStyle.errorText}>
-              {errors.emailOrUsername.message}
+              {errors.email_or_username.message}
             </Text>
           )}
 

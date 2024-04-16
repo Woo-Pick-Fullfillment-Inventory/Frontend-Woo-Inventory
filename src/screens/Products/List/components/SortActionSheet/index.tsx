@@ -83,7 +83,6 @@ const SortActionSheet = ({
     setQueryData({
       ...queryData,
       sorting_criteria: {
-        ...queryData.sorting_criteria,
         direction,
         field,
       },

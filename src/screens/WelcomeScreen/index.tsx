@@ -2,16 +2,18 @@ import React, { useEffect } from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Text } from 'react-native-paper';
 import { SvgXml } from 'react-native-svg';
-import { logoSvg } from '../assets/logo.tsx';
-import { BLACKCOLOR, PRIMARYCOLOR, WHITECOLOR, globalStyle } from '../theme';
-import { RootStackParamList } from '../App';
+import { logoSvg } from 'src/assets/logo.tsx';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 import SplashScreen from 'react-native-splash-screen';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../redux/store.ts';
 import * as Keychain from 'react-native-keychain';
-import { setIsLoggedIn } from '../redux/authSlice.ts';
+import { RootStackParamList } from 'src/types/navigation.ts';
+import {
+  globalStyle,
+  PRIMARYCOLOR,
+  WHITECOLOR,
+  BLACKCOLOR,
+} from 'src/theme.ts';
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -19,7 +21,6 @@ type HomeScreenNavigationProp = NativeStackNavigationProp<
 >;
 
 const WelcomeScreen = () => {
-  const dispatch = useDispatch<AppDispatch>();
   const navigation = useNavigation<HomeScreenNavigationProp>();
 
   useEffect(() => {
@@ -28,7 +29,6 @@ const WelcomeScreen = () => {
     const checkForToken = async () => {
       const credentials = await Keychain.getGenericPassword();
       if (credentials) {
-        dispatch(setIsLoggedIn(true));
         navigation.navigate('MainMenuScreen');
       }
     };

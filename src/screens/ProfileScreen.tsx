@@ -1,16 +1,13 @@
-import { RootStackParamList } from '../App'; // Adjust the import path as necessary
-import { RouteProp } from '@react-navigation/native';
+import { RootStackParamList } from '../types/navigation'; // Adjust the import path as necessary
+import { RouteProp, useRoute } from '@react-navigation/native';
 
 import React from 'react';
 import { View } from 'react-native';
 import { Text } from 'react-native-paper';
 import PasswordInput from '../components/PasswordInput';
 
-type Props = {
-  route: RouteProp<RootStackParamList, 'ProfileScreen'>;
-};
-
-const ProfileScreen: React.FC<Props> = ({ route }) => {
+const ProfileScreen = () => {
+  const route = useRoute<RouteProp<RootStackParamList, 'ProfileScreen'>>();
   const name = route.params?.name;
 
   return (

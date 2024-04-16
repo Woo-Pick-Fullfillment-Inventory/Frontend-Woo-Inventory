@@ -4,13 +4,12 @@
     "jsx": "react-native",
     "moduleResolution": "node16",
     "esModuleInterop": true,
-    "baseUrl": ".", // Base directory to resolve non-relative module names
+    "baseUrl": ".", // Set the base directory for resolving paths
     "paths": {
-      "*": ["src/*"],
-      "*.ts": ["src/*"],
-      "*.tsx": ["src/*"]
+      "src/*": ["src/*"] // Map all paths starting with "src/" to the "src/" directory
     }
   },
   "allowSyntheticDefaultImports": true, // Allows default imports from modules with no default export
   "esModuleInterop": true, // Enables emit interoperability between CommonJS and ES Modules
+  "exclude": ["node_modules", "babel.config.js", "metro.config.js"]
 }
