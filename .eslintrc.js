@@ -61,7 +61,7 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }], // Ignore unused variables starting with _
     'jsx-a11y/accessible-emoji': 'off', // Consider your project's accessibility needs
     'import/extensions': 'off', // turnoff import extension
-    'import/resolver': 'off',
+    'import/resolver': 'off', // turnoff import resolver => config when developer want to use absolute import
   },
   overrides: [
     {

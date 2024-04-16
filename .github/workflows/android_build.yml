@@ -49,15 +49,15 @@ jobs:
           key: ${{ runner.os }}-gradle-caches-${{ hashFiles('gradle/wrapper/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-caches-
-              
+
       - name: Make Gradlew Executable
         run: cd android && chmod +x ./gradlew
-      
+
       # clean cache and bundle new apk
-      - name: Generate App APK
+      - name: Clean gradlew cache and Generate App APK
         run: |
           cd android && ./gradlew clean && ./gradlew assembleRelease --no-daemon
-
+      # Since all actions are executed as separate instances, having the Gradle daemon running doesn’t make sense; it will create an extra burden on memory. Therefore, we have added a --no-daemon flag to our build step.
       ## sign generated apk
       - name: Sign APK
         id: sign_app
@@ -75,3 +75,14 @@ jobs:
           name: app
           path: android/app/build/outputs/apk/release/app-release.apk
           retention-days: 14
+
+      - name: Deploy to Play Store (BETA)
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.ANDROID_SERVICE_ACCOUNT }}
+          packageName: com.wooinventoryfrontend
+          releaseFile: a${{steps.sign_app.outputs.signedReleaseFile}}
+          track: beta
+          inAppUpdatePriority: 3
+          userFraction: 0.5
+          whatsNewDirectory: android/release-notes/
