@@ -13,6 +13,8 @@ export const WHITECOLOR = '#FFFFFF';
 export const GRAY_01 = '#F6F6F6';
 export const GRAY_02 = '#E8E8E8';
 export const GRAY_03 = '#BDBDBD';
+export const GRAY_04 = '#746D6D80';
+export const RED_01 = '#FA0606';
 
 export const LARGE_SIZE = 'large';
 
@@ -63,6 +65,6 @@ export const globalStyle = EStyleSheet.create({
 
   errorText: {
     maxWidth: '300rem',
-    color: 'red', 
+    color: 'red',
   },
 });

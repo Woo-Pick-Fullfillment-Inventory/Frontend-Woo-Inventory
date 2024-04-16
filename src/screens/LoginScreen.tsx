@@ -16,7 +16,11 @@ import { AppDispatch } from '../redux/store';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../App';
 
-import { emailRegex, isApiValidationErrorResponse, passwordRegex } from '../constants';
+import {
+  emailRegex,
+  isApiValidationErrorResponse,
+  passwordRegex,
+} from '../constants';
 
 const LoginScreen = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -44,6 +48,7 @@ const LoginScreen = () => {
       );
       navigation.navigate('DataSyncingScreen');
     } catch (error) {
+      console.log('🚀 ~ handleOnPressLogin ~ error:', error);
       isApiValidationErrorResponse(error)
         ? Alert.alert('Error ', error.message)
         : Alert.alert('Error');
@@ -111,9 +116,7 @@ const LoginScreen = () => {
             name="password"
           />
           {errors.password && (
-            <Text style={globalStyle.errorText}>
-              {errors.password.message}
-            </Text>
+            <Text style={globalStyle.errorText}>{errors.password.message}</Text>
           )}
         </View>
 

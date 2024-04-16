@@ -1,17 +1,25 @@
 import axios, { AxiosError, AxiosResponse, CreateAxiosDefaults } from 'axios';
-
+import * as Keychain from 'react-native-keychain';
 // TODO: complete this
 
-export const ApiService = (customConfig?: CreateAxiosDefaults) => {
+export const ApiService = async (customConfig?: CreateAxiosDefaults) => {
   const instance = axios.create({
     baseURL: 'https://woopick-backend-2plmu3pwka-ey.a.run.app/api/v1',
-    headers: { 'X-Custom-Header': 'foobar' },
+    headers: {
+      'content-type': 'application/json',
+    },
     ...customConfig,
   });
+
+  const token = await Keychain.getGenericPassword();
 
   instance.interceptors.request.use(
     function (config) {
       // Do something before request is sent
+      if (token) {
+        config.headers.Authorization = token.password;
+      }
+
       return config;
     },
     function (error) {
