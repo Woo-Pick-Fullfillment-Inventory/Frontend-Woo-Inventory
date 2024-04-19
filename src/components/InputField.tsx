@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import { TextInput } from 'react-native-paper';
-import { View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import EStyleSheet from 'react-native-extended-stylesheet';
 
 import * as globalStyles from '../theme';
-import { RootStackParamList } from '../App';
 import { useNavigation } from '@react-navigation/native';
+import { RootStackParamList } from 'src/types/navigation';
 
 type InputFieldNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -63,20 +62,20 @@ export const InputField = (props: Props) => {
   );
 };
 
-const styles = EStyleSheet.create({
+const styles = StyleSheet.create({
   container: {
-    width: '300rem',
+    width: 300,
     marginBottom: 2,
   },
 
   inputText: {
-    width: '300rem',
-    height: '40rem',
+    width: 300,
+    height: 40,
     backgroundColor: globalStyles.GRAY_01,
-    marginTop: '5rem',
-    fontSize: '14rem',
-    borderWidth: '1rem',
-    borderRadius: '5rem',
+    marginTop: 5,
+    fontSize: 14,
+    borderWidth: 1,
+    borderRadius: 5,
     borderColor: globalStyles.GRAY_02,
     color: globalStyles.BLACKCOLOR,
   },

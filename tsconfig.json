@@ -3,6 +3,7 @@
   "compilerOptions": {
     "jsx": "react-native",
     "moduleResolution": "node16",
+    "module": "Node16",
     "esModuleInterop": true,
     "baseUrl": ".", // Set the base directory for resolving paths
     "paths": {

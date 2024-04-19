@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
-import { View, Text, Alert, SafeAreaView, Button } from 'react-native';
+import {
+  View,
+  Text,
+  Alert,
+  SafeAreaView,
+  Button,
+  StyleSheet,
+} from 'react-native';
 import { SvgXml } from 'react-native-svg';
-import EStyleSheet from 'react-native-extended-stylesheet';
 import { useForm, Controller } from 'react-hook-form';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
 import { logoSvg } from 'src/assets/logo';
@@ -36,17 +42,12 @@ const LoginScreen = () => {
     try {
       setIsLoading(true);
       const loginResultSucceeded = await authenticationService.signin(data);
-      console.log(
-        '🚀 ~ handleOnPressLogin ~ loginResultSucceeded:',
-        loginResultSucceeded,
-      );
       await Keychain.setGenericPassword(
         'jwtToken',
         loginResultSucceeded.data.jwtToken,
       );
       navigation.navigate('DataSyncingScreen');
     } catch (error) {
-      console.log('🚀 ~ handleOnPressLogin ~ error:', error);
       isApiValidationErrorResponse(error)
         ? Alert.alert('Error ', error.message)
         : Alert.alert('Error');
@@ -133,13 +134,13 @@ const LoginScreen = () => {
   );
 };
 
-const styles = EStyleSheet.create({
+const styles = StyleSheet.create({
   intro: {
-    marginTop: '10rem',
+    marginTop: 10,
   },
 
   buttonSection: {
-    marginTop: '15rem',
+    marginTop: 15,
   },
 
   checkboxWrapper: {

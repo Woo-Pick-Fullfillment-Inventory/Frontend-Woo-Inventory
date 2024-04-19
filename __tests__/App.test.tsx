@@ -1,17 +1,36 @@
-/**
- * @format
- */
+import { render } from '@testing-library/react-native';
+import * as React from 'react';
+import LoginScreen from '../src/screens/Login';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { RootStackParamList } from 'src/types/navigation';
+import { PRIMARYCOLOR, WHITECOLOR } from 'src/theme';
+import HeaderRight from 'src/components/HeaderRight';
 
-import 'react-native';
-import React from 'react';
-import App from '../src/App';
+jest.mock('@react-navigation/native', () => ({
+  useNavigation: () => ({
+    navigate: jest.fn(),
+    // Mock other navigation methods your component uses
+  }),
+}));
+jest.mock('@react-navigation/native-stack', () => ({
+  createNativeStackNavigator: jest.fn(),
+}));
 
-// Note: import explicitly to use the types shipped with jest.
-import {it} from '@jest/globals';
+test('Testing Login screen', () => {
+  const Stack = createNativeStackNavigator<RootStackParamList>();
 
-// Note: test renderer must be required after react-native.
-import renderer from 'react-test-renderer';
-
-it('renders correctly', () => {
-  renderer.create(<App />);
+  render(
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: { backgroundColor: PRIMARYCOLOR },
+          headerTitleAlign: 'center',
+          headerTintColor: WHITECOLOR,
+          headerRight: HeaderRight,
+        }}>
+        <LoginScreen />
+      </Stack.Navigator>
+    </NavigationContainer>,
+  );
 });

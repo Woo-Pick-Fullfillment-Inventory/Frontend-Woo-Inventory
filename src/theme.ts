@@ -1,10 +1,8 @@
 // All colors must be defined here
-import { Dimensions } from 'react-native';
-import EStyleSheet from 'react-native-extended-stylesheet';
+import { Dimensions, StyleSheet } from 'react-native';
 
 // Calculate rem ratio with the most common mobile screen size
 export const entireScreenWidth = Dimensions.get('window').width;
-EStyleSheet.build({ $rem: entireScreenWidth / 390 });
 
 export const PRIMARYCOLOR = '#6600FF';
 export const BLACKCOLOR = '#000000';
@@ -18,7 +16,7 @@ export const RED_01 = '#FA0606';
 
 export const LARGE_SIZE = 'large';
 
-export const globalStyle = EStyleSheet.create({
+export const globalStyle = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
@@ -29,34 +27,34 @@ export const globalStyle = EStyleSheet.create({
 
   mainContent: {
     alignItems: 'center',
-    paddingBottom: '40rem',
+    paddingBottom: 40,
     color: BLACKCOLOR,
   },
 
   logo: {
-    width: '10rem',
+    width: 10,
     resizeMode: 'contain',
   },
 
   heading1: {
-    fontSize: '37.5rem',
+    fontSize: 37.5,
     fontWeight: '700',
-    lineHeight: '51rem',
-    paddingVertical: '8rem',
+    lineHeight: 51,
+    paddingVertical: 8,
     textAlign: 'center',
     color: BLACKCOLOR,
   },
 
   paragraph: {
-    fontSize: '16rem',
+    fontSize: 16,
     fontWeight: '400',
-    lineHeight: '20rem',
+    lineHeight: 20,
     textAlign: 'center',
     color: BLACKCOLOR,
   },
 
   section: {
-    marginTop: '30rem',
+    marginTop: 30,
   },
 
   hyperlink: {
@@ -64,7 +62,7 @@ export const globalStyle = EStyleSheet.create({
   },
 
   errorText: {
-    maxWidth: '300rem',
+    maxWidth: 300,
     color: 'red',
   },
 });

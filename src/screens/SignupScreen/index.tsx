@@ -9,11 +9,11 @@ import {
   KeyboardAvoidingView,
   Platform,
   Button,
+  StyleSheet,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { SvgXml } from 'react-native-svg';
-import EStyleSheet from 'react-native-extended-stylesheet';
 import { useForm, Controller } from 'react-hook-form';
 
 import {
@@ -253,33 +253,33 @@ const SignupScreen = () => {
   );
 };
 
-const styles = EStyleSheet.create({
+const styles = StyleSheet.create({
   buttonSection: {
-    marginTop: '15rem',
+    marginTop: 15,
   },
 
   checkbox: {
-    width: '2rem',
+    width: 2,
   },
 
   text: {
-    fontSize: '18rem',
+    fontSize: 18,
     fontWeight: '400',
-    lineHeight: '22.4rem',
+    lineHeight: 22.4,
     textAlign: 'center',
-    marginTop: '15rem',
+    marginTop: 15,
     color: BLACKCOLOR,
   },
 
   agbLink: {
-    fontSize: '13rem',
+    fontSize: 13,
     color: 'rgba(14, 56, 208, 0.56)',
     fontWeight: '700',
   },
 
   loginLink: {
-    top: '4rem',
-    fontSize: '18rem',
+    top: 4,
+    fontSize: 18,
     color: BLACKCOLOR,
   },
 });

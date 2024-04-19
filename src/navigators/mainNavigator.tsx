@@ -6,7 +6,7 @@ import { RootStackParamList } from 'src/types/navigation';
 import { PRIMARYCOLOR, WHITECOLOR } from 'src/theme';
 import { routesArr } from 'src/routes';
 
-const MainNavigation = () => {
+const MainNavigator = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
 
   return (
@@ -31,4 +31,4 @@ const MainNavigation = () => {
   );
 };
 
-export default MainNavigation;
+export default MainNavigator;
