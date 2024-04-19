@@ -1,11 +1,7 @@
-import { render } from '@testing-library/react-native';
 import * as React from 'react';
-import LoginScreen from '../src/screens/Login';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { RootStackParamList } from 'src/types/navigation';
-import { PRIMARYCOLOR, WHITECOLOR } from 'src/theme';
-import HeaderRight from 'src/components/HeaderRight';
+import { create } from 'react-test-renderer';
+import App from '../src/App';
+import LoginScreen from 'src/screens/Login';
 
 jest.mock('@react-navigation/native', () => ({
   useNavigation: () => ({
@@ -17,20 +13,14 @@ jest.mock('@react-navigation/native-stack', () => ({
   createNativeStackNavigator: jest.fn(),
 }));
 
-test('Testing Login screen', () => {
-  const Stack = createNativeStackNavigator<RootStackParamList>();
+describe('Testing App', () => {
+  it('renders correctly', () => {
+    const tree = create(<App />);
+    expect(tree).toMatchSnapshot();
+  });
+});
 
-  render(
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerStyle: { backgroundColor: PRIMARYCOLOR },
-          headerTitleAlign: 'center',
-          headerTintColor: WHITECOLOR,
-          headerRight: HeaderRight,
-        }}>
-        <LoginScreen />
-      </Stack.Navigator>
-    </NavigationContainer>,
-  );
+test('renders correctlyyyyyyyyyyy', () => {
+  const tree = create(<LoginScreen />).toJSON();
+  expect(tree).toMatchSnapshot();
 });

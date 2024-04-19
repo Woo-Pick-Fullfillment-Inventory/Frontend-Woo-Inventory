@@ -20,6 +20,8 @@ jest.mock('react-native-keychain', () => ({
   resetGenericPassword: jest.fn(() => Promise.resolve(null)),
 }));
 
+jest.mock('react-native-vision-camera', () => 'Camera');
+
 jest.mock('react-native-vector-icons/AntDesign', () => 'Icon');
 jest.mock('react-native-vector-icons/Entypo', () => 'Icon');
 jest.mock('react-native-vector-icons/EvilIcons', () => 'Icon');
